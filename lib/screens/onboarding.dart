@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home_page.dart';
@@ -27,15 +28,24 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   void _onDone(context) {
     widget.prefs.setBool(widget.prefsKey, true);
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => HomePage(title: 'Bandon')),
     );
   }
 
   void _requestPermissions(context) async {
-    LocationPermission permission = await requestPermission();
+    LocationPermission _permission;
+
+    try {
+      _permission = await requestPermission();
+    } on PlatformException catch (e) {
+      print('Error: ${e.toString()}, code: ${e.code}');
+    } on PermissionRequestInProgressException catch (e) {
+      print('Error: ${e.toString()}');
+    }
+
+    print("Location Permissions: " + _permission.toString());
     _onDone(context);
-    print("Location Permissions: " + permission.toString());
   }
 
   @override
