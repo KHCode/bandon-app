@@ -8,6 +8,7 @@ const title = 'Bandon';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
