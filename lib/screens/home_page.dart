@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
-// import 'package:weather/weather.dart';
-// import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+// import 'package:geolocator/geolocator.dart';
+// import 'package:weather/weather.dart';
+
+import 'dining.dart';
+import 'lodging.dart';
 import '../widgets/settings_drawer.dart';
-import '../widgets/test_distance_display.dart';
-import '../widgets/test_rss_feed.dart';
-import '../widgets/test_web_scraping.dart';
+
+// Week 4 tests
+// import '../widgets/test_distance_display.dart';
+// import '../widgets/test_rss_feed.dart';
+// import '../widgets/test_web_scraping.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
+  static const routeName = '/';
   final String title;
+
+  HomePage({Key key, @required this.title}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -95,12 +101,21 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Image.asset(
-                'assets/images/bandon-home-choose-your-table-green.jpg'),
+            child: InkWell(
+              child: Image.asset(
+                  'assets/images/bandon-home-choose-your-table-green.jpg'),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(DiningScreen.routeName),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Image.asset('assets/images/bandon-home-book-your-stay.jpg'),
+            child: InkWell(
+              child:
+                  Image.asset('assets/images/bandon-home-book-your-stay.jpg'),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(LodgingScreen.routeName),
+            ),
           ),
         ]),
       ),
