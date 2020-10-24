@@ -37,7 +37,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
     LocationPermission _permission;
 
     try {
-      _permission = await requestPermission();
+      _permission = await Geolocator.requestPermission();
     } on PlatformException catch (e) {
       print('Error: ${e.toString()}, code: ${e.code}');
     } on PermissionRequestInProgressException catch (e) {

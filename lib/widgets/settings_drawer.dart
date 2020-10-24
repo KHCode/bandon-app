@@ -26,11 +26,12 @@ class SettingsDrawerState extends State<SettingsDrawer> {
   //   }
   // }
 
-  Future<bool> _getLocationServicesStatus() async => isLocationServiceEnabled();
+  Future<bool> _getLocationServicesStatus() async =>
+      Geolocator.isLocationServiceEnabled();
 
   Future<bool> _getAppLocationPermissionStatus() async {
     bool _result = false;
-    LocationPermission _permission = await checkPermission();
+    LocationPermission _permission = await Geolocator.checkPermission();
 
     switch (_permission) {
       case LocationPermission.whileInUse:
@@ -88,7 +89,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
           subtitle: InkWell(
             child: Text("Tap here to review your device settings"),
             onTap: () {
-              openAppSettings();
+              Geolocator.openAppSettings();
             },
           ),
         ),

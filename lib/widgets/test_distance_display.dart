@@ -18,7 +18,7 @@ class _TestDistanceDisplayState extends State<TestDistanceDisplay> {
   String message = "";
 
   void writeMessage() async {
-    LocationPermission _permission = await checkPermission();
+    LocationPermission _permission = await Geolocator.checkPermission();
     if (_permission == LocationPermission.denied ||
         _permission == LocationPermission.deniedForever) {
       message = "We couldn't determine your current location. Please check your"
@@ -34,8 +34,8 @@ class _TestDistanceDisplayState extends State<TestDistanceDisplay> {
   Future<double> getMetersFromAddress(String address) async {
     Position _position;
     try {
-      _position =
-          await getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      _position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
     } on PermissionRequestInProgressException catch (e) {
       print('Error: ${e.toString()}');
     }
@@ -43,7 +43,7 @@ class _TestDistanceDisplayState extends State<TestDistanceDisplay> {
     List<Location> _locations =
         await locationFromAddress(address, localeIdentifier: "en_US");
 
-    return distanceBetween(_position.latitude, _position.longitude,
+    return Geolocator.distanceBetween(_position.latitude, _position.longitude,
         _locations[0].latitude, _locations[0].longitude);
   }
 
