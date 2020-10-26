@@ -1,3 +1,10 @@
+import 'package:bandon/screens/contact.dart';
+import 'package:bandon/screens/dining.dart';
+import 'package:bandon/screens/events.dart';
+import 'package:bandon/screens/find-business.dart';
+import 'package:bandon/screens/getting-started.dart';
+import 'package:bandon/screens/lodging.dart';
+import 'package:bandon/screens/things-to-do.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 // import 'package:flutter/services.dart';
@@ -68,29 +75,106 @@ class SettingsDrawerState extends State<SettingsDrawer> {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Theme.of(context).accentColor,
-          ),
-          child: Text(
-            'Settings',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 24,
-            ),
-          ),
-        ),
-        SwitchListTile(
-          secondary: Icon(Icons.location_on),
-          title: Text('Location access'),
-          isThreeLine: true,
-          value: _locationEnabled,
-          onChanged: null,
-          subtitle: InkWell(
-            child: Text("Tap here to review your device settings"),
-            onTap: () {
-              Geolocator.openAppSettings();
-            },
+        // DrawerHeader(
+        //   decoration: BoxDecoration(
+        //     color: Theme.of(context).accentColor,
+        //   ),
+        //   child: Text(
+        //     'Settings',
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //       fontSize: 48,
+        //     ),
+        //   ),
+        // ),
+        Container(
+          color: Color(0xFF05668d),
+          child: Column(
+            children: [
+              ListTile(
+                title: Text(
+                  'Getting Started',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(GetStartedScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Dining',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(DiningScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Lodging',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(LodgingScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Things To Do',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Events',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(EventsScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Find a Business',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () => Navigator.of(context)
+                    .pushNamed(FindBusinessScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Contact',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(ContactScreen.routeName),
+              ),
+              ListTile(
+                title: Text(
+                  'Relocate Here',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(RelocateScreen.routeName),
+              ),
+              SwitchListTile(
+                secondary: Icon(Icons.location_on),
+                title: Text(
+                  'Location access',
+                  style: TextStyle(color: Colors.white),
+                ),
+                isThreeLine: true,
+                value: _locationEnabled,
+                onChanged: null,
+                subtitle: InkWell(
+                  child: Text(
+                    "Tap here to review your device settings",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () {
+                    Geolocator.openAppSettings();
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ],
