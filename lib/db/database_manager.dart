@@ -7,8 +7,9 @@ class DatabaseManager {
   static const String DATABASE_FILENAME = 'events.sqlite3.db';
   static const String SQL_DROP_TABLE = 'DROP TABLE IF EXISTS events;';
   static const String SQL_INSERT =
-      'INSERT INTO events(title, description, permalink, startDate, endDate, dateDetails, location, admission, website, contact, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
-  static const String SQL_SELECT = 'SELECT * FROM events;';
+      'INSERT OR REPLACE INTO events(title, description, permalink, startDate, endDate, dateDetails, location, admission, website, contact, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+  static const String SQL_SELECT =
+      'SELECT * FROM events ORDER BY date(startDate);';
 
   static DatabaseManager _instance;
 
@@ -23,14 +24,13 @@ class DatabaseManager {
 
   static Future initialize(String schema) async {
     final db = await openDatabase(DATABASE_FILENAME, version: 1,
-        onCreate: (Database db, int version) async {
+        onCreate: (Database db, int version) {
       _createTables(db, schema);
     });
     _instance = DatabaseManager._(database: db);
   }
 
   static void _createTables(Database db, String sql) async {
-    await db.execute(SQL_DROP_TABLE);
     await db.execute(sql);
   }
 
