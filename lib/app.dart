@@ -1,3 +1,4 @@
+import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import 'screens/home_page.dart';
 import 'screens/lodging.dart';
 import 'screens/onboarding.dart';
 import 'screens/things-to-do.dart';
+import 'screens/relocate_screen.dart';
 
 class App extends StatefulWidget {
   final String title;
@@ -33,7 +35,8 @@ class AppState extends State<App> {
     FindBusinessScreen.routeName: (context) => FindBusinessScreen(),
     GetStartedScreen.routeName: (context) => GetStartedScreen(),
     LodgingScreen.routeName: (context) => LodgingScreen(),
-    ThingsToDoScreen.routeName: (context) => ThingsToDoScreen()
+    ThingsToDoScreen.routeName: (context) => ThingsToDoScreen(),
+    RelocateScreen.routeName: (context) => RelocateScreen()
   };
 
   bool get _onboarded => widget.prefs.getBool(ONBOARDED_KEY) ?? false;

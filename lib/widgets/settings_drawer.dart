@@ -5,6 +5,7 @@ import 'package:bandon/screens/find-business.dart';
 import 'package:bandon/screens/getting-started.dart';
 import 'package:bandon/screens/lodging.dart';
 import 'package:bandon/screens/things-to-do.dart';
+import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 // import 'package:flutter/services.dart';
@@ -75,18 +76,18 @@ class SettingsDrawerState extends State<SettingsDrawer> {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        // DrawerHeader(
-        //   decoration: BoxDecoration(
-        //     color: Theme.of(context).accentColor,
-        //   ),
-        //   child: Text(
-        //     'Settings',
-        //     style: TextStyle(
-        //       color: Colors.white,
-        //       fontSize: 48,
-        //     ),
-        //   ),
-        // ),
+        DrawerHeader(
+          decoration: BoxDecoration(
+            color: Color(0xFF05668d),
+          ),
+          child: Text(
+            'More to learn about Bandon',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ),
+        ),
         Container(
           color: Color(0xFF05668d),
           child: Column(
