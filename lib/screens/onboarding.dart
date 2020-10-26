@@ -26,14 +26,14 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
-  void _onDone(context) {
+  void _onDone(BuildContext context) {
     widget.prefs.setBool(widget.prefsKey, true);
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => HomePage(title: 'Bandon')),
+      MaterialPageRoute(builder: (context) => HomePage(title: 'Bandon')),
     );
   }
 
-  void _requestPermissions(context) async {
+  void _requestPermissions(BuildContext context) async {
     LocationPermission _permission;
 
     try {
