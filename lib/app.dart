@@ -13,8 +13,6 @@ import 'screens/onboarding.dart';
 import 'screens/things-to-do.dart';
 
 import 'utils/event_collector.dart';
-import 'db/database_manager.dart';
-import 'models/event.dart';
 
 class App extends StatefulWidget {
   final String title;
