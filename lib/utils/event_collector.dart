@@ -8,13 +8,14 @@ class EventCollector {
 
   const EventCollector({this.url});
 
-  void getEvents() async {
+  Future<bool> getEvents() async {
     final List<String> _events = await _getEventUrls();
     _events.forEach((element) async {
       final _event = await _getEventDetails(element);
       final databaseManager = DatabaseManager.getInstance();
       databaseManager.saveEvent(dto: _event);
     });
+    return _events.isNotEmpty ? true : false;
   }
 
   Future<List<String>> _getEventUrls() async {
