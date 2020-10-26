@@ -6,6 +6,7 @@ import '../widgets/styled_section_banner.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
+import '../widgets/settings_drawer.dart';
 
 class DiningScreen extends StatefulWidget {
   static const routeName = 'diningScreen';
