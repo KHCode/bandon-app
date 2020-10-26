@@ -42,6 +42,7 @@ class _DiningScreenState extends State<DiningScreen> {
       appBar: AppBar(
         title: Text("Bandon Dining"),
       ),
+      endDrawer: SettingsDrawer(),
       body: Container(
           decoration: gradientBackground(),
           child: ListView(
