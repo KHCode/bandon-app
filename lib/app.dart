@@ -14,9 +14,13 @@ import 'screens/onboarding.dart';
 import 'screens/things-to-do.dart';
 import 'screens/relocate_screen.dart';
 
+import 'utils/event_collector.dart';
+
 class App extends StatefulWidget {
   final String title;
   final SharedPreferences prefs;
+  final eventCollector =
+      const EventCollector(url: 'https://tourism.bandon.com/events');
 
   const App({Key key, @required this.title, @required this.prefs})
       : super(key: key);
@@ -27,6 +31,7 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   static const ONBOARDED_KEY = 'hasBeenOnboarded';
+  static const EVENT_UPDATE_TIME_KEY = 'lastUpdateTime';
 
   static final routes = {
     ContactScreen.routeName: (context) => ContactScreen(),
@@ -48,6 +53,27 @@ class AppState extends State<App> {
 
   void initState() {
     super.initState();
+    getEventsOnLoad();
+  }
+
+  void getEventsOnLoad() async {
+    String lastUpdate = widget.prefs.getString(EVENT_UPDATE_TIME_KEY) ??
+        DateTime.now().subtract(Duration(minutes: 120)).toString();
+    Duration difference = DateTime.now().difference(DateTime.parse(lastUpdate));
+    // If events were updated in last hour, don't try to update again.
+    if (difference.inMinutes.abs() > 60) {
+      // Otherwise get events, verify success and then update the last time
+      // events were fetched.
+      if (await widget.eventCollector.getEvents()) {
+        print('Events fetched successfully');
+        widget.prefs
+            .setString(EVENT_UPDATE_TIME_KEY, DateTime.now().toString());
+      } else {
+        print('Failed to fetch events');
+      }
+    } else {
+      print('Events were fetched recently. Skipping update.');
+    }
   }
 
   @override
