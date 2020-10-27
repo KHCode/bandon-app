@@ -26,6 +26,7 @@ class _EventsScreenState extends State<EventsScreen> {
           return Column(
             children: <Widget>[
               ListTile(
+                  leading: Icon(Icons.favorite_outline),
                   title: Text(snapshot.data[index].title),
                   subtitle: Text(DateFormat("EEEE',' MMM'.' d")
                       .format(snapshot.data[index].startDate)),
