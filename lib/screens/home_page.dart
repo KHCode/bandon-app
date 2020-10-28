@@ -2,7 +2,6 @@ import 'package:bandon/widgets/styled_section_banner.dart';
 
 import '../widgets/app_gradient_background.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 // import 'package:geolocator/geolocator.dart';
 // import 'package:weather/weather.dart';
 
@@ -47,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        decoration: gradientBackground(),
+        decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),

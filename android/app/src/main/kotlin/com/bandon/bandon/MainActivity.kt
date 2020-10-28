@@ -1,4 +1,4 @@
-package com.bandon.bandon
+package com.bandon.BandonOregon
 
 import io.flutter.embedding.android.FlutterActivity
 
