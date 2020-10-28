@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-BoxDecoration gradientBackground() {
+BoxDecoration gradientBackground(BuildContext context) {
+  List<Color> gradientColors = Theme.of(context).brightness == Brightness.light
+      ? [Colors.white70, Color(0xFFF0F3BD)]
+      : [Color(0xFF2F5570), Colors.black];
+
   return BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [Color(0xFF05668d), Color(0xFFf0f3bd)],
+      colors: gradientColors,
     ),
   );
 }

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 // import 'package:flutter/services.dart';
 
-// import '../app.dart';
+import '../app.dart';
 
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({Key key}) : super(key: key);
@@ -20,6 +20,10 @@ class SettingsDrawer extends StatefulWidget {
 
 class SettingsDrawerState extends State<SettingsDrawer> {
   bool _locationEnabled = false;
+
+  bool _getDarkModeStatus(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark ? true : false;
+  void _toggleTheme(AppState appState) => appState.toggleTheme();
 
   void initState() {
     super.initState();
@@ -66,12 +70,14 @@ class SettingsDrawerState extends State<SettingsDrawer> {
   Future<void> _getLocationOverallStatus() async {
     _locationEnabled = (await _getLocationServicesStatus() &&
         await _getAppLocationPermissionStatus());
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // AppState appState = context.findAncestorStateOfType<AppState>();
+    AppState appState = context.findAncestorStateOfType<AppState>();
 
     return Drawer(
         child: ListView(
@@ -168,12 +174,21 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                 subtitle: InkWell(
                   child: Text(
                     "Tap here to review your device settings",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white70),
                   ),
                   onTap: () {
                     Geolocator.openAppSettings();
                   },
                 ),
+              ),
+              SwitchListTile(
+                secondary: Icon(Icons.settings_brightness),
+                title: Text(
+                  'Dark Mode',
+                  style: TextStyle(color: Colors.white),
+                ),
+                value: _getDarkModeStatus(context),
+                onChanged: (value) => _toggleTheme(appState),
               ),
             ],
           ),

@@ -31,6 +31,7 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   static const ONBOARDED_KEY = 'hasBeenOnboarded';
+  static const DARK_MODE_KEY = 'darkMode';
   static const EVENT_UPDATE_TIME_KEY = 'lastUpdateTime';
 
   static final routes = {
@@ -44,6 +45,9 @@ class AppState extends State<App> {
     RelocateScreen.routeName: (context) => RelocateScreen()
   };
 
+  Brightness appBrightness;
+
+  bool get _darkMode => widget.prefs.getBool(DARK_MODE_KEY) ?? false;
   bool get _onboarded => widget.prefs.getBool(ONBOARDED_KEY) ?? false;
 
   Widget get _startingPage => _onboarded
@@ -53,10 +57,11 @@ class AppState extends State<App> {
 
   void initState() {
     super.initState();
-    getEventsOnLoad();
+    appBrightness = _darkMode ? Brightness.dark : Brightness.light;
+    _getEventsOnLoad();
   }
 
-  void getEventsOnLoad() async {
+  void _getEventsOnLoad() async {
     String lastUpdate = widget.prefs.getString(EVENT_UPDATE_TIME_KEY) ??
         DateTime.now().subtract(Duration(minutes: 120)).toString();
     Duration difference = DateTime.now().difference(DateTime.parse(lastUpdate));
@@ -76,11 +81,19 @@ class AppState extends State<App> {
     }
   }
 
+  void toggleTheme() {
+    widget.prefs.setBool(DARK_MODE_KEY, !_darkMode);
+    setState(() {
+      appBrightness = _darkMode ? Brightness.dark : Brightness.light;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         title: widget.title,
         theme: ThemeData(
+          brightness: appBrightness,
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),

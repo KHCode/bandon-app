@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class StyledButton extends StatelessWidget {
-  final text;
+  final String text;
 
   StyledButton({Key key, this.text});
 

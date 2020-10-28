@@ -44,7 +44,7 @@ class _DiningScreenState extends State<DiningScreen> {
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
-          decoration: gradientBackground(),
+          decoration: gradientBackground(context),
           child: ListView(
             children: <Widget>[
               StyledTopBanner(topText: "Choose Your Table"),
