@@ -49,9 +49,9 @@ class _HomePageState extends State<HomePage> {
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
-            child: Image.asset('assets/images/bandon-logo.png'),
-          ),
+              padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+              child: Image.asset(
+                  'assets/images/bandon-logo-${Theme.of(context).brightness == Brightness.dark ? 'light' : 'dark'}.png')),
           Image.asset('assets/images/beach-sunset.jpg'),
           Image.asset('assets/images/bandon-weather-widget.jpg'),
           StyledSectionBanner(
