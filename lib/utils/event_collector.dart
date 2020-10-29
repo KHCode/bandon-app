@@ -42,19 +42,18 @@ class EventCollector {
     final _webScraper = WebScraper('https://tourism.bandon.com');
     final _endpoint = eventUrl.replaceAll(r'https://tourism.bandon.com', '');
     if (await _webScraper.loadWebPage(_endpoint)) {
-      final Map<String, dynamic> _dateDetails =
-          await _getEventDate(_webScraper);
+      final Map<String, dynamic> _dateDetails = _getEventDate(_webScraper);
       _newEvent.startDate = _dateDetails['startDate'];
       _newEvent.endDate = _dateDetails['endDate'];
       _newEvent.dateDetails = _dateDetails['dateDetails'];
       _newEvent.permalink = eventUrl;
-      _newEvent.title = await _getEventTitle(_webScraper);
-      _newEvent.description = await _getEventDescription(_webScraper);
-      _newEvent.location = await _getEventLocation(_webScraper);
-      _newEvent.admission = await _getEventAdmission(_webScraper);
-      _newEvent.website = await _getEventWebsite(_webScraper);
-      _newEvent.contact = await _getEventContact(_webScraper);
-      _newEvent.email = await _getEventEmail(_webScraper);
+      _newEvent.title = _getEventTitle(_webScraper);
+      _newEvent.description = _getEventDescription(_webScraper);
+      _newEvent.location = _getEventLocation(_webScraper);
+      _newEvent.admission = _getEventAdmission(_webScraper);
+      _newEvent.website = _getEventWebsite(_webScraper);
+      _newEvent.contact = _getEventContact(_webScraper);
+      _newEvent.email = _getEventEmail(_webScraper);
     } else {
       print('Failed to load the event');
     }
@@ -62,7 +61,7 @@ class EventCollector {
     return _newEvent;
   }
 
-  Future<String> _getEventTitle(WebScraper webScraper) async {
+  String _getEventTitle(WebScraper webScraper) {
     String _title;
 
     final _elements = webScraper.getElement('h1.gz-pagetitle', []);
@@ -71,7 +70,7 @@ class EventCollector {
     return _title;
   }
 
-  Future<String> _getEventDescription(WebScraper webScraper) async {
+  String _getEventDescription(WebScraper webScraper) {
     String _description;
 
     final _elements =
@@ -84,7 +83,7 @@ class EventCollector {
   }
 }
 
-Future<Map<String, dynamic>> _getEventDate(WebScraper webScraper) async {
+Map<String, dynamic> _getEventDate(WebScraper webScraper) {
   final Map<String, dynamic> _date = {};
   DateTime _startDate;
   DateTime _endDate;
@@ -117,7 +116,7 @@ Future<Map<String, dynamic>> _getEventDate(WebScraper webScraper) async {
   return _date;
 }
 
-Future<String> _getEventLocation(WebScraper webScraper) async {
+String _getEventLocation(WebScraper webScraper) {
   String _location;
 
   final _elements =
@@ -127,7 +126,7 @@ Future<String> _getEventLocation(WebScraper webScraper) async {
   return _location;
 }
 
-Future<String> _getEventAdmission(WebScraper webScraper) async {
+String _getEventAdmission(WebScraper webScraper) {
   String _admission;
 
   final _elements = webScraper.getElement('span.gz-event-fees', []);
@@ -138,7 +137,7 @@ Future<String> _getEventAdmission(WebScraper webScraper) async {
   return _admission;
 }
 
-Future<String> _getEventWebsite(WebScraper webScraper) async {
+String _getEventWebsite(WebScraper webScraper) {
   String _website;
 
   final _elements =
@@ -150,7 +149,7 @@ Future<String> _getEventWebsite(WebScraper webScraper) async {
   return _website;
 }
 
-Future<String> _getEventContact(WebScraper webScraper) async {
+String _getEventContact(WebScraper webScraper) {
   String _contact;
 
   final _elements = webScraper
@@ -160,7 +159,7 @@ Future<String> _getEventContact(WebScraper webScraper) async {
   return _contact;
 }
 
-Future<String> _getEventEmail(WebScraper webScraper) async {
+String _getEventEmail(WebScraper webScraper) {
   String _email;
 
   final _elements = webScraper
