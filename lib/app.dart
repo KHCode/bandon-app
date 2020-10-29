@@ -91,13 +91,15 @@ class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: widget.title,
-        theme: ThemeData(
-          brightness: appBrightness,
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: _startingPage,
-        routes: routes);
+      title: widget.title,
+      theme: ThemeData(
+        brightness: appBrightness,
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: _startingPage,
+      routes: routes,
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
