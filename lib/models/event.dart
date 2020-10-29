@@ -10,6 +10,8 @@ class Event {
   final String website;
   final String contact;
   final String email;
+  final bool isFavorite;
+  final DateTime dateFavorited;
 
   const Event(
       {this.title,
@@ -22,5 +24,7 @@ class Event {
       this.admission,
       this.website,
       this.contact,
-      this.email});
+      this.email,
+      this.isFavorite,
+      this.dateFavorited});
 }
