@@ -178,7 +178,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
-        decoration: gradientBackground(),
+        decoration: gradientBackground(context),
         child: ListView(
           children: <Widget>[
             StyledTopBanner(topText: "Things To Do"),
