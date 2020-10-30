@@ -33,7 +33,9 @@ class StyledExpansionTile extends StatelessWidget {
       child: ExpansionTile(
         title: Text(title),
         childrenPadding: EdgeInsets.all(15),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.light
+            ? Colors.white
+            : Colors.black,
         children: bodyBuilder(hiddenContent),
       ),
     );
