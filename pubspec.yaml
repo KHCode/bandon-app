@@ -70,7 +70,13 @@ flutter:
     - assets/images/things-to-do/bandon-things-to-do.jpg
     - assets/images/things-to-do/bandon-golfing.jpg
     - assets/images/things-to-do/bandon-hiking.jpg
+    - assets/images/things-to-do/bandon-beaches.jpg
+    - assets/images/things-to-do/bandon-fishing.jpg
+    - assets/images/things-to-do/bandon-birding.jpg
+    - assets/images/things-to-do/bandon-oldtown.jpg
     - assets/images/separator-golf.png
+    - assets/images/separator-bicycle.png
+    - assets/images/separator-beaches.png
     # - assets/images/lighthouse.png
     # - assets/images/dining.png
     # - assets/images/map.png
