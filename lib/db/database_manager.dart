@@ -72,8 +72,6 @@ class DatabaseManager {
   Future<List<Event>> getEvents() async {
     final eventRecords = await db.rawQuery(SQL_SELECT_EVENTS);
     final events = eventRecords.map((record) {
-      print(
-          '${record['id']}: ${record['isFavorite']} - ${record['dateFavorited'] ?? 'Not favorited'}');
       return Event(
         title: record['title'],
         description: record['description'],
