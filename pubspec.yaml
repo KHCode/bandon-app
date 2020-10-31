@@ -85,13 +85,21 @@ flutter:
     - assets/images/separator-golf.png
     - assets/images/separator-bicycle.png
     - assets/images/separator-beaches.png
+    - assets/images/separator-suitcase.png
+    - assets/images/plane-view.jpg 
+    - assets/images/bandon-forest-generic.jpg
+    - assets/images/maps/fly-portland.jpg
+    - assets/images/maps/drive-portland.jpg
+    - assets/images/drive-view.jpg
     # - assets/images/lighthouse.png
     # - assets/images/dining.png
     # - assets/images/map.png
     # - assets/images/bandon-logo.png
     # - assets/images/beach-sunset.jpg #tim-peterson-IIjWzuOaMdk-unsplash
     # - assets/
-
+  # drive-view.jpg #Photo by Cristofer Jeschke on Unsplash https://unsplash.com/photos/-fW7YPjhifk  
+  # bandon-forest-generic.jpg #Photo by Dave Hoefler on Unsplash https://unsplash.com/photos/vA80ZTVyooc
+  # plane-view.jpg #Photo by Ross Parmly on Unsplash https://unsplash.com/photos/rf6ywHVkrlY
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

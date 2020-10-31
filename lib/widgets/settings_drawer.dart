@@ -100,7 +100,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
             children: [
               ListTile(
                 title: Text(
-                  'Getting Started',
+                  'Start Here',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onTap: () =>
