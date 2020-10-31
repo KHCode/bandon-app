@@ -3,6 +3,7 @@ import 'package:bandon/screens/dining.dart';
 import 'package:bandon/screens/events.dart';
 import 'package:bandon/screens/find-business.dart';
 import 'package:bandon/screens/getting-started.dart';
+import 'package:bandon/screens/home_page.dart';
 import 'package:bandon/screens/lodging.dart';
 import 'package:bandon/screens/things-to-do.dart';
 import 'package:bandon/screens/relocate_screen.dart';
@@ -99,6 +100,16 @@ class SettingsDrawerState extends State<SettingsDrawer> {
           child: Column(
             children: [
               ListTile(
+                dense: true,
+                title: Text(
+                  'Home',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(HomePage.routeName),
+              ),
+              ListTile(
+                dense: true,
                 title: Text(
                   'Start Here',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -107,6 +118,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(GetStartedScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Dining',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -115,6 +127,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(DiningScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Lodging',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -123,6 +136,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(LodgingScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Things To Do',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -131,6 +145,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Events',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -139,6 +154,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(EventsScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Find a Business',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -147,6 +163,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     .pushNamed(FindBusinessScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Contact',
                   style: TextStyle(color: Colors.white, fontSize: 20),
@@ -155,6 +172,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                     Navigator.of(context).pushNamed(ContactScreen.routeName),
               ),
               ListTile(
+                dense: true,
                 title: Text(
                   'Relocate Here',
                   style: TextStyle(color: Colors.white, fontSize: 20),
