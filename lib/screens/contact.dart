@@ -13,7 +13,7 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Relocate"),
+        title: Text("Bandon Contact"),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
