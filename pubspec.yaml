@@ -88,6 +88,7 @@ flutter:
     - assets/images/separator-suitcase.png
     - assets/images/plane-view.jpg 
     - assets/images/bandon-forest-generic.jpg
+    - assets/images/bandon-sunset-generic.jpg
     - assets/images/maps/fly-portland.jpg
     - assets/images/maps/drive-portland.jpg
     - assets/images/drive-view.jpg
@@ -97,6 +98,7 @@ flutter:
     # - assets/images/bandon-logo.png
     # - assets/images/beach-sunset.jpg #tim-peterson-IIjWzuOaMdk-unsplash
     # - assets/
+  # bandon-sunset-generic.jpg #Photo by Tim Peterson on Unsplash https://unsplash.com/photos/V5MQ6Moq-3w
   # drive-view.jpg #Photo by Cristofer Jeschke on Unsplash https://unsplash.com/photos/-fW7YPjhifk  
   # bandon-forest-generic.jpg #Photo by Dave Hoefler on Unsplash https://unsplash.com/photos/vA80ZTVyooc
   # plane-view.jpg #Photo by Ross Parmly on Unsplash https://unsplash.com/photos/rf6ywHVkrlY
