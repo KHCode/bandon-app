@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../db/database_manager.dart';
 import '../models/event.dart';
+import '../widgets/settings_drawer.dart';
 
 class EventsScreen extends StatefulWidget {
   static const routeName = 'eventsScreen';
@@ -58,6 +59,7 @@ class _EventsScreenState extends State<EventsScreen> {
       appBar: AppBar(
         title: Text('Events'),
       ),
+      endDrawer: SettingsDrawer(),
       body: FutureBuilder(
         future: _getEvents(),
         initialData: [],
