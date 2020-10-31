@@ -29,7 +29,10 @@ class LodgingScreen extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               StyledTopBanner(topText: 'Book a Room'),
-              Padding(padding: EdgeInsets.only(top: 50)),
+              Padding(
+                  padding: EdgeInsets.only(bottom: 40),
+                  child: Image.asset(
+                      'assets/images/lodging-wildspring-cabin.jpg')),
               PaddedTextBody(textBody: body1),
               StyledButton(
                 text: 'View Lodging Options',
