@@ -71,7 +71,7 @@ class DatabaseManager {
     });
   }
 
-  void setFavorite({String permalink, bool isFavorite}) {
+  void setFavoriteEvent({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
     final date = isFavorite ? DateTime.now().toString() : null;
     db.transaction((txn) async {

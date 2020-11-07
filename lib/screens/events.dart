@@ -53,7 +53,7 @@ class _EventsScreenState extends State<EventsScreen> {
 
   void _toggleFavorite(Event event) {
     final databaseManager = DatabaseManager.getInstance();
-    databaseManager.setFavorite(
+    databaseManager.setFavoriteEvent(
         permalink: event.permalink, isFavorite: !event.isFavorite);
     setState(() {});
   }
