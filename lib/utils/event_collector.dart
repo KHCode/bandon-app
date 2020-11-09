@@ -54,8 +54,8 @@ class EventCollector {
       }
       _newEvent.permalink = eventUrl;
       final _dateDetails = _getEventDate(_webScraper);
-      _newEvent.startDate = _dateDetails['startDate'].trim();
-      _newEvent.endDate = _dateDetails['endDate'].trim();
+      _newEvent.startDate = _dateDetails['startDate'];
+      _newEvent.endDate = _dateDetails['endDate'];
       _newEvent.dateDetails = _dateDetails['dateDetails'].trim();
       _newEvent.description = _getEventDescription(_webScraper).trim();
       _newEvent.location = _getEventLocation(_webScraper).trim();
@@ -101,15 +101,15 @@ Map<String, dynamic> _getEventDate(WebScraper webScraper) {
   final _startDateElements = webScraper
       .getElement('div.gz-event-date > p > span:first-child', ['content']);
   _startDateElements.isNotEmpty
-      ? _startDate =
-          DateTime.parse(_startDateElements.first['attributes']['content'])
+      ? _startDate = DateTime.parse(
+          _startDateElements.first['attributes']['content'].trim())
       : _startDate = null;
 
   final _endDateElements =
       webScraper.getElement('div.gz-event-date > p > meta', ['content']);
   _endDateElements.isNotEmpty
       ? _endDate =
-          DateTime.parse(_endDateElements.first['attributes']['content'])
+          DateTime.parse(_endDateElements.first['attributes']['content'].trim())
       : _endDate = null;
 
   final _dateDetailsElements =
