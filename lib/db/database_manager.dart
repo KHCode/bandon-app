@@ -125,8 +125,7 @@ class DatabaseManager {
         contact: record['contact'],
         email: record['email'],
         isFavorite: record['isFavorite'] == 1 ? true : false,
-        dateFavorited:
-            DateTime.parse(record['dateFavorited']?.isEmpty ?? '00010101'),
+        dateFavorited: DateTime.parse(record['dateFavorited'] ?? '00010101'),
       );
     }).toList();
     return _events;
@@ -192,8 +191,7 @@ class DatabaseManager {
         hours: record['hours'],
         highlights: record['highlights'],
         isFavorite: record['isFavorite'] == 1 ? true : false,
-        dateFavorited:
-            DateTime.parse(record['dateFavorited']?.isEmpty ?? '00010101'),
+        dateFavorited: DateTime.parse(record['dateFavorited'] ?? '00010101'),
       );
     }).toList();
     return _businesses;
