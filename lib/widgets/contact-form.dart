@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/contact_info.dart';
+import '../screens/home_page.dart';
 
 Future<String> sendData(ContactInfo infoBody) async {
   String jsonInfoBody = jsonEncode(infoBody);
@@ -40,14 +41,8 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _stateController = TextEditingController();
   final TextEditingController _zipController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
-  // final TextEditingController _lodgingController = TextEditingController();
-  // final TextEditingController _diningController = TextEditingController();
-  // final TextEditingController _todoController = TextEditingController();
-  // final TextEditingController _movingController = TextEditingController();
-  // final TextEditingController _joiningController = TextEditingController();
-  // final TextEditingController _volunteerController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
-  static String _choiceString;
+  static String _choiceString = "email";
   static String statusCode;
   ContactChoice _choice = ContactChoice.email;
 
@@ -343,7 +338,6 @@ class _ContactFormState extends State<ContactForm> {
                 value: ContactChoice.email,
                 groupValue: _choice,
                 onChanged: (ContactChoice value) {
-                  _choiceString = "email";
                   setState(() {
                     _choice = value;
                   });
@@ -353,7 +347,6 @@ class _ContactFormState extends State<ContactForm> {
                 value: ContactChoice.phone,
                 groupValue: _choice,
                 onChanged: (ContactChoice value) {
-                  _choiceString = "phone";
                   setState(() {
                     _choice = value;
                   });
@@ -361,6 +354,9 @@ class _ContactFormState extends State<ContactForm> {
             ElevatedButton(
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
+                  _choice == ContactChoice.email
+                      ? _choiceString = "email"
+                      : _choiceString = "phone";
                   infoCollector = ContactInfo(
                       firstName: _firstNameController.text,
                       lastName: _lastNameController.text,
@@ -400,6 +396,7 @@ class _ContactFormState extends State<ContactForm> {
                   //   _lodging = false;
                   //   _dining = false;
                   // });
+                  Navigator.of(context).pushNamed(HomePage.routeName);
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(statusCode)));
                 }
