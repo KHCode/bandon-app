@@ -15,17 +15,12 @@ import '../widgets/padded_text_body.dart';
 // import '../widgets/test_rss_feed.dart';
 // import '../widgets/test_web_scraping.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   static const routeName = '/';
   final String title;
 
   HomePage({Key key, @required this.title}) : super(key: key);
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   static const bodyAbout = [
     'Life in Bandon is shaped by nature and the people who make their home in this corner of the Oregon Coast.',
     'That’s why we say our attractions are always in season, always open.',
@@ -35,15 +30,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       body: Container(
         decoration: gradientBackground(context),

@@ -22,7 +22,7 @@ class LodgingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Lodging"),
+        title: Text('Bandon Lodging'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(

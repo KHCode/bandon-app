@@ -44,7 +44,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       print('Error: ${e.toString()}');
     }
 
-    print("Location Permissions: " + _permission.toString());
+    print('Location Permissions: ' + _permission.toString());
     _onDone(context);
   }
 
@@ -62,8 +62,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       key: introKey,
       pages: [
         PageViewModel(
-          title: "See the sights",
-          body: "Learn about all of the activities Bandon has to offer.",
+          title: 'See the sights',
+          body: 'Learn about all of the activities Bandon has to offer.',
           image: AlignedImage(
               fileName: 'lighthouse.png',
               size: 350.0,
@@ -71,8 +71,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Get to know us",
-          body: "Find shops, dining, lodging and events around town.",
+          title: 'Get to know us',
+          body: 'Find shops, dining, lodging and events around town.',
           image: AlignedImage(
               fileName: 'dining.png',
               size: 350.0,
@@ -80,7 +80,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Enable location access",
+          title: 'Enable location access',
           body:
               "It's like having your own concierge.\n\nTap the button below to find how close you are to the greatest Bandon has to offer.",
           image: AlignedImage(

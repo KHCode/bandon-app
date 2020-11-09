@@ -5,6 +5,7 @@ import '../db/event_dto.dart';
 
 class EventCollector {
   final String url;
+  //TODO: Utilize url
 
   const EventCollector({this.url});
 
@@ -44,7 +45,7 @@ class EventCollector {
     final _webScraper = WebScraper('https://tourism.bandon.com');
     final _endpoint = eventUrl.replaceAll(r'https://tourism.bandon.com', '');
     if (await _webScraper.loadWebPage(_endpoint)) {
-      final Map<String, dynamic> _dateDetails = _getEventDate(_webScraper);
+      // TODO: Bail out if NOT NULL data not found
       final _dateDetails = _getEventDate(_webScraper);
       _newEvent.startDate = _dateDetails['startDate'];
       _newEvent.endDate = _dateDetails['endDate'];
