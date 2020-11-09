@@ -8,26 +8,27 @@ class TestDistanceDisplay extends StatefulWidget {
 }
 
 class _TestDistanceDisplayState extends State<TestDistanceDisplay> {
+  @override
   void initState() {
     super.initState();
     writeMessage();
   }
 
-  static const String testDestination = "20 10th Street SE Bandon, OR 97411";
-  static const String testBusiness = "Bandon Bicycle Works";
-  String message = "";
+  static const String testDestination = '20 10th Street SE Bandon, OR 97411';
+  static const String testBusiness = 'Bandon Bicycle Works';
+  var message = '';
 
   void writeMessage() async {
-    LocationPermission _permission = await Geolocator.checkPermission();
+    final _permission = await Geolocator.checkPermission();
     if (_permission == LocationPermission.denied ||
         _permission == LocationPermission.deniedForever) {
-      message = "We couldn't determine your current location. Please check your"
-          " device settings for more information.";
+      message = '''We couldn't determine your current location.
+      \nPlease check your device settings for more information.''';
     } else {
-      String distance = await calcDistanceInMiles();
-      message = "You\'re $distance miles away from $testBusiness.";
+      final distance = await calcDistanceInMiles();
+      message = "You're $distance miles away from $testBusiness.";
     }
-    print("Updating state");
+    print('Updating state');
     setState(() {});
   }
 
@@ -40,15 +41,15 @@ class _TestDistanceDisplayState extends State<TestDistanceDisplay> {
       print('Error: ${e.toString()}');
     }
 
-    List<Location> _locations =
-        await locationFromAddress(address, localeIdentifier: "en_US");
+    final _locations =
+        await locationFromAddress(address, localeIdentifier: 'en_US');
 
     return Geolocator.distanceBetween(_position.latitude, _position.longitude,
         _locations[0].latitude, _locations[0].longitude);
   }
 
   Future<String> calcDistanceInMiles() async {
-    double distanceMeters = await getMetersFromAddress(testDestination);
+    final distanceMeters = await getMetersFromAddress(testDestination);
     return (distanceMeters / 1609.344).toStringAsFixed(1);
   }
 
