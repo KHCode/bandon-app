@@ -42,11 +42,11 @@ class _FindBusinessScreenState extends State<FindBusinessScreen> {
           return Column(
             children: <Widget>[
               ListTile(
-                leading: InkWell(
-                  child: Icon(snapshot.data[index].isFavorite
+                leading: IconButton(
+                  icon: Icon(snapshot.data[index].isFavorite
                       ? Icons.favorite
                       : Icons.favorite_outline),
-                  onTap: () => {_toggleFavorite(snapshot.data[index])},
+                  onPressed: () => {_toggleFavorite(snapshot.data[index])},
                 ),
                 title: Text(snapshot.data[index].name),
                 trailing: Icon(Icons.navigate_next),
