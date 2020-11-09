@@ -17,6 +17,7 @@ class ContactInfo {
   final bool joining;
   final bool volunteer;
   final String contactBy;
+  final String message;
 
   const ContactInfo(
       {this.firstName,
@@ -36,5 +37,28 @@ class ContactInfo {
       this.moving,
       this.joining,
       this.volunteer,
-      this.contactBy});
+      this.contactBy,
+      this.message});
+
+  Map toJson() => {
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'phone': phone,
+        'business': business,
+        'address1': address1,
+        'address2': address2,
+        'city': city,
+        'state': state,
+        'zip': zip,
+        'country': country,
+        'lodging': lodging,
+        'dining': dining,
+        'todo': todo,
+        'moving': moving,
+        'joining': joining,
+        'volunteer': volunteer,
+        'contactBy': contactBy,
+        'message': message
+      };
 }

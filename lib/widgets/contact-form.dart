@@ -1,4 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import '../models/contact_info.dart';
+
+Future<String> sendData(ContactInfo infoBody) async {
+  String jsonInfoBody = jsonEncode(infoBody);
+  final http.Response response = await http.post('http://10.0.2.2:8080',
+      headers: {"content-type": "application/json"}, body: jsonInfoBody);
+
+  return response.statusCode.toString();
+}
 
 class ContactForm extends StatefulWidget {
   @override
@@ -8,6 +21,7 @@ class ContactForm extends StatefulWidget {
 enum ContactChoice { email, phone }
 
 class _ContactFormState extends State<ContactForm> {
+  ContactInfo infoCollector;
   final _formKey = GlobalKey<FormState>();
   bool _lodging = false,
       _dining = false,
@@ -15,7 +29,34 @@ class _ContactFormState extends State<ContactForm> {
       _moving = false,
       _joining = false,
       _volunteer = false;
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _businessController = TextEditingController();
+  final TextEditingController _address1Controller = TextEditingController();
+  final TextEditingController _address2Controller = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _stateController = TextEditingController();
+  final TextEditingController _zipController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  // final TextEditingController _lodgingController = TextEditingController();
+  // final TextEditingController _diningController = TextEditingController();
+  // final TextEditingController _todoController = TextEditingController();
+  // final TextEditingController _movingController = TextEditingController();
+  // final TextEditingController _joiningController = TextEditingController();
+  // final TextEditingController _volunteerController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
+  static String _choiceString;
+  static String statusCode;
   ContactChoice _choice = ContactChoice.email;
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +79,7 @@ class _ContactFormState extends State<ContactForm> {
                         return null;
                       },
                       decoration: InputDecoration(labelText: 'First Name'),
+                      controller: _firstNameController,
                     ),
                   ),
                 ),
@@ -52,6 +94,7 @@ class _ContactFormState extends State<ContactForm> {
                         return null;
                       },
                       decoration: InputDecoration(labelText: 'Last Name'),
+                      controller: _lastNameController,
                     ),
                   ),
                 ),
@@ -67,6 +110,7 @@ class _ContactFormState extends State<ContactForm> {
                   return null;
                 },
                 decoration: InputDecoration(labelText: 'Email'),
+                controller: _emailController,
               ),
             ),
             Padding(
@@ -79,6 +123,7 @@ class _ContactFormState extends State<ContactForm> {
                   return null;
                 },
                 decoration: InputDecoration(labelText: 'Daytime Phone'),
+                controller: _phoneController,
               ),
             ),
             Padding(
@@ -91,6 +136,7 @@ class _ContactFormState extends State<ContactForm> {
                   return null;
                 },
                 decoration: InputDecoration(labelText: 'Business (Optional)'),
+                controller: _businessController,
               ),
             ),
             Padding(
@@ -104,6 +150,7 @@ class _ContactFormState extends State<ContactForm> {
                 },
                 decoration:
                     InputDecoration(labelText: 'Street Address (Optional)'),
+                controller: _address1Controller,
               ),
             ),
             Padding(
@@ -116,6 +163,7 @@ class _ContactFormState extends State<ContactForm> {
                   return null;
                 },
                 decoration: InputDecoration(labelText: 'Address Line 2'),
+                controller: _address2Controller,
               ),
             ),
             Row(
@@ -131,6 +179,7 @@ class _ContactFormState extends State<ContactForm> {
                         return null;
                       },
                       decoration: InputDecoration(labelText: 'City'),
+                      controller: _cityController,
                     ),
                   ),
                 ),
@@ -146,6 +195,7 @@ class _ContactFormState extends State<ContactForm> {
                       },
                       decoration:
                           InputDecoration(labelText: 'State/Province/Region'),
+                      controller: _stateController,
                     ),
                   ),
                 ),
@@ -164,6 +214,7 @@ class _ContactFormState extends State<ContactForm> {
                         return null;
                       },
                       decoration: InputDecoration(labelText: 'Zip/Postal Code'),
+                      controller: _zipController,
                     ),
                   ),
                 ),
@@ -178,6 +229,7 @@ class _ContactFormState extends State<ContactForm> {
                         return null;
                       },
                       decoration: InputDecoration(labelText: 'Country'),
+                      controller: _countryController,
                     ),
                   ),
                 ),
@@ -280,6 +332,7 @@ class _ContactFormState extends State<ContactForm> {
                   return null;
                 },
                 decoration: InputDecoration(labelText: 'Message (Optional)'),
+                controller: _messageController,
               ),
             ),
             ListTile(
@@ -290,6 +343,7 @@ class _ContactFormState extends State<ContactForm> {
                 value: ContactChoice.email,
                 groupValue: _choice,
                 onChanged: (ContactChoice value) {
+                  _choiceString = "email";
                   setState(() {
                     _choice = value;
                   });
@@ -299,15 +353,55 @@ class _ContactFormState extends State<ContactForm> {
                 value: ContactChoice.phone,
                 groupValue: _choice,
                 onChanged: (ContactChoice value) {
+                  _choiceString = "phone";
                   setState(() {
                     _choice = value;
                   });
                 }),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState.validate()) {
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text('This field and button works')));
+                  infoCollector = ContactInfo(
+                      firstName: _firstNameController.text,
+                      lastName: _lastNameController.text,
+                      email: _emailController.text,
+                      phone: _phoneController.text,
+                      business: _businessController.text,
+                      address1: _address1Controller.text,
+                      address2: _address2Controller.text,
+                      city: _cityController.text,
+                      state: _stateController.text,
+                      zip: int.parse(_zipController.text),
+                      country: _countryController.text,
+                      lodging: _lodging,
+                      dining: _dining,
+                      todo: _todo,
+                      moving: _moving,
+                      joining: _joining,
+                      volunteer: _volunteer,
+                      contactBy: _choiceString,
+                      message: _messageController.text);
+
+                  _firstNameController.clear();
+                  _lastNameController.clear();
+                  _emailController.clear();
+                  _phoneController.clear();
+                  _businessController.clear();
+                  _address1Controller.clear();
+                  _address2Controller.clear();
+                  _cityController.clear();
+                  _stateController.clear();
+                  _zipController.clear();
+                  _countryController.clear();
+                  _messageController.clear();
+
+                  statusCode = await sendData(infoCollector);
+                  // setState(() => {
+                  //   _lodging = false;
+                  //   _dining = false;
+                  // });
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text(statusCode)));
                 }
               },
               child: Text('Submit'),
