@@ -5,7 +5,6 @@ import '../db/event_dto.dart';
 
 class EventCollector {
   final String url;
-  //TODO: Utilize url
 
   const EventCollector({this.url});
 
@@ -13,9 +12,13 @@ class EventCollector {
     final databaseManager = DatabaseManager.getInstance();
     final _events = await _getEventUrls();
 
-    for (var eventUrl in _events) {
+    for (final eventUrl in _events) {
       final _event = await _getEventDetails(eventUrl);
-      databaseManager.saveEvent(dto: _event);
+      if (_event.isNull) {
+        print("Couldn't retrieve the event at $eventUrl");
+      } else {
+        databaseManager.saveEvent(dto: _event);
+      }
     }
 
     return _events.isNotEmpty ? true : false;
@@ -29,7 +32,7 @@ class EventCollector {
       final _eventUrls = _webScraper.getElement(
           'div#gz-events > div.gz-list-card-wrapper > div.gz-events-card > div.card-header > a',
           ['href']);
-      for (var urlElement in _eventUrls) {
+      for (final urlElement in _eventUrls) {
         final String _eventUrl = urlElement['attributes']['href'];
         _eventList.add('$_eventUrl');
       }
@@ -45,19 +48,21 @@ class EventCollector {
     final _webScraper = WebScraper('https://tourism.bandon.com');
     final _endpoint = eventUrl.replaceAll(r'https://tourism.bandon.com', '');
     if (await _webScraper.loadWebPage(_endpoint)) {
-      // TODO: Bail out if NOT NULL data not found
-      final _dateDetails = _getEventDate(_webScraper);
-      _newEvent.startDate = _dateDetails['startDate'];
-      _newEvent.endDate = _dateDetails['endDate'];
-      _newEvent.dateDetails = _dateDetails['dateDetails'];
-      _newEvent.permalink = eventUrl;
       _newEvent.title = _getEventTitle(_webScraper);
-      _newEvent.description = _getEventDescription(_webScraper);
-      _newEvent.location = _getEventLocation(_webScraper);
-      _newEvent.admission = _getEventAdmission(_webScraper);
-      _newEvent.website = _getEventWebsite(_webScraper);
-      _newEvent.contact = _getEventContact(_webScraper);
-      _newEvent.email = _getEventEmail(_webScraper);
+      if (_newEvent?.title?.isEmpty ?? true) {
+        return _newEvent;
+      }
+      _newEvent.permalink = eventUrl;
+      final _dateDetails = _getEventDate(_webScraper);
+      _newEvent.startDate = _dateDetails['startDate'].trim();
+      _newEvent.endDate = _dateDetails['endDate'].trim();
+      _newEvent.dateDetails = _dateDetails['dateDetails'].trim();
+      _newEvent.description = _getEventDescription(_webScraper).trim();
+      _newEvent.location = _getEventLocation(_webScraper).trim();
+      _newEvent.admission = _getEventAdmission(_webScraper).trim();
+      _newEvent.website = _getEventWebsite(_webScraper).trim();
+      _newEvent.contact = _getEventContact(_webScraper).trim();
+      _newEvent.email = _getEventEmail(_webScraper).trim();
     } else {
       print('Failed to load the event');
     }
