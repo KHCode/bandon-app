@@ -392,13 +392,11 @@ class _ContactFormState extends State<ContactForm> {
                   _messageController.clear();
 
                   statusCode = await sendData(infoCollector);
-                  // setState(() => {
-                  //   _lodging = false;
-                  //   _dining = false;
-                  // });
-                  Navigator.of(context).pushNamed(HomePage.routeName);
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text(statusCode)));
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text("Thank you for your interest in Bandon!")));
+                  Future.delayed(const Duration(milliseconds: 2000), () {
+                    Navigator.of(context).pushNamed(HomePage.routeName);
+                  });
                 }
               },
               child: Text('Submit'),
