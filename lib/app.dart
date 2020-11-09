@@ -15,6 +15,7 @@ import 'screens/onboarding.dart';
 import 'screens/relocate_screen.dart';
 import 'screens/things-to-do.dart';
 
+import 'utils/business_collector.dart';
 import 'utils/event_collector.dart';
 
 class App extends StatefulWidget {
@@ -22,6 +23,8 @@ class App extends StatefulWidget {
   final SharedPreferences prefs;
   final eventCollector =
       const EventCollector(url: 'https://tourism.bandon.com/events');
+  final businessCollector =
+      const BusinessCollector(url: 'https://tourism.bandon.com/list');
 
   const App({Key key, @required this.title, @required this.prefs})
       : super(key: key);
@@ -57,6 +60,7 @@ class AppState extends State<App> {
       : OnboardingPage(
           title: widget.title, prefs: widget.prefs, prefsKey: ONBOARDED_KEY);
 
+  @override
   void initState() {
     super.initState();
     _appBrightness = _darkMode ? Brightness.dark : Brightness.light;
@@ -66,14 +70,14 @@ class AppState extends State<App> {
   void _getEventsOnLoad() async {
     String lastUpdate = widget.prefs.getString(EVENT_UPDATE_TIME_KEY) ??
         DateTime.now().subtract(Duration(minutes: 120)).toString();
-    Duration difference = DateTime.now().difference(DateTime.parse(lastUpdate));
+    var difference = DateTime.now().difference(DateTime.parse(lastUpdate));
     // If events were updated in last hour, don't try to update again.
     if (difference.inMinutes.abs() > 60) {
       // Otherwise get events, verify success and then update the last time
       // events were fetched.
       if (await widget.eventCollector.getEvents()) {
         print('Events fetched successfully');
-        widget.prefs
+        await widget.prefs
             .setString(EVENT_UPDATE_TIME_KEY, DateTime.now().toString());
       } else {
         print('Failed to fetch events');

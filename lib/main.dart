@@ -10,11 +10,11 @@ void main() async {
   const SCHEMA_PATH = 'assets/schema.sql';
 
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
 
-  String schema = await rootBundle.loadString(SCHEMA_PATH);
+  final schema = await rootBundle.loadString(SCHEMA_PATH);
   await DatabaseManager.initialize(schema);
 
   runApp(App(

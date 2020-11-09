@@ -1,20 +1,32 @@
 import 'package:sqflite/sqflite.dart';
 
+import 'business_dto.dart';
 import 'event_dto.dart';
+import '../models/business.dart';
 import '../models/event.dart';
 
 class DatabaseManager {
   static const DATABASE_FILENAME = 'events.sqlite3.db';
   static const SQL_DROP_EVENTS_TABLE = 'DROP TABLE IF EXISTS events;';
+  static const SQL_DROP_BUSINESSES_TABLE = 'DROP TABLE IF EXISTS businesses;';
   static const SQL_INSERT_EVENT = '''INSERT OR REPLACE INTO events(
         title, description, permalink, startDate, endDate, dateDetails, location, admission, website, contact, email, isFavorite, dateFavorited)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT isFavorite FROM events WHERE permalink = ?3), (SELECT dateFavorited FROM events WHERE permalink = ?3));''';
+  static const SQL_INSERT_BUSINESS = '''INSERT OR REPLACE INTO businesses(
+        name, aboutUs, permalink, categories, address, phone, website, hours, highlights, isFavorite, dateFavorited)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, (SELECT isFavorite FROM events WHERE permalink = ?3), (SELECT dateFavorited FROM events WHERE permalink = ?3));''';
   static const SQL_SELECT_EVENTS =
       'SELECT * FROM events ORDER BY datetime(startDate);';
+  static const SQL_SELECT_BUSINESSES =
+      'SELECT * FROM businesses ORDER BY name ASC;';
   static const SQL_SELECT_ONE_EVENT =
       'SELECT * FROM events WHERE permalink = ?;';
+  static const SQL_SELECT_ONE_BUSINESS =
+      'SELECT * FROM businesses WHERE permalink = ?;';
   static const SQL_SELECT_FAVORITE_EVENTS =
       'SELECT * FROM events WHERE isFavorite = 1 ORDER BY datetime(startDate);';
+  static const SQL_SELECT_FAVORITE_BUSINESSES =
+      'SELECT * FROM businesses WHERE isFavorite = 1 ORDER BY name ASC;';
   static const SQL_UPDATE_FAVORITE_EVENT =
       'UPDATE events SET isFavorite = ?, dateFavorited = ? WHERE permalink = ?;';
   static const SQL_DELETE_OLD_EVENTS =
@@ -50,6 +62,7 @@ class DatabaseManager {
 
   static void _createTables(Database db, String sql) async {
     await db.execute(SQL_DROP_EVENTS_TABLE);
+    await db.execute(SQL_DROP_BUSINESSES_TABLE);
     await db.execute(sql);
   }
 
@@ -84,7 +97,7 @@ class DatabaseManager {
     // Remove events that with an end date that's prior to the current time that
     // also had an end date that the event collection parsed successfully
     // (i.e., a date that's greater than 1/1/1).
-    db.transaction((txn) async {
+    await db.transaction((txn) async {
       await txn.rawDelete(SQL_DELETE_OLD_EVENTS,
           [DateTime.parse('00010101').toString(), DateTime.now().toString()]);
     });
@@ -132,5 +145,21 @@ class DatabaseManager {
           dateFavorited: record['dateFavorited']);
     }).toList();
     return events;
+  }
+
+  void saveBusiness({BusinessDTO dto}) {
+    db.transaction((txn) async {
+      await txn.rawInsert(SQL_INSERT_BUSINESS, [
+        dto.name,
+        dto.aboutUs,
+        dto.permalink,
+        dto.categories,
+        dto.address,
+        dto.phone,
+        dto.website,
+        dto.hours,
+        dto.highlights,
+      ]);
+    });
   }
 }
