@@ -43,6 +43,7 @@ dependencies:
   webfeed: ^0.6.0
 
 dev_dependencies:
+  pedantic: ^1.9.2
   flutter_test:
     sdk: flutter
 
