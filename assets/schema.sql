@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS events(
     email TEXT,
     isFavorite INTEGER NOT NULL DEFAULT 0,
     dateFavorited TEXT
-    );
+);
 
 CREATE TABLE IF NOT EXISTS businesses(
     id INTEGER PRIMARY KEY,
@@ -28,4 +28,4 @@ CREATE TABLE IF NOT EXISTS businesses(
     highlights TEXT,
     isFavorite INTEGER NOT NULL DEFAULT 0,
     dateFavorited TEXT
-    );
+);
