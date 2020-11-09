@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/services.dart';
 
+import 'screens/business_details.dart';
 import 'screens/contact.dart';
 import 'screens/dining.dart';
 import 'screens/event_details.dart';
@@ -36,9 +37,12 @@ class App extends StatefulWidget {
 class AppState extends State<App> {
   static const ONBOARDED_KEY = 'hasBeenOnboarded';
   static const DARK_MODE_KEY = 'darkMode';
-  static const EVENT_UPDATE_TIME_KEY = 'lastUpdateTime';
+  static const EVENT_UPDATE_TIME_KEY = 'lastEventUpdateTime';
+  static const BUSINESS_UPDATE_TIME_KEY = 'lastBusinessUpdateTime';
+  static const EVENT_UPDATE_TIME_KEY_DEPRECATED = 'lastUpdateTime';
 
   static final routes = {
+    BusinessDetails.routeName: (context) => BusinessDetails(),
     ContactScreen.routeName: (context) => ContactScreen(),
     DiningScreen.routeName: (context) => DiningScreen(),
     EventDetails.routeName: (context) => EventDetails(),
@@ -65,25 +69,51 @@ class AppState extends State<App> {
     super.initState();
     _appBrightness = _darkMode ? Brightness.dark : Brightness.light;
     _getEventsOnLoad();
+    _getBusinessesOnLoad();
   }
 
   void _getEventsOnLoad() async {
-    String lastUpdate = widget.prefs.getString(EVENT_UPDATE_TIME_KEY) ??
-        DateTime.now().subtract(Duration(minutes: 120)).toString();
-    var difference = DateTime.now().difference(DateTime.parse(lastUpdate));
+    if (widget.prefs.containsKey(EVENT_UPDATE_TIME_KEY_DEPRECATED)) {
+      await widget.prefs.remove(EVENT_UPDATE_TIME_KEY_DEPRECATED);
+    }
+    final lastUpdate = widget.prefs.getString(EVENT_UPDATE_TIME_KEY) ??
+        DateTime.now().toUtc().subtract(Duration(minutes: 120)).toString();
+    final difference =
+        DateTime.now().toUtc().difference(DateTime.parse(lastUpdate));
     // If events were updated in last hour, don't try to update again.
     if (difference.inMinutes.abs() > 60) {
       // Otherwise get events, verify success and then update the last time
       // events were fetched.
       if (await widget.eventCollector.getEvents()) {
         print('Events fetched successfully');
-        await widget.prefs
-            .setString(EVENT_UPDATE_TIME_KEY, DateTime.now().toString());
+        await widget.prefs.setString(
+            EVENT_UPDATE_TIME_KEY, DateTime.now().toUtc().toString());
       } else {
         print('Failed to fetch events');
       }
     } else {
       print('Events were fetched recently. Skipping update.');
+    }
+  }
+
+  void _getBusinessesOnLoad() async {
+    final lastUpdate = widget.prefs.getString(BUSINESS_UPDATE_TIME_KEY) ??
+        DateTime.now().toUtc().subtract(Duration(days: 31)).toString();
+    final difference =
+        DateTime.now().toUtc().difference(DateTime.parse(lastUpdate));
+    // If businesses were updated in last hour, don't try to update again.
+    if (difference.inDays.abs() > 30) {
+      // Otherwise get businesses, verify success and then update the last time
+      // businesses were fetched.
+      if (await widget.businessCollector.getBusinesses()) {
+        print('Businesses fetched successfully');
+        await widget.prefs.setString(
+            BUSINESS_UPDATE_TIME_KEY, DateTime.now().toUtc().toString());
+      } else {
+        print('Failed to fetch businesses');
+      }
+    } else {
+      print('Businesses were fetched recently. Skipping update.');
     }
   }
 

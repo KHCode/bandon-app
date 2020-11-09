@@ -9,15 +9,15 @@ class BusinessDTO {
   String hours;
   String highlights;
 
-  // TODO: Check SQL "NOT NULL" fields, permalink is always found when getting details
-  bool get isNull =>
-      (name?.isEmpty ?? true) &&
-      (aboutUs?.isEmpty ?? true) &&
-      (permalink?.isEmpty ?? true) &&
-      (categories?.isEmpty ?? true) &&
-      (address?.isEmpty ?? true) &&
-      (phone?.isEmpty ?? true) &&
-      (website?.isEmpty ?? true) &&
-      (hours?.isEmpty ?? true) &&
-      (highlights?.isEmpty ?? true);
+  bool get isNull => [
+        name,
+        aboutUs,
+        permalink,
+        categories,
+        address,
+        phone,
+        website,
+        hours,
+        highlights
+      ].contains(null);
 }

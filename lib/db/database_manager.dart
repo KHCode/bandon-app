@@ -29,9 +29,10 @@ class DatabaseManager {
       'SELECT * FROM businesses WHERE isFavorite = 1 ORDER BY name ASC;';
   static const SQL_UPDATE_FAVORITE_EVENT =
       'UPDATE events SET isFavorite = ?, dateFavorited = ? WHERE permalink = ?;';
+  static const SQL_UPDATE_FAVORITE_BUSINESS =
+      'UPDATE businesses SET isFavorite = ?, dateFavorited = ? WHERE permalink = ?;';
   static const SQL_DELETE_OLD_EVENTS =
       'DELETE FROM events WHERE datetime(endDate) > datetime(?) AND datetime(endDate) < ?;';
-
   static const SQL_SELECT_OLD_EVENTS =
       'SELECT * FROM events WHERE datetime(endDate) > datetime(?) AND datetime(endDate) < ?;';
 
@@ -49,7 +50,7 @@ class DatabaseManager {
   static Future initialize(String schema) async {
     final db = await openDatabase(
       DATABASE_FILENAME,
-      version: 2,
+      version: 3,
       onCreate: (Database db, int version) {
         _createTables(db, schema);
       },
@@ -63,7 +64,11 @@ class DatabaseManager {
   static void _createTables(Database db, String sql) async {
     await db.execute(SQL_DROP_EVENTS_TABLE);
     await db.execute(SQL_DROP_BUSINESSES_TABLE);
-    await db.execute(sql);
+    for (final statement in sql.split(';')) {
+      if (statement.trim().isNotEmpty) {
+        await db.execute('${statement.trim()};');
+      }
+    }
   }
 
   void saveEvent({EventDTO dto}) {
@@ -105,8 +110,8 @@ class DatabaseManager {
 
   Future<List<Event>> getEvents() async {
     await _cleanStaleEvents();
-    final eventRecords = await db.rawQuery(SQL_SELECT_EVENTS);
-    final events = eventRecords.map((record) {
+    final _eventRecords = await db.rawQuery(SQL_SELECT_EVENTS);
+    final _events = _eventRecords.map((record) {
       return Event(
         title: record['title'],
         description: record['description'],
@@ -120,10 +125,11 @@ class DatabaseManager {
         contact: record['contact'],
         email: record['email'],
         isFavorite: record['isFavorite'] == 1 ? true : false,
-        dateFavorited: DateTime.parse(record['dateFavorited'] ?? '00010101'),
+        dateFavorited:
+            DateTime.parse(record['dateFavorited']?.isEmpty ?? '00010101'),
       );
     }).toList();
-    return events;
+    return _events;
   }
 
   Future<List<Event>> getFavoriteEvents() async {
@@ -147,6 +153,15 @@ class DatabaseManager {
     return events;
   }
 
+  void setFavoriteBusiness({String permalink, bool isFavorite}) {
+    final favorite = isFavorite ? 1 : 0;
+    final date = isFavorite ? DateTime.now().toString() : null;
+    db.transaction((txn) async {
+      await txn
+          .rawUpdate(SQL_UPDATE_FAVORITE_BUSINESS, [favorite, date, permalink]);
+    });
+  }
+
   void saveBusiness({BusinessDTO dto}) {
     db.transaction((txn) async {
       await txn.rawInsert(SQL_INSERT_BUSINESS, [
@@ -161,5 +176,26 @@ class DatabaseManager {
         dto.highlights,
       ]);
     });
+  }
+
+  Future<List<Business>> getBusinesses() async {
+    final _businessRecords = await db.rawQuery(SQL_SELECT_BUSINESSES);
+    final _businesses = _businessRecords.map((record) {
+      return Business(
+        name: record['name'],
+        aboutUs: record['aboutUs'],
+        permalink: record['permalink'],
+        categories: record['categories'],
+        address: record['address'],
+        phone: record['phone'],
+        website: record['website'],
+        hours: record['hours'],
+        highlights: record['highlights'],
+        isFavorite: record['isFavorite'] == 1 ? true : false,
+        dateFavorited:
+            DateTime.parse(record['dateFavorited']?.isEmpty ?? '00010101'),
+      );
+    }).toList();
+    return _businesses;
   }
 }
