@@ -29,7 +29,6 @@ class _FindBusinessScreenState extends State<FindBusinessScreen> {
     final databaseManager = DatabaseManager.getInstance();
     databaseManager.setFavoriteBusiness(
         permalink: business.permalink, isFavorite: !business.isFavorite);
-    print(business.isFavorite);
     setState(() {});
   }
 

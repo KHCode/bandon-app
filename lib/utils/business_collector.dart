@@ -78,7 +78,6 @@ class BusinessCollector {
         return _newBusiness;
       }
       _newBusiness.permalink = businessUrl;
-      print(_newBusiness.permalink);
       _newBusiness.aboutUs = _getAboutUs(_webScraper).trim();
       _newBusiness.categories = _getCategories(_webScraper).trim();
       _newBusiness.address = _getAddress(_webScraper).trim();
@@ -99,7 +98,6 @@ class BusinessCollector {
     final _elements = webScraper.getElement('h1.gz-pagetitle', []);
     _elements.isNotEmpty ? _name = _elements.first['title'] : _name = '';
 
-    print(_name);
     return _name;
   }
 
@@ -111,7 +109,6 @@ class BusinessCollector {
       _categories.add(element['title']);
     }
 
-    print(_categories.join(';'));
     return _categories.join(';');
   }
 
@@ -146,7 +143,6 @@ String _getAddress(WebScraper webScraper) {
     _address.add(_zipCode.first['title']);
   }
 
-  print(_address.join(' '));
   return _address.join(' ');
 }
 
@@ -156,7 +152,6 @@ String _getPhone(WebScraper webScraper) {
   final _elements = webScraper.getElement('span[itemprop="telephone"]', []);
   _elements.isNotEmpty ? _phone = _elements.first['title'] : _phone = '';
 
-  print(_phone);
   return _phone;
 }
 
@@ -169,7 +164,6 @@ String _getWebsite(WebScraper webScraper) {
       ? _website = _elements.first['attributes']['href']
       : _website = '';
 
-  print(_website);
   return _website;
 }
 
@@ -180,7 +174,6 @@ String _getHours(WebScraper webScraper) {
       .getElement('div.gz-details-hours > p:not(.gz-details-subtitle)', []);
   _elements.isNotEmpty ? _hours = _elements.first['title'] : _hours = '';
 
-  print('Hours: ${_hours}');
   return _hours;
 }
 
@@ -193,6 +186,6 @@ String _getHighlights(WebScraper webScraper) {
       _highlights.add(element['title']);
     }
   }
-  print('Highlights: ${_highlights.join(';')}');
+
   return _highlights.join(';');
 }
