@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/business.dart';
 
 class BusinessDetails extends StatefulWidget {
@@ -19,9 +23,39 @@ class _BusinessDetailsState extends State<BusinessDetails> {
       _business = ModalRoute.of(context).settings.arguments;
     }
 
+    void launchMap(address) async {
+      var url =
+          Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
+              .toString();
+      if (Platform.isIOS) {
+        url = Uri.parse('http://maps.apple.com/?q=$address').toString();
+      }
+      if (await canLaunch(url)) {
+        await launch(url);
+      }
+    }
+
+    void launchPhone(phoneNumber) async {
+      if (await canLaunch('tel:{phoneNumber}')) {
+        await launch(phoneNumber);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Business Details'),
+        actions: <Widget>[
+          if (_business?.phone?.isNotEmpty ?? false)
+            IconButton(
+              onPressed: () => launchPhone(_business.phone),
+              icon: Icon(Icons.phone),
+            ),
+          IconButton(
+            onPressed: () =>
+                Share.share('Check this out: ${_business.permalink}'),
+            icon: Icon(Icons.share),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -35,10 +69,20 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
-                Text(
-                  _business.website,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+                if (_business?.categories?.isNotEmpty ?? false)
+                  Text(
+                    '${_business.categories.replaceAll(';', '\n')}',
+                  ),
+                SizedBox(height: 10),
+                _business?.address?.isEmpty ?? true
+                    ? null
+                    : InkWell(
+                        onTap: () => launchMap(_business.address),
+                        child: Text(
+                          _business.address,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
                 SizedBox(height: 20),
                 Text(
                   _business.aboutUs,
