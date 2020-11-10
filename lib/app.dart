@@ -101,7 +101,7 @@ class AppState extends State<App> {
         DateTime.now().toUtc().subtract(Duration(days: 31)).toString();
     final difference =
         DateTime.now().toUtc().difference(DateTime.parse(lastUpdate));
-    // If businesses were updated in last hour, don't try to update again.
+    // If businesses were updated in last 30 days, don't try to update again.
     if (difference.inDays.abs() > 30) {
       // Otherwise get businesses, verify success and then update the last time
       // businesses were fetched.
