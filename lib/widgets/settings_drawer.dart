@@ -16,16 +16,18 @@ import '../app.dart';
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({Key key}) : super(key: key);
 
-  SettingsDrawerState createState() => SettingsDrawerState();
+  @override
+  _SettingsDrawerState createState() => _SettingsDrawerState();
 }
 
-class SettingsDrawerState extends State<SettingsDrawer> {
+class _SettingsDrawerState extends State<SettingsDrawer> {
   bool _locationEnabled = false;
 
   bool _getDarkModeStatus(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark ? true : false;
   void _toggleTheme(AppState appState) => appState.toggleTheme();
 
+  @override
   void initState() {
     super.initState();
     _getLocationOverallStatus();
@@ -43,8 +45,8 @@ class SettingsDrawerState extends State<SettingsDrawer> {
       Geolocator.isLocationServiceEnabled();
 
   Future<bool> _getAppLocationPermissionStatus() async {
-    bool _result = false;
-    LocationPermission _permission = await Geolocator.checkPermission();
+    var _result = false;
+    final _permission = await Geolocator.checkPermission();
 
     switch (_permission) {
       case LocationPermission.whileInUse:
@@ -62,7 +64,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
         print('Location permissions were denied forever');
         break;
       default:
-        print('Couldn\'t determine location permissions');
+        print("Couldn't determine location permissions");
     }
 
     return _result;
@@ -78,7 +80,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    AppState appState = context.findAncestorStateOfType<AppState>();
+    final appState = context.findAncestorStateOfType<AppState>();
 
     return Drawer(
         child: ListView(
@@ -191,7 +193,7 @@ class SettingsDrawerState extends State<SettingsDrawer> {
                 onChanged: null,
                 subtitle: InkWell(
                   child: Text(
-                    "Tap here to review your device settings",
+                    'Tap here to review your device settings',
                     style: TextStyle(color: Colors.white70),
                   ),
                   onTap: () {

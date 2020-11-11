@@ -9,12 +9,18 @@ class EventCollector {
   const EventCollector({this.url});
 
   Future<bool> getEvents() async {
-    final List<String> _events = await _getEventUrls();
-    _events.forEach((element) async {
-      final _event = await _getEventDetails(element);
-      final databaseManager = DatabaseManager.getInstance();
-      databaseManager.saveEvent(dto: _event);
-    });
+    final databaseManager = DatabaseManager.getInstance();
+    final _events = await _getEventUrls();
+
+    for (final eventUrl in _events) {
+      final _event = await _getEventDetails(eventUrl);
+      if (_event.isNull) {
+        print("Couldn't retrieve the event at $eventUrl");
+      } else {
+        databaseManager.saveEvent(dto: _event);
+      }
+    }
+
     return _events.isNotEmpty ? true : false;
   }
 
@@ -26,10 +32,10 @@ class EventCollector {
       final _eventUrls = _webScraper.getElement(
           'div#gz-events > div.gz-list-card-wrapper > div.gz-events-card > div.card-header > a',
           ['href']);
-      _eventUrls.forEach((element) {
-        final String _eventUrl = element['attributes']['href'];
+      for (final urlElement in _eventUrls) {
+        final String _eventUrl = urlElement['attributes']['href'];
         _eventList.add('$_eventUrl');
-      });
+      }
     } else {
       print('Failed to load the event list');
     }
@@ -42,18 +48,21 @@ class EventCollector {
     final _webScraper = WebScraper('https://tourism.bandon.com');
     final _endpoint = eventUrl.replaceAll(r'https://tourism.bandon.com', '');
     if (await _webScraper.loadWebPage(_endpoint)) {
-      final Map<String, dynamic> _dateDetails = _getEventDate(_webScraper);
+      _newEvent.title = _getEventTitle(_webScraper);
+      if (_newEvent?.title?.isEmpty ?? true) {
+        return _newEvent;
+      }
+      _newEvent.permalink = eventUrl;
+      final _dateDetails = _getEventDate(_webScraper);
       _newEvent.startDate = _dateDetails['startDate'];
       _newEvent.endDate = _dateDetails['endDate'];
-      _newEvent.dateDetails = _dateDetails['dateDetails'];
-      _newEvent.permalink = eventUrl;
-      _newEvent.title = _getEventTitle(_webScraper);
-      _newEvent.description = _getEventDescription(_webScraper);
-      _newEvent.location = _getEventLocation(_webScraper);
-      _newEvent.admission = _getEventAdmission(_webScraper);
-      _newEvent.website = _getEventWebsite(_webScraper);
-      _newEvent.contact = _getEventContact(_webScraper);
-      _newEvent.email = _getEventEmail(_webScraper);
+      _newEvent.dateDetails = _dateDetails['dateDetails'].trim();
+      _newEvent.description = _getEventDescription(_webScraper).trim();
+      _newEvent.location = _getEventLocation(_webScraper).trim();
+      _newEvent.admission = _getEventAdmission(_webScraper).trim();
+      _newEvent.website = _getEventWebsite(_webScraper).trim();
+      _newEvent.contact = _getEventContact(_webScraper).trim();
+      _newEvent.email = _getEventEmail(_webScraper).trim();
     } else {
       print('Failed to load the event');
     }
@@ -65,7 +74,7 @@ class EventCollector {
     String _title;
 
     final _elements = webScraper.getElement('h1.gz-pagetitle', []);
-    _elements.length > 0 ? _title = _elements.first['title'] : _title = '';
+    _elements.isNotEmpty ? _title = _elements.first['title'] : _title = '';
 
     return _title;
   }
@@ -75,7 +84,7 @@ class EventCollector {
 
     final _elements =
         webScraper.getElement('div.gz-event-description > div > p', []);
-    _elements.length > 0
+    _elements.isNotEmpty
         ? _description = _elements.first['title']
         : _description = '';
 
@@ -84,33 +93,33 @@ class EventCollector {
 }
 
 Map<String, dynamic> _getEventDate(WebScraper webScraper) {
-  final Map<String, dynamic> _date = {};
+  final _date = <String, dynamic>{};
   DateTime _startDate;
   DateTime _endDate;
   String _dateDetails;
 
   final _startDateElements = webScraper
       .getElement('div.gz-event-date > p > span:first-child', ['content']);
-  _startDateElements.length > 0
-      ? _startDate =
-          DateTime.parse(_startDateElements.first['attributes']['content'])
+  _startDateElements.isNotEmpty
+      ? _startDate = DateTime.parse(
+          _startDateElements.first['attributes']['content'].trim())
       : _startDate = null;
 
   final _endDateElements =
       webScraper.getElement('div.gz-event-date > p > meta', ['content']);
-  _endDateElements.length > 0
+  _endDateElements.isNotEmpty
       ? _endDate =
-          DateTime.parse(_endDateElements.first['attributes']['content'])
+          DateTime.parse(_endDateElements.first['attributes']['content'].trim())
       : _endDate = null;
 
   final _dateDetailsElements =
       webScraper.getElement('div.gz-event-date > div.gz-details-hours > p', []);
-  _dateDetailsElements.length > 0
+  _dateDetailsElements.isNotEmpty
       ? _dateDetails = _dateDetailsElements.first['title']
       : _dateDetails = '';
 
-  _date["startDate"] = _startDate ?? DateTime.parse('00010101');
-  _date["endDate"] = _endDate ?? DateTime.parse('00010101');
+  _date['startDate'] = _startDate ?? DateTime.parse('00010101');
+  _date['endDate'] = _endDate ?? DateTime.parse('00010101');
   _date['dateDetails'] = _dateDetails;
 
   return _date;
@@ -121,7 +130,7 @@ String _getEventLocation(WebScraper webScraper) {
 
   final _elements =
       webScraper.getElement('div.gz-event-location > p > span', []);
-  _elements.length > 0 ? _location = _elements.first['title'] : _location = '';
+  _elements.isNotEmpty ? _location = _elements.first['title'] : _location = '';
 
   return _location;
 }
@@ -130,7 +139,7 @@ String _getEventAdmission(WebScraper webScraper) {
   String _admission;
 
   final _elements = webScraper.getElement('span.gz-event-fees', []);
-  _elements.length > 0
+  _elements.isNotEmpty
       ? _admission = _elements.first['title']
       : _admission = '';
 
@@ -142,7 +151,7 @@ String _getEventWebsite(WebScraper webScraper) {
 
   final _elements =
       webScraper.getElement('div.gz-event-website > p > span > a', ['href']);
-  _elements.length > 0
+  _elements.isNotEmpty
       ? _website = _elements.first['attributes']['href']
       : _website = '';
 
@@ -154,7 +163,7 @@ String _getEventContact(WebScraper webScraper) {
 
   final _elements = webScraper
       .getElement('div.gz-event-contactInfo > p > span:first-child', []);
-  _elements.length > 0 ? _contact = _elements.first['title'] : _contact = '';
+  _elements.isNotEmpty ? _contact = _elements.first['title'] : _contact = '';
 
   return _contact;
 }
@@ -164,7 +173,7 @@ String _getEventEmail(WebScraper webScraper) {
 
   final _elements = webScraper
       .getElement('div.gz-event-contactInfo > p > span > a', ['href']);
-  _elements.length > 0
+  _elements.isNotEmpty
       ? _email = _elements.first['attributes']['href']
       : _email = '';
 

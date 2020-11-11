@@ -13,18 +13,19 @@ class Event {
   final bool isFavorite;
   final DateTime dateFavorited;
 
-  const Event(
-      {this.title,
-      this.description,
-      this.permalink,
-      this.startDate,
-      this.endDate,
-      this.dateDetails,
-      this.location,
-      this.admission,
-      this.website,
-      this.contact,
-      this.email,
-      this.isFavorite,
-      this.dateFavorited});
+  const Event({
+    this.title,
+    this.description,
+    this.permalink,
+    this.startDate,
+    this.endDate,
+    this.dateDetails,
+    this.location,
+    this.admission,
+    this.website,
+    this.contact,
+    this.email,
+    this.isFavorite,
+    this.dateFavorited,
+  });
 }

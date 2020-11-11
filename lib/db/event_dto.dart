@@ -10,4 +10,18 @@ class EventDTO {
   String website;
   String contact;
   String email;
+
+  bool get isNull => [
+        title,
+        description,
+        permalink,
+        startDate,
+        endDate,
+        dateDetails,
+        location,
+        admission,
+        website,
+        contact,
+        email
+      ].contains(null);
 }
