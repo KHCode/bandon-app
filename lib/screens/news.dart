@@ -6,32 +6,23 @@ import 'package:webfeed/webfeed.dart';
 
 import '../models/article.dart';
 
-class NewsScreen extends StatefulWidget {
+class NewsScreen extends StatelessWidget {
   static const routeName = 'newsScreen';
 
-  @override
-  _NewsScreenState createState() => _NewsScreenState();
-}
-
-class _NewsScreenState extends State<NewsScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _getNews();
-  }
+  const NewsScreen({Key key}) : super(key: key);
 
   Future<List<Article>> _getNews() async {
-    final articles = <Article>[];
-    final feedUrl = 'https://www.bandon.com/feed/';
-    final response = await http.get(feedUrl);
-    final channel = RssFeed.parse(response.body);
-    for (final item in channel.items) {
-      articles.add(Article(
+    final _articles = <Article>[];
+    final _feedUrl = 'https://www.bandon.com/feed/';
+    final _response = await http.get(_feedUrl);
+    final _channel = RssFeed.parse(_response.body);
+    for (final item in _channel.items) {
+      _articles.add(Article(
           title: item.title,
           datePublished: item.pubDate,
           permalink: item.link));
     }
-    return articles;
+    return _articles;
   }
 
   Future<void> _launchUrl(String articleUrl) async {
@@ -85,6 +76,5 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 }
 
-String parseDate(DateTime dateTime) {
-  return '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
-}
+String parseDate(DateTime dateTime) =>
+    '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
