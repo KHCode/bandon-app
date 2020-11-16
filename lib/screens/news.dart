@@ -12,16 +12,19 @@ class NewsScreen extends StatelessWidget {
   const NewsScreen({Key key}) : super(key: key);
 
   Future<List<Article>> _getNews() async {
+    const FEED_URL = 'https://www.bandon.com/feed/';
     final _articles = <Article>[];
-    final _feedUrl = 'https://www.bandon.com/feed/';
-    final _response = await http.get(_feedUrl);
+
+    final _response = await http.get(FEED_URL);
     final _channel = RssFeed.parse(_response.body);
+
     for (final item in _channel.items) {
       _articles.add(Article(
           title: item.title,
           datePublished: item.pubDate,
           permalink: item.link));
     }
+
     return _articles;
   }
 

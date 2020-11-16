@@ -59,6 +59,5 @@ double padding(BuildContext context) {
       : MediaQuery.of(context).size.width * 0.1;
 }
 
-String parseDate(DateTime dateTime) {
-  return '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
-}
+String parseDate(DateTime dateTime) =>
+    '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
