@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
     const CITY_NAME = 'Bandon';
     IconData conditionIcon;
 
-    final secret = await SecretLoader(secretPath: "openweather.json").load();
+    final secret = await SecretLoader(secretPath: 'openweather.json').load();
     final weatherFactory =
         WeatherFactory(secret.key, language: Language.ENGLISH);
     final currentWeather =

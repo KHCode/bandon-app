@@ -97,6 +97,7 @@ flutter:
     - assets/images/maps/drive-portland.jpg
     - assets/images/lodging-wildspring-cabin.jpg
     - assets/images/drive-view.jpg
+    - openweather.json
     # - assets/images/lighthouse.png
     # - assets/images/dining.png
     # - assets/images/map.png
