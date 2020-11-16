@@ -13,7 +13,7 @@ class StyledButton extends StatelessWidget {
       child: RaisedButton(
         onPressed: () {},
         color: Color(0xFFF58B3E),
-        textColor: Color(0xFF05668D),
+        // textColor: Color(0xFF05668D),
         child: Text(text),
       ),
     );

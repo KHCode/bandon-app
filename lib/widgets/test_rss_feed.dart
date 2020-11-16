@@ -12,6 +12,7 @@ class _TestRssFeedState extends State<TestRssFeed> {
   final client = http.Client();
   Html articleBody;
 
+  @override
   void initState() {
     super.initState();
     getOneArticle();
@@ -19,10 +20,10 @@ class _TestRssFeedState extends State<TestRssFeed> {
 
   void getOneArticle() async {
     final response = await client.get('https://www.bandon.com/feed/');
-    final RssFeed channel = RssFeed.parse(response.body);
+    final channel = RssFeed.parse(response.body);
 
-    final RssItem item = channel.items.first;
-    final String itemSource = item.content.value;
+    final item = channel.items.first;
+    final itemSource = item.content.value;
     final html = Html(
       data: itemSource,
     );

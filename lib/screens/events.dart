@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'event_details.dart';
 import '../db/database_manager.dart';
 import '../models/event.dart';
 import '../widgets/settings_drawer.dart';
@@ -18,6 +19,9 @@ class _EventsScreenState extends State<EventsScreen> {
     return await databaseManager.getEvents();
   }
 
+  void pushEventDetails(BuildContext context, Event event) =>
+      Navigator.of(context).pushNamed(EventDetails.routeName, arguments: event);
+
   Widget _createEventsListView(BuildContext context, AsyncSnapshot snapshot) {
     if (snapshot.hasData && snapshot.data.length > 0) {
       return ListView.builder(
@@ -26,16 +30,18 @@ class _EventsScreenState extends State<EventsScreen> {
           return Column(
             children: <Widget>[
               ListTile(
-                  leading: InkWell(
-                    child: Icon(snapshot.data[index].isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_outline),
-                    onTap: () => {_toggleFavorite(snapshot.data[index])},
-                  ),
-                  title: Text(snapshot.data[index].title),
-                  subtitle: Text(DateFormat("EEEE',' MMM'.' d")
-                      .format(snapshot.data[index].startDate)),
-                  trailing: Icon(Icons.navigate_next)),
+                leading: IconButton(
+                  icon: Icon(snapshot.data[index].isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_outline),
+                  onPressed: () => {_toggleFavorite(snapshot.data[index])},
+                ),
+                title: Text(snapshot.data[index].title),
+                subtitle: Text(DateFormat("EEEE',' MMM'.' d")
+                    .format(snapshot.data[index].startDate)),
+                trailing: Icon(Icons.navigate_next),
+                onTap: () => pushEventDetails(context, snapshot.data[index]),
+              ),
             ],
           );
         },
@@ -46,9 +52,8 @@ class _EventsScreenState extends State<EventsScreen> {
   }
 
   void _toggleFavorite(Event event) {
-    print("Toggled!");
     final databaseManager = DatabaseManager.getInstance();
-    databaseManager.setFavorite(
+    databaseManager.setFavoriteEvent(
         permalink: event.permalink, isFavorite: !event.isFavorite);
     setState(() {});
   }

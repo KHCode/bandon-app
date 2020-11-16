@@ -1,5 +1,6 @@
-import 'package:bandon/widgets/styled_button.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/styled_button.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
@@ -21,7 +22,7 @@ class LodgingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Lodging"),
+        title: Text('Bandon Lodging'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
