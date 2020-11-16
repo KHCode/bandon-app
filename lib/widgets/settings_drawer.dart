@@ -5,6 +5,7 @@ import 'package:bandon/screens/find-business.dart';
 import 'package:bandon/screens/getting-started.dart';
 import 'package:bandon/screens/home_page.dart';
 import 'package:bandon/screens/lodging.dart';
+import 'package:bandon/screens/news.dart';
 import 'package:bandon/screens/things-to-do.dart';
 import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
@@ -85,9 +86,9 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
     return Drawer(
         child: ListView(
       children: <Widget>[
-        DrawerHeader(
+        const DrawerHeader(
           decoration: BoxDecoration(
-            color: Color(0xFF05668d),
+            color: Color(0xFF05668D),
           ),
           child: Text(
             'More to learn about Bandon',
@@ -98,12 +99,12 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
           ),
         ),
         Container(
-          color: Color(0xFF05668d),
+          color: const Color(0xFF05668D),
           child: Column(
             children: [
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Home',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -112,7 +113,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Start Here',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -121,7 +122,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Dining',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -130,7 +131,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Lodging',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -139,7 +140,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Things To Do',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -148,7 +149,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Events',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -157,7 +158,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Find a Business',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -166,7 +167,16 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
+                  'News',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                onTap: () =>
+                    Navigator.of(context).pushNamed(NewsScreen.routeName),
+              ),
+              ListTile(
+                dense: true,
+                title: const Text(
                   'Contact',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -175,7 +185,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               ListTile(
                 dense: true,
-                title: Text(
+                title: const Text(
                   'Relocate Here',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -184,7 +194,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               SwitchListTile(
                 secondary: Icon(Icons.location_on),
-                title: Text(
+                title: const Text(
                   'Location access',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -192,7 +202,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 value: _locationEnabled,
                 onChanged: null,
                 subtitle: InkWell(
-                  child: Text(
+                  child: const Text(
                     'Tap here to review your device settings',
                     style: TextStyle(color: Colors.white70),
                   ),
@@ -203,7 +213,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
               ),
               SwitchListTile(
                 secondary: Icon(Icons.settings_brightness),
-                title: Text(
+                title: const Text(
                   'Dark Mode',
                   style: TextStyle(color: Colors.white),
                 ),
