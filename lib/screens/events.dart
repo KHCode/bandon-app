@@ -47,7 +47,7 @@ class _EventsScreenState extends State<EventsScreen> {
         },
       );
     } else {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
   }
 
@@ -62,15 +62,14 @@ class _EventsScreenState extends State<EventsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Events'),
+        title: const Text('Events'),
       ),
       endDrawer: SettingsDrawer(),
       body: FutureBuilder(
         future: _getEvents(),
         initialData: [],
-        builder: (context, snapshot) {
-          return _createEventsListView(context, snapshot);
-        },
+        builder: (context, snapshot) =>
+            _createEventsListView(context, snapshot),
       ),
     );
   }
