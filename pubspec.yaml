@@ -25,7 +25,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_html: ^1.0.2
-  flutter_local_notifications: ^3.0.1+2
+  flutter_local_notifications: ^3.0.1+4
   flutter_native_timezone: ^1.0.4
   flutter_polyline_points:
   geolocator: ^6.1.6
@@ -41,7 +41,8 @@ dependencies:
   timezone: ^0.5.9
   url_launcher: ^5.7.10
   weather: ^1.2.4
-  web_scraper: ^0.0.6
+  weather_icons: ^2.0.2
+  web_scraper: ^0.0.8
   webfeed: ^0.6.0
 
 dev_dependencies:
@@ -98,6 +99,7 @@ flutter:
     - assets/images/maps/drive-portland.jpg
     - assets/images/lodging-wildspring-cabin.jpg
     - assets/images/drive-view.jpg
+    - openweather.json
     # - assets/images/lighthouse.png
     # - assets/images/dining.png
     # - assets/images/map.png

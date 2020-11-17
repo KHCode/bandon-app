@@ -56,7 +56,7 @@ class _FindBusinessScreenState extends State<FindBusinessScreen> {
         },
       );
     } else {
-      return Center(child: CircularProgressIndicator());
+      return const Center(child: CircularProgressIndicator());
     }
   }
 
@@ -64,15 +64,14 @@ class _FindBusinessScreenState extends State<FindBusinessScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Find a Business'),
+        title: const Text('Find a Business'),
       ),
       endDrawer: SettingsDrawer(),
       body: FutureBuilder(
         future: _getBusinesses(),
         initialData: [],
-        builder: (context, snapshot) {
-          return _createBusinessesListView(context, snapshot);
-        },
+        builder: (context, snapshot) =>
+            _createBusinessesListView(context, snapshot),
       ),
     );
   }

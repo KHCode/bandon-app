@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import '../models/event.dart';
 
 class EventDetails extends StatefulWidget {
@@ -22,7 +23,7 @@ class _EventDetailsState extends State<EventDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Event Details'),
+        title: const Text('Event Details'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -53,13 +54,10 @@ class _EventDetailsState extends State<EventDetails> {
 }
 
 double padding(BuildContext context) {
-  if (MediaQuery.of(context).orientation == Orientation.landscape) {
-    return MediaQuery.of(context).size.width * 0.05;
-  } else {
-    return MediaQuery.of(context).size.width * 0.1;
-  }
+  return (MediaQuery.of(context).orientation == Orientation.landscape)
+      ? MediaQuery.of(context).size.width * 0.05
+      : MediaQuery.of(context).size.width * 0.1;
 }
 
-String parseDate(DateTime dateTime) {
-  return '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
-}
+String parseDate(DateTime dateTime) =>
+    '${DateFormat("EEEE',' MMM'.' d',' y").format(dateTime)}';
