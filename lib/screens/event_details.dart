@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../models/event.dart';
+import '../widgets/settings_drawer.dart';
 
 class EventDetails extends StatefulWidget {
   static const routeName = 'eventDetails';
@@ -25,6 +26,7 @@ class _EventDetailsState extends State<EventDetails> {
       appBar: AppBar(
         title: const Text('Event Details'),
       ),
+      endDrawer: const SettingsDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(padding(context)),

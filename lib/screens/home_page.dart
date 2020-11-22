@@ -79,6 +79,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      endDrawer: const SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
@@ -152,7 +153,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
       ),
-      endDrawer: SettingsDrawer(),
     );
   }
 }

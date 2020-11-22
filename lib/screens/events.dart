@@ -64,7 +64,7 @@ class _EventsScreenState extends State<EventsScreen> {
       appBar: AppBar(
         title: const Text('Events'),
       ),
-      endDrawer: SettingsDrawer(),
+      endDrawer: const SettingsDrawer(),
       body: FutureBuilder(
         future: _getEvents(),
         initialData: [],
