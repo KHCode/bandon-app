@@ -11,6 +11,10 @@ class EventDTO {
   String contact;
   String email;
 
+  EventDTO();
+
+  EventDTO.nullEvent() : title = null;
+
   bool get isNull => [
         title,
         description,
