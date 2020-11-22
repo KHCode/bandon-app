@@ -130,8 +130,14 @@ class BusinessCollector {
   }
 
   String _getAboutUs(WebScraper webScraper) {
-    final exp = RegExp(
-        r'([a-z]{2,}\.*)([A-Z]+[a-z]*?)|(\s{2,})([A-Z]+[a-z]*?)|([pP]\.*[mM]\.*)([A-Z0-9])|([1-2][0-9]{3}\.)([A-Z]+[a-z]*?)|([A-Za-z]{2,}\.)([A-Z])|(!|\?+?)([A-Z]+[a-z]*?)');
+    final expressions = [
+      RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
+      RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
+      RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
+      RegExp(r'([pP]\.*[mM]\.*)([A-Z0-9])'),
+      RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
+      RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
+    ];
     String _aboutUs;
 
     final _elements =
@@ -141,8 +147,10 @@ class BusinessCollector {
         : _aboutUs = '';
 
     if (_aboutUs.isNotEmpty) {
-      _aboutUs = _aboutUs.replaceAllMapped(
-          exp, (Match match) => '${match[1]}\n\n${match[2]}');
+      for (final exp in expressions) {
+        _aboutUs = _aboutUs.replaceAllMapped(
+            exp, (Match match) => '${match[1]}\n\n${match[2]}');
+      }
     }
 
     return _aboutUs;
@@ -199,8 +207,14 @@ String _getWebsite(WebScraper webScraper) {
 }
 
 String _getHours(WebScraper webScraper) {
-  final exp = RegExp(
-      r'([a-z]{2,}\.*)([A-Z]+[a-z]*?)|(\s{2,})([A-Z]+[a-z]*?)|([pP]\.*[mM]\.*)([A-Z0-9])|([1-2][0-9]{3}\.)([A-Z]+[a-z]*?)|([A-Za-z]{2,}\.)([A-Z])|(!|\?+?)([A-Z]+[a-z]*?)');
+  final expressions = [
+    RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
+    RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
+    RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
+    RegExp(r'([pP]\.*[mM]\.*)([A-Z0-9])'),
+    RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
+    RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
+  ];
   String _hours;
 
   final _elements = webScraper
@@ -208,8 +222,10 @@ String _getHours(WebScraper webScraper) {
   _elements.isNotEmpty ? _hours = _elements.first['title'].trim() : _hours = '';
 
   if (_hours.isNotEmpty) {
-    _hours = _hours.replaceAllMapped(
-        exp, (Match match) => '${match[1]}\n\n${match[2]}');
+    for (final exp in expressions) {
+      _hours = _hours.replaceAllMapped(
+          exp, (Match match) => '${match[1]}\n\n${match[2]}');
+    }
   }
 
   return _hours;
