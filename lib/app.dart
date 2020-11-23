@@ -12,6 +12,7 @@ import 'screens/find-business.dart';
 import 'screens/getting-started.dart';
 import 'screens/home_page.dart';
 import 'screens/lodging.dart';
+import 'screens/news.dart';
 import 'screens/onboarding.dart';
 import 'screens/relocate_screen.dart';
 import 'screens/things-to-do.dart';
@@ -50,6 +51,7 @@ class AppState extends State<App> {
     FindBusinessScreen.routeName: (context) => FindBusinessScreen(),
     GetStartedScreen.routeName: (context) => GetStartedScreen(),
     LodgingScreen.routeName: (context) => LodgingScreen(),
+    NewsScreen.routeName: (context) => NewsScreen(),
     RelocateScreen.routeName: (context) => RelocateScreen(),
     ThingsToDoScreen.routeName: (context) => ThingsToDoScreen(),
   };

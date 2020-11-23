@@ -111,45 +111,50 @@ class DatabaseManager {
   Future<List<Event>> getEvents() async {
     await _cleanStaleEvents();
     final _eventRecords = await db.rawQuery(SQL_SELECT_EVENTS);
-    final _events = _eventRecords.map((record) {
-      return Event(
-        title: record['title'],
-        description: record['description'],
-        permalink: record['permalink'],
-        startDate: DateTime.parse(record['startDate']),
-        endDate: DateTime.parse(record['endDate']),
-        dateDetails: record['dateDetails'],
-        location: record['location'],
-        admission: record['admission'],
-        website: record['website'],
-        contact: record['contact'],
-        email: record['email'],
-        isFavorite: record['isFavorite'] == 1 ? true : false,
-        dateFavorited: DateTime.parse(record['dateFavorited'] ?? '00010101'),
-      );
-    }).toList();
+    final _events = _eventRecords
+        .map(
+          (record) => Event(
+            title: record['title'],
+            description: record['description'],
+            permalink: record['permalink'],
+            startDate: DateTime.parse(record['startDate']),
+            endDate: DateTime.parse(record['endDate']),
+            dateDetails: record['dateDetails'],
+            location: record['location'],
+            admission: record['admission'],
+            website: record['website'],
+            contact: record['contact'],
+            email: record['email'],
+            isFavorite: record['isFavorite'] == 1 ? true : false,
+            dateFavorited:
+                DateTime.parse(record['dateFavorited'] ?? '00010101'),
+          ),
+        )
+        .toList();
     return _events;
   }
 
   Future<List<Event>> getFavoriteEvents() async {
-    final eventRecords = await db.rawQuery(SQL_SELECT_FAVORITE_EVENTS);
-    final events = eventRecords.map((record) {
-      return Event(
-          title: record['title'],
-          description: record['description'],
-          permalink: record['permalink'],
-          startDate: DateTime.parse(record['startDate']),
-          endDate: DateTime.parse(record['endDate']),
-          dateDetails: record['dateDetails'],
-          location: record['location'],
-          admission: record['admission'],
-          website: record['website'],
-          contact: record['contact'],
-          email: record['email'],
-          isFavorite: true,
-          dateFavorited: record['dateFavorited']);
-    }).toList();
-    return events;
+    final _eventRecords = await db.rawQuery(SQL_SELECT_FAVORITE_EVENTS);
+    final _events = _eventRecords
+        .map(
+          (record) => Event(
+              title: record['title'],
+              description: record['description'],
+              permalink: record['permalink'],
+              startDate: DateTime.parse(record['startDate']),
+              endDate: DateTime.parse(record['endDate']),
+              dateDetails: record['dateDetails'],
+              location: record['location'],
+              admission: record['admission'],
+              website: record['website'],
+              contact: record['contact'],
+              email: record['email'],
+              isFavorite: true,
+              dateFavorited: record['dateFavorited']),
+        )
+        .toList();
+    return _events;
   }
 
   void setFavoriteBusiness({String permalink, bool isFavorite}) {
@@ -179,21 +184,24 @@ class DatabaseManager {
 
   Future<List<Business>> getBusinesses() async {
     final _businessRecords = await db.rawQuery(SQL_SELECT_BUSINESSES);
-    final _businesses = _businessRecords.map((record) {
-      return Business(
-        name: record['name'],
-        aboutUs: record['aboutUs'],
-        permalink: record['permalink'],
-        categories: record['categories'],
-        address: record['address'],
-        phone: record['phone'],
-        website: record['website'],
-        hours: record['hours'],
-        highlights: record['highlights'],
-        isFavorite: record['isFavorite'] == 1 ? true : false,
-        dateFavorited: DateTime.parse(record['dateFavorited'] ?? '00010101'),
-      );
-    }).toList();
+    final _businesses = _businessRecords
+        .map(
+          (record) => Business(
+            name: record['name'],
+            aboutUs: record['aboutUs'],
+            permalink: record['permalink'],
+            categories: record['categories'],
+            address: record['address'],
+            phone: record['phone'],
+            website: record['website'],
+            hours: record['hours'],
+            highlights: record['highlights'],
+            isFavorite: record['isFavorite'] == 1 ? true : false,
+            dateFavorited:
+                DateTime.parse(record['dateFavorited'] ?? '00010101'),
+          ),
+        )
+        .toList();
     return _businesses;
   }
 }

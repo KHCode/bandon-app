@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../models/business.dart';
 
 class BusinessDetails extends StatefulWidget {
@@ -43,7 +44,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Business Details'),
+        title: const Text('Business Details'),
         actions: <Widget>[
           if (_business?.phone?.isNotEmpty ?? false)
             IconButton(
@@ -96,9 +97,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
 }
 
 double padding(BuildContext context) {
-  if (MediaQuery.of(context).orientation == Orientation.landscape) {
-    return MediaQuery.of(context).size.width * 0.05;
-  } else {
-    return MediaQuery.of(context).size.width * 0.1;
-  }
+  return (MediaQuery.of(context).orientation == Orientation.landscape)
+      ? MediaQuery.of(context).size.width * 0.05
+      : MediaQuery.of(context).size.width * 0.1;
 }

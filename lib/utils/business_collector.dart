@@ -78,8 +78,8 @@ class BusinessCollector {
         return _newBusiness;
       }
       _newBusiness.permalink = businessUrl;
-      _newBusiness.aboutUs = _getAboutUs(_webScraper).trim();
       _newBusiness.categories = _getCategories(_webScraper).trim();
+      _newBusiness.aboutUs = _getAboutUs(_webScraper).trim();
       _newBusiness.address = _getAddress(_webScraper).trim();
       _newBusiness.phone = _getPhone(_webScraper).trim();
       _newBusiness.website = _getWebsite(_webScraper).trim();
