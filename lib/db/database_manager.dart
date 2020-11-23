@@ -91,7 +91,7 @@ class DatabaseManager {
 
   void setFavoriteEvent({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
-    final date = isFavorite ? DateTime.now().toString() : null;
+    final date = isFavorite ? DateTime.now().toUtc().toString() : null;
     db.transaction((txn) async {
       await txn
           .rawUpdate(SQL_UPDATE_FAVORITE_EVENT, [favorite, date, permalink]);
@@ -159,7 +159,7 @@ class DatabaseManager {
 
   void setFavoriteBusiness({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
-    final date = isFavorite ? DateTime.now().toString() : null;
+    final date = isFavorite ? DateTime.now().toUtc().toString() : null;
     db.transaction((txn) async {
       await txn
           .rawUpdate(SQL_UPDATE_FAVORITE_BUSINESS, [favorite, date, permalink]);
