@@ -4,6 +4,7 @@ import 'package:bandon/widgets/styled_section_banner.dart';
 import 'package:bandon/widgets/styled_top_banner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
@@ -22,42 +23,46 @@ class GetStartedScreen extends StatelessWidget {
     "Eugene Airport (EUG) in Eugene, Oregon offers flights from multiple destinations with several airlines, including United, Delta, Alaska, and American Airlines. Eugene is a two and a half hour drive from Bandon, approximately 150 miles.",
     "Southwestern Oregon Regional Airport (OTH) in North Bend offers commercial flights via United between San Francisco, CA, and Denver, CO. OTH is located 30 miles north of Bandon.",
     "Bandon State Airport (BDY) in Bandon offers private and charter plane service.",
-    "Visit our Bandon Quick Look page for additional travel and transportation tips.",
+    "Click on our Bandon Quick Look links below for additional travel and transportation tips. (links open up a browser)",
+  ];
+
+  static const transpOptions = [
+    'Bandon State Airport',
+    'Southwestern Oregon Regional Airport',
+    'Eugene Airport',
+    'Amtrak',
+    'Driver on Demand',
+    'Coos County Area Transit',
+    'Coastal Express'
+  ];
+
+  static const transpLinks = [
+    'https://www.linearair.com/airport/Bandon-State-in-Bandon-OR-BDY/',
+    'https://cooscountyairportdistrict.com/',
+    'https://www.eugene-or.gov/173/Airport',
+    'https://www.amtrak.com/content/amtrak/en-us/stations/eug.html',
+    'https://driverondemand.online/',
+    'https://www.coostransit.org/',
+    'https://currypublictransit.org/coastal-express/'
   ];
 
   static const bodyDrive = [
     "When you plan your drive to the Southern Oregon Coast, look forward to the memorable scenery along the way. Browse the suggested routes below.",
   ];
 
-  static const flyDisplays = [
-    "West Coast Flights",
-    "Portland",
-    "San Francisco",
-    "Seattle",
-  ];
-
-  static const flyValues = [
-    "start",
-    "Portland, OR",
-    "San Francisco, CA",
-    "Seattle, WA",
-  ];
-
   static const driveDisplays = [
-    "West Coast Drives",
-    "Portland",
-    "Portland (alt)",
-    "Eugene",
-    "Bend",
-    "Ashland",
-    "San Francisco",
-    "Boise",
+    'West Coast Drives',
+    'Portland',
+    'Eugene',
+    'Bend',
+    'Ashland',
+    'San Francisco',
+    'Boise',
   ];
 
   static const driveValues = [
     "start",
     "Portland, OR",
-    "Portland, OR (alt)",
     "Eugene, OR",
     "Bend, OR",
     "Ashland, OR",
@@ -85,6 +90,12 @@ class GetStartedScreen extends StatelessWidget {
     "The Bandon Visitors Center provides information about vacation destinations near Bandon, in the Southwestern Oregon region and the Oregon Coast. Find additional Oregon travel resources from our partners at the Oregon Coast Visitors Association and Travel Oregon.",
   ];
 
+  void _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,8 +119,8 @@ class GetStartedScreen extends StatelessWidget {
               textBody: bodyIntro,
             ),
             StyledSectionBanner(
-              leftText: "Grab a West Coast",
-              rightText: "Flight",
+              leftText: "Take a Train",
+              rightText: "or a Plane",
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
@@ -118,16 +129,36 @@ class GetStartedScreen extends StatelessWidget {
             PaddedTextBody(
               textBody: bodyFlight,
             ),
-            StyledDropdownMenu(
-              optionsDisplays: flyDisplays,
-              optionsValues: flyValues,
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: transpOptions.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: GestureDetector(
+                      onTap: () => _launchURL(transpLinks[index]),
+                      child: Card(
+                        color: Color(0xFFF58B3E),
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              transpOptions[index],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Color(0xFF05668d), fontSize: 24),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 60.0),
-              child: Image.asset('assets/images/maps/fly-portland.jpg'),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
+              padding: const EdgeInsets.only(top: 60, bottom: 20),
               child: Image.asset('assets/images/separator-suitcase.png'),
             ),
             StyledSectionBanner(
@@ -146,8 +177,8 @@ class GetStartedScreen extends StatelessWidget {
               optionsValues: driveValues,
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 40.0),
-              child: Image.asset('assets/images/maps/drive-portland.jpg'),
+              padding: const EdgeInsets.only(top: 60, bottom: 20),
+              child: Image.asset('assets/images/separator-suitcase.png'),
             ),
             StyledSectionBanner(
               leftText: "Planning a trip",
