@@ -22,11 +22,11 @@ class BusinessDetails extends StatefulWidget {
 class _BusinessDetailsState extends State<BusinessDetails> {
   Business _business;
 
-  void pushBusiness(BuildContext context, String category) =>
-      Navigator.of(context).pushReplacementNamed(FindBusinessScreen.routeName,
-          arguments: category);
+  void pushBusinessCategory(BuildContext context, String category) =>
+      Navigator.of(context)
+          .pushNamed(FindBusinessScreen.routeName, arguments: category);
 
-  void launchMap(address) async {
+  void _launchMap(address) async {
     var url =
         Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
             .toString();
@@ -38,14 +38,14 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     }
   }
 
-  void launchPhone(String phoneNumber) async {
+  void _launchPhone(String phoneNumber) async {
     var _phone = phoneNumber.replaceAll(RegExp(r'\W'), '');
     if (await canLaunch('tel:${_phone}')) {
       await launch(phoneNumber);
     }
   }
 
-  void launchUrl(String url) async {
+  void _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -60,7 +60,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
       );
     } else {
       return InkWell(
-        onTap: () => launchUrl(business.website),
+        onTap: () => _launchUrl(business.website),
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
@@ -99,7 +99,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                   .copyWith(color: Theme.of(context).accentColor),
             ),
           ),
-          onTap: () => pushBusiness(context, category),
+          onTap: () => pushBusinessCategory(context, category),
         ),
       );
     }
@@ -114,7 +114,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     return Column(
       children: [
         InkWell(
-          onTap: () => launchMap(_business.address),
+          onTap: () => _launchMap(_business.address),
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -178,7 +178,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             ),
           ],
         ),
-        Row(
+        Wrap(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 4.0, bottom: 24.0),
@@ -304,7 +304,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         actions: <Widget>[
           if (_business?.phone?.isNotEmpty ?? false)
             IconButton(
-              onPressed: () => launchPhone(_business.phone),
+              onPressed: () => _launchPhone(_business.phone),
               icon: Icon(Icons.phone),
             ),
           IconButton(
