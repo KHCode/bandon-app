@@ -54,6 +54,9 @@ class DatabaseManager {
       onCreate: (Database db, int version) {
         _createTables(db, schema);
       },
+      // onOpen: (Database db) {
+      //   _createTables(db, schema);
+      // },
       onUpgrade: (Database db, int oldVersion, int newVersion) {
         _createTables(db, schema);
       },
@@ -91,7 +94,7 @@ class DatabaseManager {
 
   void setFavoriteEvent({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
-    final date = isFavorite ? DateTime.now().toString() : null;
+    final date = isFavorite ? DateTime.now().toUtc().toString() : null;
     db.transaction((txn) async {
       await txn
           .rawUpdate(SQL_UPDATE_FAVORITE_EVENT, [favorite, date, permalink]);
@@ -114,17 +117,17 @@ class DatabaseManager {
     final _events = _eventRecords
         .map(
           (record) => Event(
-            title: record['title'],
-            description: record['description'],
-            permalink: record['permalink'],
-            startDate: DateTime.parse(record['startDate']),
-            endDate: DateTime.parse(record['endDate']),
-            dateDetails: record['dateDetails'],
-            location: record['location'],
-            admission: record['admission'],
-            website: record['website'],
-            contact: record['contact'],
-            email: record['email'],
+            title: record['title'].toString(),
+            description: record['description'].toString(),
+            permalink: record['permalink'].toString(),
+            startDate: DateTime.parse(record['startDate'].toString()),
+            endDate: DateTime.parse(record['endDate'].toString()),
+            dateDetails: record['dateDetails'].toString(),
+            location: record['location'].toString(),
+            admission: record['admission'].toString(),
+            website: record['website'].toString(),
+            contact: record['contact'].toString(),
+            email: record['email'].toString(),
             isFavorite: record['isFavorite'] == 1 ? true : false,
             dateFavorited:
                 DateTime.parse(record['dateFavorited'] ?? '00010101'),
@@ -139,17 +142,17 @@ class DatabaseManager {
     final _events = _eventRecords
         .map(
           (record) => Event(
-              title: record['title'],
-              description: record['description'],
-              permalink: record['permalink'],
-              startDate: DateTime.parse(record['startDate']),
-              endDate: DateTime.parse(record['endDate']),
-              dateDetails: record['dateDetails'],
-              location: record['location'],
-              admission: record['admission'],
-              website: record['website'],
-              contact: record['contact'],
-              email: record['email'],
+              title: record['title'].toString(),
+              description: record['description'].toString(),
+              permalink: record['permalink'].toString(),
+              startDate: DateTime.parse(record['startDate'].toString()),
+              endDate: DateTime.parse(record['endDate'].toString()),
+              dateDetails: record['dateDetails'].toString(),
+              location: record['location'].toString(),
+              admission: record['admission'].toString(),
+              website: record['website'].toString(),
+              contact: record['contact'].toString(),
+              email: record['email'].toString(),
               isFavorite: true,
               dateFavorited: record['dateFavorited']),
         )
@@ -159,7 +162,7 @@ class DatabaseManager {
 
   void setFavoriteBusiness({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
-    final date = isFavorite ? DateTime.now().toString() : null;
+    final date = isFavorite ? DateTime.now().toUtc().toString() : null;
     db.transaction((txn) async {
       await txn
           .rawUpdate(SQL_UPDATE_FAVORITE_BUSINESS, [favorite, date, permalink]);
@@ -187,15 +190,15 @@ class DatabaseManager {
     final _businesses = _businessRecords
         .map(
           (record) => Business(
-            name: record['name'],
-            aboutUs: record['aboutUs'],
-            permalink: record['permalink'],
-            categories: record['categories'],
-            address: record['address'],
-            phone: record['phone'],
-            website: record['website'],
-            hours: record['hours'],
-            highlights: record['highlights'],
+            name: record['name'].toString(),
+            aboutUs: record['aboutUs'].toString(),
+            permalink: record['permalink'].toString(),
+            categories: record['categories'].toString(),
+            address: record['address'].toString(),
+            phone: record['phone'].toString(),
+            website: record['website'].toString(),
+            hours: record['hours'].toString(),
+            highlights: record['highlights'].toString(),
             isFavorite: record['isFavorite'] == 1 ? true : false,
             dateFavorited:
                 DateTime.parse(record['dateFavorited'] ?? '00010101'),

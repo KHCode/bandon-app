@@ -10,11 +10,6 @@ import '../widgets/settings_drawer.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/padded_text_body.dart';
 
-// Week 4 tests
-// import '../widgets/test_distance_display.dart';
-// import '../widgets/test_rss_feed.dart';
-// import '../widgets/test_web_scraping.dart';
-
 class HomePage extends StatefulWidget {
   static const routeName = '/';
   final String title;
@@ -84,6 +79,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      endDrawer: const SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
@@ -157,7 +153,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
       ),
-      endDrawer: SettingsDrawer(),
     );
   }
 }

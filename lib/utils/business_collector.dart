@@ -16,7 +16,7 @@ class BusinessCollector {
     for (final businessUrl in _businesses) {
       final _business = await _getBusinessDetails(businessUrl);
       if (_business.isNull) {
-        print("Couldn't retrieve the business at $businessUrl");
+        print('Skipping the business at $businessUrl');
       } else {
         databaseManager.saveBusiness(dto: _business);
       }
@@ -27,7 +27,7 @@ class BusinessCollector {
   Future<List<String>> _getBusinessUrls() async {
     const MAX_FAILURES = 10;
     var _businessId = 1;
-    var _consecutiveFailures = 10;
+    var _consecutiveFailures = 0;
 
     final _urls = <String>[];
     final _client = http.Client();
@@ -73,18 +73,35 @@ class BusinessCollector {
     final _webScraper = WebScraper('https://tourism.bandon.com');
     final _endpoint = businessUrl.replaceAll(r'https://tourism.bandon.com', '');
     if (await _webScraper.loadWebPage(_endpoint)) {
-      _newBusiness.name = _getName(_webScraper).trim();
+      _newBusiness.name = _getName(_webScraper);
+
+      // Return a null object if the business name isn't published
       if (_newBusiness?.name?.isEmpty ?? true) {
-        return _newBusiness;
+        return BusinessDTO.nullBusiness();
+      }
+      _newBusiness.address = _getAddress(_webScraper);
+      _newBusiness.phone = _getPhone(_webScraper);
+
+      // Return a null object if there is no contact information
+      // (a PO Box or no address at all)
+      if (_newBusiness.phone.isEmpty &&
+              (_newBusiness.address
+                  .contains(RegExp(r'P\.*O\.*\s+BOX', caseSensitive: false))) ||
+          _newBusiness.address.isEmpty) {
+        return BusinessDTO.nullBusiness();
+      }
+      _newBusiness.aboutUs = _getAboutUs(_webScraper);
+      _newBusiness.categories = _getCategories(_webScraper);
+
+      // Return a null object if the business isn't categorized or described
+      // (this indicates an individual member, not a business listing)
+      if (_newBusiness.aboutUs.isEmpty && _newBusiness.categories.isEmpty) {
+        return BusinessDTO.nullBusiness();
       }
       _newBusiness.permalink = businessUrl;
-      _newBusiness.categories = _getCategories(_webScraper).trim();
-      _newBusiness.aboutUs = _getAboutUs(_webScraper).trim();
-      _newBusiness.address = _getAddress(_webScraper).trim();
-      _newBusiness.phone = _getPhone(_webScraper).trim();
-      _newBusiness.website = _getWebsite(_webScraper).trim();
-      _newBusiness.hours = _getHours(_webScraper).trim();
-      _newBusiness.highlights = _getHighlights(_webScraper).trim();
+      _newBusiness.website = _getWebsite(_webScraper);
+      _newBusiness.hours = _getHours(_webScraper);
+      _newBusiness.highlights = _getHighlights(_webScraper);
     } else {
       print('Failed to load the business');
     }
@@ -96,7 +113,7 @@ class BusinessCollector {
     String _name;
 
     final _elements = webScraper.getElement('h1.gz-pagetitle', []);
-    _elements.isNotEmpty ? _name = _elements.first['title'] : _name = '';
+    _elements.isNotEmpty ? _name = _elements.first['title'].trim() : _name = '';
 
     return _name;
   }
@@ -106,18 +123,35 @@ class BusinessCollector {
 
     final _elements = webScraper.getElement('span.gz-cat', []);
     for (final element in _elements) {
-      _categories.add(element['title']);
+      _categories.add(element['title'].trim());
     }
 
     return _categories.join(';');
   }
 
   String _getAboutUs(WebScraper webScraper) {
+    final expressions = [
+      RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
+      RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
+      RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
+      RegExp(r'([aApP]\.*[mM]\.*)([A-Z0-9])'),
+      RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
+      RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
+    ];
     String _aboutUs;
 
     final _elements =
         webScraper.getElement('div.gz-details-about > div > p', []);
-    _elements.isNotEmpty ? _aboutUs = _elements.first['title'] : _aboutUs = '';
+    _elements.isNotEmpty
+        ? _aboutUs = _elements.first['title'].trim()
+        : _aboutUs = '';
+
+    if (_aboutUs.isNotEmpty) {
+      for (final exp in expressions) {
+        _aboutUs = _aboutUs.replaceAllMapped(
+            exp, (Match match) => '${match[1]}\n\n${match[2]}');
+      }
+    }
 
     return _aboutUs;
   }
@@ -130,17 +164,19 @@ String _getAddress(WebScraper webScraper) {
   final _city = webScraper.getElement('span.gz-address-city', []);
   final _state = webScraper.getElement('span[itemprop="addressRegion"]', []);
   final _zipCode = webScraper.getElement('span[itemprop="postalCode"]', []);
+
   if (_streetAddress.isNotEmpty) {
-    _address.add(_streetAddress.first['title']);
+    _address.add(_streetAddress.first['title'].trim());
   }
   if (_city.isNotEmpty) {
-    _address.add('${_city.first['title']}${_state.isNotEmpty ? ',' : ''}');
+    _address
+        .add('${_city.first['title'].trim()}${_state.isNotEmpty ? ',' : ''}');
   }
   if (_state.isNotEmpty) {
-    _address.add(_state.first['title']);
+    _address.add(_state.first['title'].trim());
   }
   if (_zipCode.isNotEmpty) {
-    _address.add(_zipCode.first['title']);
+    _address.add(_zipCode.first['title'].trim());
   }
 
   return _address.join(' ');
@@ -149,8 +185,11 @@ String _getAddress(WebScraper webScraper) {
 String _getPhone(WebScraper webScraper) {
   String _phone;
 
-  final _elements = webScraper.getElement('span[itemprop="telephone"]', []);
-  _elements.isNotEmpty ? _phone = _elements.first['title'] : _phone = '';
+  var _elements = webScraper.getElement('span[itemprop="telephone"]', []);
+  if (_elements.isEmpty) {
+    _elements = webScraper.getElement('span[itemprop="tollfree"]', []);
+  }
+  _elements.isNotEmpty ? _phone = _elements.first['title'].trim() : _phone = '';
 
   return _phone;
 }
@@ -161,18 +200,33 @@ String _getWebsite(WebScraper webScraper) {
   final _elements =
       webScraper.getElement('li.gz-card-website > a[itemprop="url"]', ['href']);
   _elements.isNotEmpty
-      ? _website = _elements.first['attributes']['href']
+      ? _website = _elements.first['attributes']['href'].trim()
       : _website = '';
 
   return _website;
 }
 
 String _getHours(WebScraper webScraper) {
+  final expressions = [
+    RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
+    RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
+    RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
+    RegExp(r'([aApP]\.*[mM]\.*)([A-Z0-9])'),
+    RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
+    RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
+  ];
   String _hours;
 
   final _elements = webScraper
       .getElement('div.gz-details-hours > p:not(.gz-details-subtitle)', []);
-  _elements.isNotEmpty ? _hours = _elements.first['title'] : _hours = '';
+  _elements.isNotEmpty ? _hours = _elements.first['title'].trim() : _hours = '';
+
+  if (_hours.isNotEmpty) {
+    for (final exp in expressions) {
+      _hours = _hours.replaceAllMapped(
+          exp, (Match match) => '${match[1]}\n\n${match[2]}');
+    }
+  }
 
   return _hours;
 }
@@ -181,10 +235,9 @@ String _getHighlights(WebScraper webScraper) {
   final _highlights = <String>[];
 
   final _elements = webScraper.getElement('ul.gz-highlights-list > li', []);
-  if (_elements.isNotEmpty) {
-    for (final element in _elements) {
-      _highlights.add(element['title']);
-    }
+
+  for (final element in _elements) {
+    _highlights.add(element['title'].trim());
   }
 
   return _highlights.join(';');
