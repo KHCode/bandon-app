@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../screens/find-business.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
@@ -77,10 +78,15 @@ class _DiningScreenState extends State<DiningScreen> {
                 ),
               ),
               PaddedTextBody(textBody: body3),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child:
-                    Image.asset('assets/images/dining/dining-restaurants.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Restaurants'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child: Image.asset(
+                      'assets/images/dining/dining-restaurants.jpg'),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 50),
