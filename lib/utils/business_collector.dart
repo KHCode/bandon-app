@@ -134,7 +134,7 @@ class BusinessCollector {
       RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
       RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
       RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
-      RegExp(r'([pP]\.*[mM]\.*)([A-Z0-9])'),
+      RegExp(r'([aApP]\.*[mM]\.*)([A-Z0-9])'),
       RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
       RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
     ];
@@ -211,7 +211,7 @@ String _getHours(WebScraper webScraper) {
     RegExp(r'([a-z]{2,})([A-Z]+[a-z]*)'),
     RegExp(r'([A-Za-z]{2,}\.)([A-Z]+[a-z]*)'),
     RegExp(r'(\s{2,})([A-Z]+[a-z]*)'),
-    RegExp(r'([pP]\.*[mM]\.*)([A-Z0-9])'),
+    RegExp(r'([aApP]\.*[mM]\.*)([A-Z0-9])'),
     RegExp(r'([1-2][0-9]{3}\.)([A-Z]+[a-z]*)'),
     RegExp(r'(!|\?+)([A-Z]+[a-z]*)'),
   ];
