@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   var currentTemp = 72;
   var currentCondition = 'Sunny';
   var currentConditionIcon = BoxedIcon(WeatherIcons.day_sunny);
+  final forecastWidgets = <Widget>[];
 
   @override
   void initState() {
@@ -41,35 +43,47 @@ class _HomePageState extends State<HomePage> {
 
   void _loadWeather() async {
     const CITY_NAME = 'Bandon';
-    IconData conditionIcon;
 
     final secret = await SecretLoader(secretPath: 'openweather.json').load();
     final weatherFactory =
         WeatherFactory(secret.key, language: Language.ENGLISH);
     final currentWeather =
         await weatherFactory.currentWeatherByCityName(CITY_NAME);
+    final forecast = await weatherFactory.fiveDayForecastByCityName(CITY_NAME);
 
-    if (currentWeather.weatherConditionCode >= 200 &&
-        currentWeather.weatherConditionCode < 300) {
-      conditionIcon = WeatherIcons.thunderstorm;
-    } else if (currentWeather.weatherConditionCode >= 300 &&
-        currentWeather.weatherConditionCode < 400) {
-      conditionIcon = WeatherIcons.sprinkle;
-    } else if (currentWeather.weatherConditionCode >= 500 &&
-        currentWeather.weatherConditionCode < 600) {
-      conditionIcon = WeatherIcons.rain;
-    } else if (currentWeather.weatherConditionCode >= 500 &&
-        currentWeather.weatherConditionCode < 600) {
-      conditionIcon = WeatherIcons.snow;
-    } else if (currentWeather.weatherConditionCode == 800) {
-      conditionIcon = WeatherIcons.day_sunny;
-    } else if (currentWeather.weatherConditionCode > 800) {
-      conditionIcon = WeatherIcons.cloud;
+    final threeDayForecast = <Weather>[];
+    var dateTime = DateTime.now();
+    for (var i = 0; i < 3; i++) {
+      threeDayForecast.add(forecast.firstWhere((forecast) =>
+          (forecast.date.day == dateTime.day && forecast.date.hour >= 11)));
+      dateTime = dateTime.add(Duration(days: 1));
     }
+
+    dateTime = DateTime.now();
+    forecastWidgets.clear();
+    for (final day in threeDayForecast) {
+      print(day);
+      forecastWidgets.add(
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                BoxedIcon(getConditionIcon(day.weatherConditionCode)),
+                Text('${day.temperature.fahrenheit.round()}°'),
+                Text(DateFormat('EEEE').format(dateTime)),
+              ],
+            ),
+          ),
+        ),
+      );
+      dateTime = dateTime.add(Duration(days: 1));
+    }
+
     setState(() {
       currentTemp = currentWeather.temperature.fahrenheit.round();
       currentCondition = currentWeather.weatherDescription;
-      currentConditionIcon = BoxedIcon(conditionIcon);
+      currentConditionIcon =
+          BoxedIcon(getConditionIcon(currentWeather.weatherConditionCode));
     });
   }
 
@@ -90,35 +104,44 @@ class _HomePageState extends State<HomePage> {
           ),
           Image.asset('assets/images/beach-sunset.jpg'),
           SizedBox(height: 20),
-          Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        currentConditionIcon,
-                        Text(currentCondition),
-                      ],
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          currentConditionIcon,
+                          Text(currentCondition),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          '${currentTemp.toString()}°',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      ],
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Text(
+                            '${currentTemp.toString()}°',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            )
-          ]),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: forecastWidgets,
+              ),
+            ],
+          ),
           StyledSectionBanner(
             leftText: 'About',
             rightText: 'Bandon Oregon',
@@ -154,5 +177,28 @@ class _HomePageState extends State<HomePage> {
         ]),
       ),
     );
+  }
+
+  IconData getConditionIcon(int conditionCode) {
+    IconData conditionIcon;
+
+    if (conditionCode >= 200 && conditionCode < 300) {
+      conditionIcon = WeatherIcons.thunderstorm;
+    } else if (conditionCode >= 300 && conditionCode < 400) {
+      conditionIcon = WeatherIcons.sprinkle;
+    } else if (conditionCode >= 500 && conditionCode < 600) {
+      conditionIcon = WeatherIcons.rain;
+    } else if (conditionCode >= 600 && conditionCode < 700) {
+      conditionIcon = WeatherIcons.snow;
+    } else if (conditionCode >= 700 && conditionCode < 800) {
+      conditionIcon = WeatherIcons.fog;
+    } else if (conditionCode == 800) {
+      conditionIcon = WeatherIcons.day_sunny;
+    } else if (conditionCode > 800) {
+      conditionIcon = WeatherIcons.cloud;
+    } else {
+      conditionIcon = WeatherIcons.day_sunny;
+    }
+    return conditionIcon;
   }
 }
