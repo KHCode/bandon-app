@@ -5,11 +5,11 @@ class StyledDropdownMenu extends StatefulWidget {
   final List<String> optionsDisplays;
   final List<String> optionsValues;
 
-  StyledDropdownMenu({Key key, this.optionsDisplays, this.optionsValues})
+  const StyledDropdownMenu({Key key, this.optionsDisplays, this.optionsValues})
       : super(key: key);
 
   List<DropdownMenuItem<String>> menuBuilder() {
-    List<DropdownMenuItem<String>> optionsList = [];
+    final optionsList = <DropdownMenuItem<String>>[];
     for (var i = 0; i < optionsDisplays.length; i++) {
       optionsList.add(
         DropdownMenuItem(

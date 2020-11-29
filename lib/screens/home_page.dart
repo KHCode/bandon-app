@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.symmetric(vertical: 40.0),
             child: Image.asset('assets/images/separator.png'),
           ),
-          PaddedTextBody(textBody: HomePage.bodyAbout),
+          const PaddedTextBody(textBody: HomePage.bodyAbout),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
             child: InkWell(

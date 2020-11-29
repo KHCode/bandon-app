@@ -35,7 +35,7 @@ class LodgingScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 40),
                 child:
                     Image.asset('assets/images/lodging-wildspring-cabin.jpg')),
-            PaddedTextBody(textBody: body1),
+            const PaddedTextBody(textBody: body1),
             StyledButton(
               text: 'View Lodging Options',
               onPressed: () => Navigator.of(context).pushNamed(

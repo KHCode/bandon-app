@@ -187,7 +187,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child: Image.asset(
                   'assets/images/things-to-do/bandon-things-to-do.jpg'),
             ),
-            PaddedTextBody(textBody: body1),
+            const PaddedTextBody(textBody: body1),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/separator.png'),
@@ -256,7 +256,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-beaches.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyBeach,
             ),
             const StyledExpansionTile(
@@ -284,7 +284,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-fishing.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyFishing,
             ),
             const StyledExpansionTile(
@@ -316,7 +316,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-birding.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyBirding,
             ),
             const StyledExpansionTile(
@@ -344,7 +344,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-oldtown.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyOldTown,
             ),
             const StyledExpansionTile(
