@@ -4,11 +4,8 @@ import 'business_details.dart';
 import '../db/database_manager.dart';
 import '../models/business.dart';
 import '../models/directory.dart';
-// import '../widgets/app_gradient_background.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/categories_dropdown_menu.dart';
-// import '../widgets/styled_section_banner.dart';
-// import '../widgets/styled_top_banner.dart';
 
 class FindBusinessScreen extends StatefulWidget {
   static const routeName = 'findBusinessScreen';

@@ -140,7 +140,7 @@ class GetStartedScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => _launchURL(transpLinks[index]),
                       child: Card(
-                        color: Color(0xFFF58B3E),
+                        color: const Color(0xFFF58B3E),
                         child: Container(
                           child: Center(
                             child: Text(

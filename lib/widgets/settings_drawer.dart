@@ -10,7 +10,6 @@ import 'package:bandon/screens/things-to-do.dart';
 import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-// import 'package:flutter/services.dart';
 
 import '../app.dart';
 
@@ -33,14 +32,6 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
     super.initState();
     _getLocationOverallStatus();
   }
-
-  // void _toggleLocationUsage() async {
-  //   try {
-  //     await requestPermission();
-  //   } on PermissionRequestInProgressException catch (e) {
-  //     print('Error: ${e.toString()}');
-  //   }
-  // }
 
   Future<bool> _getLocationServicesStatus() async =>
       Geolocator.isLocationServiceEnabled();
