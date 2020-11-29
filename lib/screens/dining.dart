@@ -7,15 +7,11 @@ import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
 import '../widgets/settings_drawer.dart';
 
-class DiningScreen extends StatefulWidget {
+class DiningScreen extends StatelessWidget {
   static const routeName = 'diningScreen';
-  DiningScreen({Key key}) : super(key: key);
 
-  @override
-  _DiningScreenState createState() => _DiningScreenState();
-}
+  const DiningScreen({Key key}) : super(key: key);
 
-class _DiningScreenState extends State<DiningScreen> {
   static const body1 = [
     'We invite you to sample the foods and flavors of Bandon and the coast. Bandon chefs have year-round access to local and regionally sourced seafood, as well as meats, produce and cheese.',
     'Taste Oregon wine, and regional craft beer and spirits.',
@@ -30,10 +26,6 @@ class _DiningScreenState extends State<DiningScreen> {
     'Indulge your taste buds with sweets unique to our corner of the coast. Coastal Mist Chocolate Boutique has won countless awards– one bite, and you’ll see why their classic chocolates and desserts have fans raving. Find award-winning artisan cheese at Face Rock Creamery. The creamery retail shop also features a variety of Oregon-made food and wine.',
     'Sample local brews on tap Bandon Brewing. For more local specialty foods, visit the Big Wheel General Store and try their handmade fudge served right from the baking pan. Cranberry Sweets is an Oregon Coast sweet shop that celebrates locally grown cranberries, and a lot more. Misty Meadows, south of town, is your destination for Oregon-grown berries, preserves and sauces.'
   ];
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +44,7 @@ class _DiningScreenState extends State<DiningScreen> {
                 child:
                     Image.asset('assets/images/dining/bandon-fish-market.jpg'),
               ),
-              PaddedTextBody(textBody: body1),
+              const PaddedTextBody(textBody: body1),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 50, 0, 50),
                 child: Image.asset('assets/images/separator-cranberry.png'),
@@ -68,7 +60,7 @@ class _DiningScreenState extends State<DiningScreen> {
                   fit: BoxFit.fill,
                 ),
               ),
-              PaddedTextBody(textBody: body2),
+              const PaddedTextBody(textBody: body2),
               StyledSectionBanner(leftText: 'Coastal', rightText: 'Treats'),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
@@ -77,7 +69,7 @@ class _DiningScreenState extends State<DiningScreen> {
                   fit: BoxFit.fill,
                 ),
               ),
-              PaddedTextBody(textBody: body3),
+              const PaddedTextBody(textBody: body3),
               InkWell(
                 onTap: () => Navigator.of(context).pushNamed(
                     FindBusinessScreen.routeName,
