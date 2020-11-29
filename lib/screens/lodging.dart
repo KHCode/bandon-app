@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/find-business.dart';
+import '../screens/find_business.dart';
 import '../widgets/styled_button.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
@@ -30,7 +30,7 @@ class LodgingScreen extends StatelessWidget {
         decoration: gradientBackground(context),
         child: ListView(
           children: <Widget>[
-            StyledTopBanner(topText: 'Book a Room'),
+            const StyledTopBanner(topText: 'Book a Room'),
             Padding(
                 padding: const EdgeInsets.only(bottom: 40),
                 child:

@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../screens/find-business.dart';
+
+import '../screens/find_business.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
@@ -38,7 +38,7 @@ class DiningScreen extends StatelessWidget {
           decoration: gradientBackground(context),
           child: ListView(
             children: <Widget>[
-              StyledTopBanner(topText: 'Choose Your Table'),
+              const StyledTopBanner(topText: 'Choose Your Table'),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40.0),
                 child:
@@ -49,7 +49,7 @@ class DiningScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 50.0),
                 child: Image.asset('assets/images/separator-cranberry.png'),
               ),
-              StyledSectionBanner(
+              const StyledSectionBanner(
                 leftText: 'Three',
                 rightText: 'Squares',
               ),
@@ -61,7 +61,8 @@ class DiningScreen extends StatelessWidget {
                 ),
               ),
               const PaddedTextBody(textBody: body2),
-              StyledSectionBanner(leftText: 'Coastal', rightText: 'Treats'),
+              const StyledSectionBanner(
+                  leftText: 'Coastal', rightText: 'Treats'),
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
                 child: Image.asset(
