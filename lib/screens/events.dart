@@ -39,7 +39,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 title: Text(snapshot.data[index].title),
                 subtitle: Text(DateFormat("EEEE',' MMM'.' d")
                     .format(snapshot.data[index].startDate)),
-                trailing: Icon(Icons.navigate_next),
+                trailing: const Icon(Icons.navigate_next),
                 onTap: () => pushEventDetails(context, snapshot.data[index]),
               ),
             ],
