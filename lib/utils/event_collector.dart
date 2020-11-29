@@ -50,7 +50,7 @@ class EventCollector {
     if (await _webScraper.loadWebPage(_endpoint)) {
       _newEvent.title = _getEventTitle(_webScraper);
       if (_newEvent?.title?.isEmpty ?? true) {
-        return _newEvent;
+        return EventDTO.nullEvent();
       }
       _newEvent.permalink = eventUrl;
       final _dateDetails = _getEventDate(_webScraper);
@@ -65,6 +65,7 @@ class EventCollector {
       _newEvent.email = _getEventEmail(_webScraper);
     } else {
       print('Failed to load the event');
+      return EventDTO.nullEvent();
     }
 
     return _newEvent;
