@@ -39,14 +39,14 @@ class _DiningScreenState extends State<DiningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Dining"),
+        title: Text('Bandon Dining'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
           decoration: gradientBackground(context),
           child: ListView(
             children: <Widget>[
-              StyledTopBanner(topText: "Choose Your Table"),
+              StyledTopBanner(topText: 'Choose Your Table'),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40.0),
                 child:
@@ -88,17 +88,34 @@ class _DiningScreenState extends State<DiningScreen> {
                       'assets/images/dining/dining-restaurants.jpg'),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/dining-specialty.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Specialty Food Sellers'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child:
+                      Image.asset('assets/images/dining/dining-specialty.jpg'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/dining-wine-beer.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Wine, Beer & Sprits'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child:
+                      Image.asset('assets/images/dining/dining-wine-beer.jpg'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/all-dining.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Dining'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  child: Image.asset('assets/images/dining/all-dining.jpg'),
+                ),
               ),
             ],
           )),
