@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../screens/find-business.dart';
 import '../widgets/styled_button.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
@@ -22,24 +23,29 @@ class LodgingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bandon Lodging'),
+        title: const Text('Bandon Lodging'),
       ),
-      endDrawer: SettingsDrawer(),
+      endDrawer: const SettingsDrawer(),
       body: Container(
-          decoration: gradientBackground(context),
-          child: ListView(
-            children: <Widget>[
-              StyledTopBanner(topText: 'Book a Room'),
-              Padding(
-                  padding: EdgeInsets.only(bottom: 40),
-                  child: Image.asset(
-                      'assets/images/lodging-wildspring-cabin.jpg')),
-              PaddedTextBody(textBody: body1),
-              StyledButton(
-                text: 'View Lodging Options',
-              )
-            ],
-          )),
+        decoration: gradientBackground(context),
+        child: ListView(
+          children: <Widget>[
+            StyledTopBanner(topText: 'Book a Room'),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child:
+                    Image.asset('assets/images/lodging-wildspring-cabin.jpg')),
+            PaddedTextBody(textBody: body1),
+            StyledButton(
+              text: 'View Lodging Options',
+              onPressed: () => Navigator.of(context).pushNamed(
+                FindBusinessScreen.routeName,
+                arguments: 'Lodging',
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

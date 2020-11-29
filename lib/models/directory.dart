@@ -7,7 +7,11 @@ class Directory {
 
   int get businessCount => businesses.length;
 
-  static const combinedCategories = ['Dining', 'Wine, Beer & Sprits'];
+  static const combinedCategories = [
+    'Dining',
+    'Lodging',
+    'Wine, Beer & Sprits',
+  ];
 
   List<Business> getByCategory(String category) =>
       (category?.isEmpty ?? true) ? businesses : filterBusinesses(category);
@@ -23,6 +27,12 @@ class Directory {
         filteredList = businesses.where((element) => element.categories
             .contains(RegExp(
                 r'(Bakeries)|(Farmers Markets)|(Grocery & Deli)|(Restaurants)|(Specialty Food Sellers)',
+                caseSensitive: false)));
+        break;
+      case 'Lodging':
+        filteredList = businesses.where((element) => element.categories
+            .contains(RegExp(
+                r'(B&B)|(Camping & RV)|(Property Management)|(Resorts, Hotels, Motels)|(Vacation Rentals)',
                 caseSensitive: false)));
         break;
       case 'Wine, Beer & Sprits':
