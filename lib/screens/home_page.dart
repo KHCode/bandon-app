@@ -1,3 +1,4 @@
+import 'package:bandon/screens/find-business.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
@@ -30,9 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var currentTemp = 72;
-  var currentCondition = 'Sunny';
-  var currentConditionIcon = BoxedIcon(WeatherIcons.day_sunny);
+  final currentConditionWidget = <Widget>[];
   final forecastWidgets = <Widget>[];
 
   @override
@@ -43,6 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   void _loadWeather() async {
     const CITY_NAME = 'Bandon';
+    final threeDayForecast = <Weather>[];
+    var dateTime = DateTime.now();
 
     final secret = await SecretLoader(secretPath: 'openweather.json').load();
     final weatherFactory =
@@ -51,18 +52,51 @@ class _HomePageState extends State<HomePage> {
         await weatherFactory.currentWeatherByCityName(CITY_NAME);
     final forecast = await weatherFactory.fiveDayForecastByCityName(CITY_NAME);
 
-    final threeDayForecast = <Weather>[];
-    var dateTime = DateTime.now();
-    for (var i = 0; i < 3; i++) {
-      threeDayForecast.add(forecast.firstWhere((forecast) =>
-          (forecast.date.day == dateTime.day && forecast.date.hour >= 11)));
+    currentConditionWidget.clear();
+    currentConditionWidget.addAll(
+      [
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                BoxedIcon(
+                    getConditionIcon(currentWeather.weatherConditionCode)),
+                Text('${currentWeather.weatherDescription}'),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  '${currentWeather.temperature.fahrenheit.round()}°',
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+
+    for (var _ = 0; _ < 3; _++) {
+      final midDayForecast = forecast.firstWhere(
+          (forecast) =>
+              (forecast.date.day == dateTime.day && forecast.date.hour >= 11),
+          orElse: () => null);
+
+      if (midDayForecast?.temperature?.fahrenheit?.isFinite ?? false) {
+        threeDayForecast.add(midDayForecast);
+      }
+
       dateTime = dateTime.add(Duration(days: 1));
     }
 
     dateTime = DateTime.now();
     forecastWidgets.clear();
     for (final day in threeDayForecast) {
-      print(day);
       forecastWidgets.add(
         Expanded(
           child: Center(
@@ -79,12 +113,7 @@ class _HomePageState extends State<HomePage> {
       dateTime = dateTime.add(Duration(days: 1));
     }
 
-    setState(() {
-      currentTemp = currentWeather.temperature.fahrenheit.round();
-      currentCondition = currentWeather.weatherDescription;
-      currentConditionIcon =
-          BoxedIcon(getConditionIcon(currentWeather.weatherConditionCode));
-    });
+    setState(() {});
   }
 
   @override
@@ -108,30 +137,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          currentConditionIcon,
-                          Text(currentCondition),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          Text(
-                            '${currentTemp.toString()}°',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                children: currentConditionWidget,
               ),
               SizedBox(
                 height: 10,
@@ -153,8 +159,12 @@ class _HomePageState extends State<HomePage> {
           PaddedTextBody(textBody: HomePage.bodyAbout),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Image.asset(
-                'assets/images/bandon-home-plan-your-visit-alt.jpg'),
+            child: InkWell(
+              child: Image.asset(
+                  'assets/images/bandon-home-plan-your-visit-alt.jpg'),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(FindBusinessScreen.routeName),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
