@@ -32,16 +32,20 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
   Uri launchUri;
 
   void launchMap(selectedValue) async {
-    launchUri = Uri.https('google.com', '/maps/dir/', {
-      'api': '1',
-      'origin': '$selectedValue',
-      'destination': 'Bandon, OR',
-      'travelnode': 'driving'
-    });
-    if (Platform.isIOS) {
+    Uri launchUri;
+
+    if (Platform.isAndroid) {
+      launchUri = Uri.https('google.com', '/maps/dir/', {
+        'api': '1',
+        'origin': '$selectedValue',
+        'destination': 'Bandon, OR',
+        'travelnode': 'driving'
+      });
+    } else {
       launchUri = Uri.parse(
           'http://maps.apple.com/?saddr=$selectedValue&daddr=Bandon, OR');
     }
+
     if (await canLaunch(launchUri.toString())) {
       await launch(launchUri.toString());
     }

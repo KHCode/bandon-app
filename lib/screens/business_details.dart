@@ -27,12 +27,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
           .pushNamed(FindBusinessScreen.routeName, arguments: category);
 
   void _launchMap(address) async {
-    var url =
-        Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
-            .toString();
+    String url;
+
     if (Platform.isIOS) {
       url = Uri.parse('http://maps.apple.com/?q=$address').toString();
+    } else {
+      url =
+          Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
+              .toString();
     }
+
     if (await canLaunch(url)) {
       await launch(url);
     }
