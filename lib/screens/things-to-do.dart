@@ -8,14 +8,8 @@ import '../widgets/padded_text_body.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/styled_expansion_tile.dart';
 
-class ThingsToDoScreen extends StatefulWidget {
+class ThingsToDoScreen extends StatelessWidget {
   static const routeName = 'thingsToDoScreen';
-
-  @override
-  _ThingsToDoScreenState createState() => _ThingsToDoScreenState();
-}
-
-class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
   static const body1 = [
     'How you pace yourself in Bandon is entirely up to you. We pride ourselves on a small-town attitude that’s relaxed and unhurried.',
     'Toss a crab pot in the water, and then kick back on the dock. Or, stroll through Old Town– then head back to the water to see what’s bitin’.',
@@ -73,12 +67,12 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
   ];
 
   static const cyclingDestinations = [
-    "On the Road",
-    "Oregon is the proud pioneer of scenic bikeways— publicly supported cycling routes that traverse picturesque cultural landmarks.",
-    "The Wild Rivers Scenic Bikeway is a 61-mile journey through some of the most appealing scenery in North Curry County. Ride past historic landmarks: Battle Rock, the Elk River fish hatchery, Cape Blanco lighthouse and the Port Orford Coast Guard Museum. The ride starts and ends at Battle Rock Park in Port Orford, just 25 miles south of Bandon. Visit the bikeway’s Travel Oregon page for maps, photos, and more.",
-    "On the Trail",
-    "Cyclists and hikers get an up-close glimpse of a working Coos County forest at Whiskey Run Mountain Bike Trails. Explore tree stands in various growth stages in a forest that’s home to a wide array of plant species. The trails are open all year with miles of single-track, two-way trails designed for beginner to intermediate difficulty. Find descriptions of each trail, including elevations, at MTB Project.",
-    "On the Beach",
+    'On the Road',
+    'Oregon is the proud pioneer of scenic bikeways— publicly supported cycling routes that traverse picturesque cultural landmarks.',
+    'The Wild Rivers Scenic Bikeway is a 61-mile journey through some of the most appealing scenery in North Curry County. Ride past historic landmarks: Battle Rock, the Elk River fish hatchery, Cape Blanco lighthouse and the Port Orford Coast Guard Museum. The ride starts and ends at Battle Rock Park in Port Orford, just 25 miles south of Bandon. Visit the bikeway’s Travel Oregon page for maps, photos, and more.',
+    'On the Trail',
+    'Cyclists and hikers get an up-close glimpse of a working Coos County forest at Whiskey Run Mountain Bike Trails. Explore tree stands in various growth stages in a forest that’s home to a wide array of plant species. The trails are open all year with miles of single-track, two-way trails designed for beginner to intermediate difficulty. Find descriptions of each trail, including elevations, at MTB Project.',
+    'On the Beach',
     'Ready to hit the sand? Fat tire bike riders are discovering just how fun it is to cruise Bandon beaches on two wheels. Oregon Coast beach rides mapped by Travel Oregon include a 19 mile Bandon fat bike beach ride. The route is easy to split into segments and rated moderately difficult. Highlights include stunning rock formations and splashy stream crossings.',
   ];
 
@@ -120,38 +114,38 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
   ];
 
   static const natureDiscovery = [
-    "Bandon Marsh National Wildlife Refuge is a tidal marsh system, providing habitat for salmon and shorebirds, and is an excellent birdwatching destination. The marsh observation deck on Riverside Drive is walking distance from Old Town– just head north on Riverside Drive, at the east end of First Street. The Ni-les’tun unit parking area and observation platform are located on North Bank Road, off Highway 101, just north of Bullards Bridge.",
-    "New River is an Area of Critical Environmental Concern located south of Bandon. Learn about the protected habitats at the Nature Center. Then hike the trails or paddle in the estuary. The trailhead and visitor parking are loaded on Croft Lake Lane, off Highway 101.",
+    'Bandon Marsh National Wildlife Refuge is a tidal marsh system, providing habitat for salmon and shorebirds, and is an excellent birdwatching destination. The marsh observation deck on Riverside Drive is walking distance from Old Town– just head north on Riverside Drive, at the east end of First Street. The Ni-les’tun unit parking area and observation platform are located on North Bank Road, off Highway 101, just north of Bullards Bridge.',
+    'New River is an Area of Critical Environmental Concern located south of Bandon. Learn about the protected habitats at the Nature Center. Then hike the trails or paddle in the estuary. The trailhead and visitor parking are loaded on Croft Lake Lane, off Highway 101.',
   ];
 
   static const natureInterpretation = [
-    "Find Group Events",
-    "The local Audubon Society, and Shoreline Education for Awareness, offer indoor and outdoor events throughout the year.",
-    "The Cape Arago chapter of the Audubon Society leads programs and outings in Bandon and the surrounding area. Meet fellow birding enthusiasts and learn more about stewardship of natural environments. Join them for their annual Oregon Shorebird Festival held in September.",
-    "Shoreline Education for Awareness interpreters share a wealth of knowledge about near shore nesting and bird habitats on the beach and offshore rocks. Find SEA volunteers equipped with spotting scopes, field guides and brochures, Friday through Sunday, May through July, at Coquille Point or Face Rock viewpoints in Bandon.",
-    "Additional SEA programs include seminars on King Tides and marine aquaculture. The annual Tufted Puffin Party, at Face Rock State Scenic Viewpoint in April, celebrates the springtime return of puffins to their nesting sites.",
-    "Book a Guide",
-    "Professional guides share their passion for nature on guided exploration of trails and waterways. Connect with Bandon’s natural wonder! Walks, hikes, kayak and boat tours are available for groups large and small.",
+    'Find Group Events',
+    'The local Audubon Society, and Shoreline Education for Awareness, offer indoor and outdoor events throughout the year.',
+    'The Cape Arago chapter of the Audubon Society leads programs and outings in Bandon and the surrounding area. Meet fellow birding enthusiasts and learn more about stewardship of natural environments. Join them for their annual Oregon Shorebird Festival held in September.',
+    'Shoreline Education for Awareness interpreters share a wealth of knowledge about near shore nesting and bird habitats on the beach and offshore rocks. Find SEA volunteers equipped with spotting scopes, field guides and brochures, Friday through Sunday, May through July, at Coquille Point or Face Rock viewpoints in Bandon.',
+    'Additional SEA programs include seminars on King Tides and marine aquaculture. The annual Tufted Puffin Party, at Face Rock State Scenic Viewpoint in April, celebrates the springtime return of puffins to their nesting sites.',
+    'Book a Guide',
+    'Professional guides share their passion for nature on guided exploration of trails and waterways. Connect with Bandon’s natural wonder! Walks, hikes, kayak and boat tours are available for groups large and small.',
   ];
 
   static const funForKids = [
-    "Watch birds in their natural habitats and learn about the relationship between birds, aquatic life and other species.",
-    "Indoors",
-    "The Charleston Marine Life Center, located near the Charleston marina, is part of the Oregon Institute of Marine Biology campus. Visitors can learn about natural history in the museum, view aquatic wildlife in the aquarium, and get up close with marine life in the tide pool touch tank. The Marine Life Center is open 11 a.m. to 5 p.m. Wednesday through Saturday. Admission is free for children and students (with student ID), \$5 for adults, and \$4 for seniors.",
-    "Outdoors",
-    "Pack a picnic and head to the Bandon Fish Hatchery. Birds such as wood ducks, herons and kingfishers are common all year with additional migratory birds visiting in the spring and summer months. View adult Chinook salmon in the fall, steelhead in the winter and spring, and trout in the show pond year round. Take Fish Hatchery Road south off Highway 42 South, approximately one-half mile east of Bandon.",
-    "The Junior Ranger program features hands-on nature discovery and learning at Bullards Beach State Park. Sessions begin at 10 a.m., Tuesday through Saturday, mid-June through Labor Day. Youth age 6 to 12 are invited to participate in this free, drop-in program. Children should be accompanied by an adult. Check in at Bullards amphitheater.",
-    "Visit the Oregon Coast Birding Trail website and download the South Coast Oregon Birding Trail Guide for more birding adventures.",
+    'Watch birds in their natural habitats and learn about the relationship between birds, aquatic life and other species.',
+    'Indoors',
+    'The Charleston Marine Life Center, located near the Charleston marina, is part of the Oregon Institute of Marine Biology campus. Visitors can learn about natural history in the museum, view aquatic wildlife in the aquarium, and get up close with marine life in the tide pool touch tank. The Marine Life Center is open 11 a.m. to 5 p.m. Wednesday through Saturday. Admission is free for children and students (with student ID), \$5 for adults, and \$4 for seniors.',
+    'Outdoors',
+    'Pack a picnic and head to the Bandon Fish Hatchery. Birds such as wood ducks, herons and kingfishers are common all year with additional migratory birds visiting in the spring and summer months. View adult Chinook salmon in the fall, steelhead in the winter and spring, and trout in the show pond year round. Take Fish Hatchery Road south off Highway 42 South, approximately one-half mile east of Bandon.',
+    'The Junior Ranger program features hands-on nature discovery and learning at Bullards Beach State Park. Sessions begin at 10 a.m., Tuesday through Saturday, mid-June through Labor Day. Youth age 6 to 12 are invited to participate in this free, drop-in program. Children should be accompanied by an adult. Check in at Bullards amphitheater.',
+    'Visit the Oregon Coast Birding Trail website and download the South Coast Oregon Birding Trail Guide for more birding adventures.',
   ];
 
   static const bodyOldTown = [
-    "Bandon’s Old Town is 10 square blocks of shopping, dining, history, art, culture and outdoor recreation. Spend an hour, or a day, exploring our historic business district, just off Highway 101 South, on the Coquille River waterfront.",
+    'Bandon’s Old Town is 10 square blocks of shopping, dining, history, art, culture and outdoor recreation. Spend an hour, or a day, exploring our historic business district, just off Highway 101 South, on the Coquille River waterfront.',
   ];
 
   static const shopping = [
-    "A stroll through Bandon’s Old Town shopping district is a feast for the senses.",
-    "Sample delectable treats, luxurious threads, art and playthings for every age. Our Old Town boutiques and galleries feature distinctive products and service, provided by independent business owners who love what they do and the visitors who brighten the day.",
-    "Many of our merchants have been delighting customers for decades: Bandon Card and Gift Shoppe, Bandon Mercantile Company, The Big Wheel General Store, Cranberry Sweets and Second Street Gallery offer that winning combination of quality products and service that bring shoppers back for more.",
+    'A stroll through Bandon’s Old Town shopping district is a feast for the senses.',
+    'Sample delectable treats, luxurious threads, art and playthings for every age. Our Old Town boutiques and galleries feature distinctive products and service, provided by independent business owners who love what they do and the visitors who brighten the day.',
+    'Many of our merchants have been delighting customers for decades: Bandon Card and Gift Shoppe, Bandon Mercantile Company, The Big Wheel General Store, Cranberry Sweets and Second Street Gallery offer that winning combination of quality products and service that bring shoppers back for more.',
   ];
 
   static const dining = [
@@ -276,8 +270,8 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child: Image.asset('assets/images/separator-beaches.png'),
             ),
             StyledSectionBanner(
-              leftText: "Fishing",
-              rightText: "Bandon",
+              leftText: 'Fishing',
+              rightText: 'Bandon',
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
