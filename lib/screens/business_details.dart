@@ -43,9 +43,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
   }
 
   void _launchPhone(String phoneNumber) async {
-    var _phone = phoneNumber.replaceAll(RegExp(r'\W'), '');
-    if (await canLaunch('tel:${_phone}')) {
-      await launch(phoneNumber);
+    final _phone = 'tel:${phoneNumber.replaceAll(RegExp(r'\W'), '')}';
+    if (await canLaunch(_phone)) {
+      await launch(_phone);
     }
   }
 
