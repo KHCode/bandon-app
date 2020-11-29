@@ -29,14 +29,14 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Contact"),
+        title: Text('Bandon Contact'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           StyledTopBanner(
-            topText: "Contact Us",
+            topText: 'Contact Us',
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 40),
