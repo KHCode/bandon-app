@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 
 class StyledButton extends StatelessWidget {
   final String text;
+  final void Function() onPressed;
 
-  StyledButton({Key key, this.text});
+  const StyledButton({Key key, this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(100, 10, 100, 10),
       child: RaisedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         color: Color(0xFFF58B3E),
-        // textColor: Color(0xFF05668D),
         child: Text(text),
       ),
     );
