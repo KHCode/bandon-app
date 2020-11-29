@@ -127,20 +127,20 @@ class _HomePageState extends State<HomePage> {
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+            padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 3.0),
             child: Image.asset(
                 'assets/images/bandon-logo-${Theme.of(context).brightness == Brightness.dark ? 'light' : 'dark'}.png'),
           ),
           Image.asset('assets/images/beach-sunset.jpg'),
-          SizedBox(height: 20),
+          const SizedBox(height: 20.0),
           Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: currentConditionWidget,
               ),
-              SizedBox(
-                height: 10,
+              const SizedBox(
+                height: 10.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const PaddedTextBody(textBody: HomePage.bodyAbout),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
             child: InkWell(
               child: Image.asset(
                   'assets/images/bandon-home-plan-your-visit-alt.jpg'),
@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
             child: InkWell(
               child: Image.asset(
                   'assets/images/bandon-home-choose-your-table-green.jpg'),
@@ -176,7 +176,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
             child: InkWell(
               child:
                   Image.asset('assets/images/bandon-home-book-your-stay.jpg'),

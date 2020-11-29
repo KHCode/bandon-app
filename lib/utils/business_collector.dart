@@ -104,6 +104,7 @@ class BusinessCollector {
       _newBusiness.highlights = _getHighlights(_webScraper);
     } else {
       print('Failed to load the business');
+      return BusinessDTO.nullBusiness();
     }
 
     return _newBusiness;

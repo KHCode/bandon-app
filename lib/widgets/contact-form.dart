@@ -96,7 +96,7 @@ class _ContactFormState extends State<ContactForm> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -109,7 +109,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -122,7 +122,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -135,7 +135,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -149,7 +149,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -318,7 +318,7 @@ class _ContactFormState extends State<ContactForm> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {

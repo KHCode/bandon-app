@@ -20,16 +20,16 @@ class StyledSectionBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 50.0),
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFF05668d),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 30, 15, 30),
+              padding: const EdgeInsets.fromLTRB(0.0, 30.0, 15.0, 30.0),
               child: Text(
                 leftText,
                 style: GoogleFonts.roboto(

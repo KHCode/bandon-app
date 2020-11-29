@@ -27,12 +27,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
           .pushNamed(FindBusinessScreen.routeName, arguments: category);
 
   void _launchMap(address) async {
-    var url =
-        Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
-            .toString();
+    String url;
+
     if (Platform.isIOS) {
       url = Uri.parse('http://maps.apple.com/?q=$address').toString();
+    } else {
+      url =
+          Uri.parse('https://www.google.com/maps/search/?api=1&query=$address')
+              .toString();
     }
+
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -114,7 +118,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     return Column(
       children: [
         InkWell(
-          onTap: () => _launchMap(_business.address),
+          onTap: () => _launchMap(business.address),
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -141,14 +145,14 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         ),
         FutureBuilder(
           initialData: '',
-          future: displayDistanceMessage(_business.address),
+          future: displayDistanceMessage(business.address),
           builder: (context, snapshot) {
             return (snapshot.hasData && snapshot.data.isNotEmpty)
                 ? Text(snapshot.data)
                 : const SizedBox.shrink();
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 20.0,
         )
       ],
@@ -322,10 +326,10 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               displayName(context, _business),
-              SizedBox(height: 10),
+              const SizedBox(height: 10.0),
               if (_business?.categories?.isNotEmpty ?? false)
                 displayCategories(context, _business),
-              SizedBox(height: 10),
+              const SizedBox(height: 10.0),
               if (_business?.address?.isNotEmpty ?? false)
                 displayAddress(context, _business),
               if (_business?.hours?.isNotEmpty ?? false)

@@ -40,7 +40,7 @@ class LodgingScreen extends StatelessWidget {
               text: 'View Lodging Options',
               onPressed: () => Navigator.of(context).pushNamed(
                 FindBusinessScreen.routeName,
-                arguments: 'Lodging',
+                arguments: 'All Lodging',
               ),
             ),
           ],

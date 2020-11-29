@@ -39,7 +39,7 @@ class _CategoriesDropdownMenuState extends State<CategoriesDropdownMenu> {
 
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.fromLTRB(20, 30, 20, 5),
+      margin: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 5.0),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
             hint: Text(widget.hint),

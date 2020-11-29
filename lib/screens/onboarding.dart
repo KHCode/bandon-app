@@ -64,7 +64,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         PageViewModel(
           title: 'See the sights',
           body: 'Learn about all of the activities Bandon has to offer.',
-          image: AlignedImage(
+          image: const AlignedImage(
               fileName: 'lighthouse.png',
               size: 350.0,
               alignment: Alignment.bottomCenter),
@@ -73,7 +73,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         PageViewModel(
           title: 'Get to know us',
           body: 'Find shops, dining, lodging and events around town.',
-          image: AlignedImage(
+          image: const AlignedImage(
               fileName: 'dining.png',
               size: 350.0,
               alignment: Alignment.bottomCenter),
@@ -83,7 +83,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
           title: 'Enable location access',
           body:
               "It's like having your own concierge.\n\nTap the button below to find how close you are to the greatest Bandon has to offer.",
-          image: AlignedImage(
+          image: const AlignedImage(
               fileName: 'map.png',
               size: 350.0,
               alignment: Alignment.bottomCenter),
@@ -91,7 +91,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             onPressed: () {
               _requestPermissions(context);
             },
-            child: Text(
+            child: const Text(
               'Enable Location',
               style: TextStyle(color: Colors.white),
             ),
@@ -106,9 +106,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       onDone: () => _onDone(context),
       showSkipButton: false,
       nextFlex: 0,
-      next: Icon(Icons.navigate_next),
-      done: Text('Skip'),
-      dotsDecorator: DotsDecorator(
+      next: const Icon(Icons.navigate_next),
+      done: const Text('Skip'),
+      dotsDecorator: const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Colors.grey,
         activeSize: Size(20.0, 20.0),

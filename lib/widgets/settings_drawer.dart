@@ -94,7 +94,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
             'More to learn about Bandon',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: 24.0,
             ),
           ),
         ),
@@ -106,7 +106,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Home',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(HomePage.routeName),
@@ -115,7 +115,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Start Here',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(GetStartedScreen.routeName),
@@ -124,7 +124,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Dining',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(DiningScreen.routeName),
@@ -133,7 +133,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Lodging',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(LodgingScreen.routeName),
@@ -142,7 +142,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Things To Do',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
@@ -151,7 +151,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Events',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(EventsScreen.routeName),
@@ -160,7 +160,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Find a Business',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () => Navigator.of(context)
                     .pushNamed(FindBusinessScreen.routeName),
@@ -169,7 +169,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'News',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(NewsScreen.routeName),
@@ -178,7 +178,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Contact',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(ContactScreen.routeName),
@@ -187,7 +187,7 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
                 dense: true,
                 title: const Text(
                   'Relocate Here',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 onTap: () =>
                     Navigator.of(context).pushNamed(RelocateScreen.routeName),
