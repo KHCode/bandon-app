@@ -114,7 +114,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     return Column(
       children: [
         InkWell(
-          onTap: () => _launchMap(_business.address),
+          onTap: () => _launchMap(business.address),
           child: RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
@@ -141,7 +141,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         ),
         FutureBuilder(
           initialData: '',
-          future: displayDistanceMessage(_business.address),
+          future: displayDistanceMessage(business.address),
           builder: (context, snapshot) {
             return (snapshot.hasData && snapshot.data.isNotEmpty)
                 ? Text(snapshot.data)
