@@ -7,9 +7,9 @@ import '../models/contact_info.dart';
 import '../screens/home_page.dart';
 
 Future<String> sendData(ContactInfo infoBody) async {
-  String jsonInfoBody = jsonEncode(infoBody);
-  final http.Response response = await http.post('http://10.0.2.2:8080',
-      headers: {"content-type": "application/json"}, body: jsonInfoBody);
+  final jsonInfoBody = jsonEncode(infoBody);
+  final response = await http.post('http://10.0.2.2:8080',
+      headers: {'content-type': 'application/json'}, body: jsonInfoBody);
 
   return response.statusCode.toString();
 }
@@ -42,7 +42,7 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _zipController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
-  static String _choiceString = "email";
+  static String _choiceString = 'email';
   static String statusCode;
   ContactChoice _choice = ContactChoice.email;
 
@@ -355,8 +355,8 @@ class _ContactFormState extends State<ContactForm> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _choice == ContactChoice.email
-                      ? _choiceString = "email"
-                      : _choiceString = "phone";
+                      ? _choiceString = 'email'
+                      : _choiceString = 'phone';
                   infoCollector = ContactInfo(
                       firstName: _firstNameController.text,
                       lastName: _lastNameController.text,
@@ -393,7 +393,7 @@ class _ContactFormState extends State<ContactForm> {
 
                   statusCode = await sendData(infoCollector);
                   Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Thank you for your interest in Bandon!")));
+                      content: Text('Thank you for your interest in Bandon!')));
                   Future.delayed(const Duration(milliseconds: 2000), () {
                     Navigator.of(context).pushNamed(HomePage.routeName);
                   });

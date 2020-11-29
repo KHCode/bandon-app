@@ -5,9 +5,15 @@ class CategoriesDropdownMenu extends StatefulWidget {
   final String start;
   final String hint;
   final void Function(String value) onChanged;
+  final bool Function() clearValue;
 
   const CategoriesDropdownMenu(
-      {Key key, this.values, this.start, this.hint, this.onChanged})
+      {Key key,
+      this.values,
+      this.start,
+      this.hint,
+      this.onChanged,
+      this.clearValue})
       : super(key: key);
 
   @override
@@ -25,9 +31,15 @@ class _CategoriesDropdownMenuState extends State<CategoriesDropdownMenu> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.clearValue()) {
+      setState(
+        () => _value = null,
+      );
+    }
+
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      margin: EdgeInsets.fromLTRB(20, 30, 20, 5),
       child: DropdownButtonHideUnderline(
         child: DropdownButton(
             hint: Text(widget.hint),

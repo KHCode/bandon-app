@@ -46,13 +46,16 @@ class FindBusinessScreenState extends State<FindBusinessScreen> {
     databaseManager.setFavoriteBusiness(
         permalink: business.permalink, isFavorite: !business.isFavorite);
     await _getBusinesses();
-    setState(() {});
   }
 
-  void filterBusinesses(String category) async {
+  void filterBusinesses(String category) {
     setState(() {
       _category = category;
     });
+  }
+
+  bool clearDropdownValue() {
+    return _category?.isEmpty ?? true ? true : false;
   }
 
   Widget _createBusinessesListView(BuildContext context) {
@@ -67,11 +70,24 @@ class FindBusinessScreenState extends State<FindBusinessScreen> {
             start: _category,
             hint: 'Category',
             onChanged: filterBusinesses,
+            clearValue: clearDropdownValue,
           ),
+          if (_category?.isNotEmpty ?? false)
+            Container(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 20),
+                  child: Text('Clear category',
+                      style: Theme.of(context).textTheme.caption),
+                ),
+                onTap: () => filterBusinesses(''),
+              ),
+            ),
           Expanded(
             child: ListView.builder(
               itemCount: businesses.length,
-              itemBuilder: (BuildContext context, int index) => ListTile(
+              itemBuilder: (context, index) => ListTile(
                 leading: IconButton(
                   icon: Icon(businesses[index].isFavorite
                       ? Icons.favorite
