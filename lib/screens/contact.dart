@@ -18,7 +18,7 @@ class ContactScreen extends StatelessWidget {
     }
   }
 
-  Uri streetAddressLaunchUri = Uri.https('google.com', '/maps/search/', {
+  final streetAddressLaunchUri = Uri.https('google.com', '/maps/search/', {
     'api': '1',
     'query': '300 2nd St SE, Bandon, OR',
   });
