@@ -146,8 +146,8 @@ class GetStartedScreen extends StatelessWidget {
                             child: Text(
                               transpOptions[index],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color(0xFF05668d), fontSize: 24),
+                              style: const TextStyle(
+                                  color: Color(0xFF05668d), fontSize: 24.0),
                             ),
                           ),
                         ),
@@ -204,7 +204,7 @@ class GetStartedScreen extends StatelessWidget {
               hiddenContent: bookEarly,
             ),
             const Padding(
-              padding: EdgeInsets.only(bottom: 50),
+              padding: EdgeInsets.only(bottom: 50.0),
               child: StyledExpansionTile(
                 title: 'Extended Travel in Oregon',
                 hiddenContent: extendedTravel,

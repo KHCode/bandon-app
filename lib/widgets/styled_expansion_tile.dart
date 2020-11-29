@@ -10,8 +10,8 @@ class StyledExpansionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.symmetric(horizontal: 50.0),
+      decoration: const BoxDecoration(
         color: Color(0xFFF58B3E),
         border: Border(
           bottom: BorderSide(
@@ -21,13 +21,13 @@ class StyledExpansionTile extends StatelessWidget {
       ),
       child: ExpansionTile(
         title: Text(title),
-        childrenPadding: EdgeInsets.all(15),
+        childrenPadding: const EdgeInsets.all(15.0),
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
             : Colors.black,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 15),
+            padding: const EdgeInsets.only(bottom: 15.0),
             child: Text(hiddenContent.join('\n\n')),
           ),
         ],

@@ -191,7 +191,7 @@ class _EventDetailsState extends State<EventDetails> {
                   : const SizedBox.shrink();
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 12.0,
           )
         ],
@@ -255,7 +255,7 @@ class _EventDetailsState extends State<EventDetails> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 displayTitle(context, _event),
-                SizedBox(height: 10),
+                const SizedBox(height: 10.0),
                 if (_event.startDate != DateTime.parse('00010101') &&
                     _event.endDate != DateTime.parse('00010101'))
                   displayTime(context, _event),

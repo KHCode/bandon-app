@@ -46,7 +46,7 @@ class DiningScreen extends StatelessWidget {
               ),
               const PaddedTextBody(textBody: body1),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 50, 0, 50),
+                padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 50.0),
                 child: Image.asset('assets/images/separator-cranberry.png'),
               ),
               StyledSectionBanner(
@@ -54,7 +54,7 @@ class DiningScreen extends StatelessWidget {
                 rightText: 'Squares',
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 30.0),
                 child: Image.asset(
                   'assets/images/dining/shrimp.jpg',
                   fit: BoxFit.fill,
@@ -63,7 +63,7 @@ class DiningScreen extends StatelessWidget {
               const PaddedTextBody(textBody: body2),
               StyledSectionBanner(leftText: 'Coastal', rightText: 'Treats'),
               Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 30.0),
                 child: Image.asset(
                   'assets/images/dining/dessert.jpg',
                   fit: BoxFit.fill,
@@ -75,7 +75,7 @@ class DiningScreen extends StatelessWidget {
                     FindBusinessScreen.routeName,
                     arguments: 'Restaurants'),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
                   child: Image.asset(
                       'assets/images/dining/dining-restaurants.jpg'),
                 ),
@@ -85,7 +85,7 @@ class DiningScreen extends StatelessWidget {
                     FindBusinessScreen.routeName,
                     arguments: 'Specialty Food Sellers'),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
                   child:
                       Image.asset('assets/images/dining/dining-specialty.jpg'),
                 ),
@@ -95,7 +95,7 @@ class DiningScreen extends StatelessWidget {
                     FindBusinessScreen.routeName,
                     arguments: 'Wine, Beer & Sprits'),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
                   child:
                       Image.asset('assets/images/dining/dining-wine-beer.jpg'),
                 ),
@@ -105,7 +105,7 @@ class DiningScreen extends StatelessWidget {
                     FindBusinessScreen.routeName,
                     arguments: 'Dining'),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
                   child: Image.asset('assets/images/dining/all-dining.jpg'),
                 ),
               ),

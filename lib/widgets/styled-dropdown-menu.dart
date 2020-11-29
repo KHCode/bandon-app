@@ -47,11 +47,11 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
       children: [
         Text(
           '*Making a selection will launch Google Maps, if available',
-          style: TextStyle(fontSize: 12, color: Colors.red),
+          style: const TextStyle(fontSize: 12.0, color: Colors.red),
         ),
         Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+          margin: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 0.0),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
                 value: selectedValue,

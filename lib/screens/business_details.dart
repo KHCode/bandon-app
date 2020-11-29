@@ -148,7 +148,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                 : const SizedBox.shrink();
           },
         ),
-        SizedBox(
+        const SizedBox(
           height: 20.0,
         )
       ],
@@ -322,10 +322,10 @@ class _BusinessDetailsState extends State<BusinessDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               displayName(context, _business),
-              SizedBox(height: 10),
+              const SizedBox(height: 10.0),
               if (_business?.categories?.isNotEmpty ?? false)
                 displayCategories(context, _business),
-              SizedBox(height: 10),
+              const SizedBox(height: 10.0),
               if (_business?.address?.isNotEmpty ?? false)
                 displayAddress(context, _business),
               if (_business?.hours?.isNotEmpty ?? false)

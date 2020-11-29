@@ -39,14 +39,14 @@ class ContactScreen extends StatelessWidget {
             topText: 'Contact Us',
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 40),
+            padding: const EdgeInsets.only(bottom: 40.0),
             child: Image.asset('assets/images/bandon-seagull-generic.jpg'),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
+            padding: const EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 30.0),
             child: Text(
-              'Contact us with questions about volunteering and visiting or relocating  to Bandon.',
-              style: TextStyle(fontSize: 16),
+              'Contact us with questions about volunteering and visiting or relocating to Bandon.',
+              style: const TextStyle(fontSize: 16.0),
             ),
           ),
           GestureDetector(
@@ -55,7 +55,7 @@ class ContactScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
               child: Text(
                 '300 2nd Street\nPO Box 1515\nBandon, OR 97411',
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20.0),
               ),
             ),
           ),
@@ -65,7 +65,7 @@ class ContactScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(50, 0, 50, 30),
               child: Text(
                 '$_phoneNumber',
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20.0),
               ),
             ),
           ),
