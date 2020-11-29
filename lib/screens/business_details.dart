@@ -6,7 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'find-business.dart';
+import 'find_business.dart';
 import '../models/business.dart';
 import '../widgets/settings_drawer.dart';
 

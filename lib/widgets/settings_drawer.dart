@@ -1,18 +1,17 @@
-import 'package:bandon/screens/contact.dart';
-import 'package:bandon/screens/dining.dart';
-import 'package:bandon/screens/events.dart';
-import 'package:bandon/screens/find-business.dart';
-import 'package:bandon/screens/getting-started.dart';
-import 'package:bandon/screens/home_page.dart';
-import 'package:bandon/screens/lodging.dart';
-import 'package:bandon/screens/news.dart';
-import 'package:bandon/screens/things-to-do.dart';
-import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-// import 'package:flutter/services.dart';
 
 import '../app.dart';
+import '../screens/contact.dart';
+import '../screens/dining.dart';
+import '../screens/events.dart';
+import '../screens/find_business.dart';
+import '../screens/getting_started.dart';
+import '../screens/home_page.dart';
+import '../screens/lodging.dart';
+import '../screens/news.dart';
+import '../screens/things_to_do.dart';
+import '../screens/relocate_screen.dart';
 
 class SettingsDrawer extends StatefulWidget {
   const SettingsDrawer({Key key}) : super(key: key);
@@ -33,14 +32,6 @@ class _SettingsDrawerState extends State<SettingsDrawer> {
     super.initState();
     _getLocationOverallStatus();
   }
-
-  // void _toggleLocationUsage() async {
-  //   try {
-  //     await requestPermission();
-  //   } on PermissionRequestInProgressException catch (e) {
-  //     print('Error: ${e.toString()}');
-  //   }
-  // }
 
   Future<bool> _getLocationServicesStatus() async =>
       Geolocator.isLocationServiceEnabled();

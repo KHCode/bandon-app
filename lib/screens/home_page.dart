@@ -1,10 +1,10 @@
-import 'package:bandon/screens/find-business.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 import 'dining.dart';
+import 'find_business.dart';
 import 'lodging.dart';
 import '../models/secret_loader.dart';
 import '../widgets/app_gradient_background.dart';
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   '${currentWeather.temperature.fahrenheit.round()}°',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: const TextStyle(fontSize: 36.0),
                 ),
               ],
             ),
@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          StyledSectionBanner(
+          const StyledSectionBanner(
             leftText: 'About',
             rightText: 'Bandon Oregon',
           ),

@@ -54,9 +54,6 @@ class DatabaseManager {
       onCreate: (Database db, int version) {
         _createTables(db, schema);
       },
-      // onOpen: (Database db) {
-      //   _createTables(db, schema);
-      // },
       onUpgrade: (Database db, int oldVersion, int newVersion) {
         _createTables(db, schema);
       },

@@ -1,13 +1,9 @@
-import 'package:bandon/widgets/padded_text_body.dart';
-import 'package:bandon/widgets/styled_section_banner.dart';
-import 'package:bandon/widgets/styled_top_banner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
-import '../widgets/contact-form.dart';
+import '../widgets/settings_drawer.dart';
+import '../widgets/styled_top_banner.dart';
 
 class ContactScreen extends StatelessWidget {
   static const routeName = 'contactScreen';
@@ -35,7 +31,7 @@ class ContactScreen extends StatelessWidget {
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
-          StyledTopBanner(
+          const StyledTopBanner(
             topText: 'Contact Us',
           ),
           Padding(

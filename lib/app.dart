@@ -1,21 +1,19 @@
-import 'package:bandon/screens/relocate_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:flutter/services.dart';
 
 import 'screens/business_details.dart';
 import 'screens/contact.dart';
 import 'screens/dining.dart';
 import 'screens/event_details.dart';
 import 'screens/events.dart';
-import 'screens/find-business.dart';
-import 'screens/getting-started.dart';
+import 'screens/find_business.dart';
+import 'screens/getting_started.dart';
 import 'screens/home_page.dart';
 import 'screens/lodging.dart';
 import 'screens/news.dart';
 import 'screens/onboarding.dart';
 import 'screens/relocate_screen.dart';
-import 'screens/things-to-do.dart';
+import 'screens/things_to_do.dart';
 
 import 'utils/business_collector.dart';
 import 'utils/event_collector.dart';

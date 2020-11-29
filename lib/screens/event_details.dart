@@ -103,7 +103,7 @@ class _EventDetailsState extends State<EventDetails> {
             Padding(
               padding: const EdgeInsets.only(top: 4.0, bottom: 12.0),
               child: Text(
-                '${parseDate(event.startDate)} ${parseTime(event.startDate)} - \n'
+                '${parseDate(event.startDate)} ${parseTime(event.startDate)} -\n'
                 '${parseDate(event.endDate)} ${parseTime(event.endDate)}',
                 style: Theme.of(context).textTheme.bodyText1,
               ),
@@ -138,12 +138,86 @@ class _EventDetailsState extends State<EventDetails> {
         Wrap(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 4.0, bottom: 24.0),
+              padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
               child: Text(
                 event.description,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget displayAdmission(BuildContext context, Event event) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Text(
+                'Admission',
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                event.admission,
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget displayContact(BuildContext context, Event event) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: Text(
+                'Contact',
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        Wrap(
+          children: [
+            Align(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
+                child: Text(
+                  event.contact,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ),
+            ),
+            if (event?.email?.isNotEmpty ?? false)
+              Align(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(4.0, 0.0, 0.0, 8.0),
+                  child: InkWell(
+                    onTap: () => _launchUrl(event.email),
+                    child: Icon(Icons.email),
+                  ),
+                ),
+              ),
           ],
         ),
       ],
@@ -267,6 +341,10 @@ class _EventDetailsState extends State<EventDetails> {
                   displayLocation(context, _event),
                 if (_event?.description?.isNotEmpty ?? false)
                   displayDescription(context, _event),
+                if (_event?.admission?.isNotEmpty ?? false)
+                  displayAdmission(context, _event),
+                if (_event?.contact?.isNotEmpty ?? false)
+                  displayContact(context, _event),
               ]),
         ),
       ),

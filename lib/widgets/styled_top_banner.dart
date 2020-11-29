@@ -9,7 +9,7 @@ class StyledTopBanner extends StatelessWidget {
   final int bottomColor;
   final int bgColor;
 
-  StyledTopBanner(
+  const StyledTopBanner(
       {Key key,
       this.topText,
       this.bottomText = 'in Bandon',

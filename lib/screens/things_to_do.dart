@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/styled_section_banner.dart';
-import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/styled_expansion_tile.dart';
+import '../widgets/styled_section_banner.dart';
+import '../widgets/styled_top_banner.dart';
 
 class ThingsToDoScreen extends StatelessWidget {
   static const routeName = 'thingsToDoScreen';
@@ -175,7 +174,7 @@ class ThingsToDoScreen extends StatelessWidget {
         decoration: gradientBackground(context),
         child: ListView(
           children: <Widget>[
-            StyledTopBanner(topText: 'Things To Do'),
+            const StyledTopBanner(topText: 'Things To Do'),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset(
@@ -186,7 +185,7 @@ class ThingsToDoScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/separator.png'),
             ),
-            StyledTopBanner(
+            const StyledTopBanner(
               topText: 'Golf on the',
               bottomText: 'Southern Oregon Coast',
               fontSize: 32,
@@ -269,7 +268,7 @@ class ThingsToDoScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-beaches.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Fishing',
               rightText: 'Bandon',
             ),
