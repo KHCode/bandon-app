@@ -103,7 +103,7 @@ class DiningScreen extends StatelessWidget {
               InkWell(
                 onTap: () => Navigator.of(context).pushNamed(
                     FindBusinessScreen.routeName,
-                    arguments: 'Dining'),
+                    arguments: 'All Dining'),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50.0),
                   child: Image.asset('assets/images/dining/all-dining.jpg'),

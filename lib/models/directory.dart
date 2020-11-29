@@ -8,8 +8,8 @@ class Directory {
   int get businessCount => businesses.length;
 
   static const combinedCategories = [
-    'Dining',
-    'Lodging',
+    'All Dining',
+    'All Lodging',
     'Wine, Beer & Sprits',
   ];
 
@@ -23,13 +23,13 @@ class Directory {
       case 'Favorites':
         filteredList = businesses.where((element) => element.isFavorite);
         break;
-      case 'Dining':
+      case 'All Dining':
         filteredList = businesses.where((element) => element.categories
             .contains(RegExp(
                 r'(Bakeries)|(Farmers Markets)|(Grocery & Deli)|(Restaurants)|(Specialty Food Sellers)',
                 caseSensitive: false)));
         break;
-      case 'Lodging':
+      case 'All Lodging':
         filteredList = businesses.where((element) => element.categories
             .contains(RegExp(
                 r'(B&B)|(Camping & RV)|(Property Management)|(Resorts, Hotels, Motels)|(Vacation Rentals)',
