@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,6 +38,10 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
       'destination': 'Bandon, OR',
       'travelnode': 'driving'
     });
+    if (Platform.isIOS) {
+      launchUri = Uri.parse(
+          'http://maps.apple.com/?saddr=$selectedValue&daddr=Bandon, OR');
+    }
     if (await canLaunch(launchUri.toString())) {
       await launch(launchUri.toString());
     }
@@ -46,7 +52,7 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
     return Column(
       children: [
         Text(
-          '*Making a selection will launch Google Maps, if available',
+          '*Making a selection will launch ${Platform.isAndroid ? 'Google' : 'Apple'} Maps, if available',
           style: const TextStyle(fontSize: 12.0, color: Colors.red),
         ),
         Container(
