@@ -103,7 +103,7 @@ class _EventDetailsState extends State<EventDetails> {
             Padding(
               padding: const EdgeInsets.only(top: 4.0, bottom: 12.0),
               child: Text(
-                '${parseDate(event.startDate)} ${parseTime(event.startDate)} - \n'
+                '${parseDate(event.startDate)} ${parseTime(event.startDate)} -\n'
                 '${parseDate(event.endDate)} ${parseTime(event.endDate)}',
                 style: Theme.of(context).textTheme.bodyText1,
               ),

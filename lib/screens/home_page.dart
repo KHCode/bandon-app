@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text(
                   '${currentWeather.temperature.fahrenheit.round()}°',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: const TextStyle(fontSize: 36.0),
                 ),
               ],
             ),
