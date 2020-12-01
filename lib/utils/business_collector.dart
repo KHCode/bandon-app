@@ -9,9 +9,14 @@ class BusinessCollector {
 
   const BusinessCollector({this.url});
 
-  Future<bool> getBusinesses() async {
+  Future<int> countBusinesses() async {
     final databaseManager = DatabaseManager.getInstance();
-    final _businesses = await _getBusinessUrls();
+    return await databaseManager.countBusinesses();
+  }
+
+  Future<bool> getBusinesses(List<String> initialUrlList) async {
+    final databaseManager = DatabaseManager.getInstance();
+    final _businesses = await _getBusinessUrls(initialUrlList);
 
     for (final businessUrl in _businesses) {
       final _business = await _getBusinessDetails(businessUrl);
@@ -21,50 +26,53 @@ class BusinessCollector {
         databaseManager.saveBusiness(dto: _business);
       }
     }
-    return _businesses.isNotEmpty ? true : false;
+    return (_businesses?.isNotEmpty ?? false) ? true : false;
   }
 
-  Future<List<String>> _getBusinessUrls() async {
-    const MAX_FAILURES = 10;
-    var _businessId = 1;
-    var _consecutiveFailures = 0;
+  Future<List<String>> _getBusinessUrls(List<String> initialUrlList) async {
+    if (initialUrlList?.isEmpty ?? true) {
+      const MAX_FAILURES = 10;
+      final _urls = <String>[];
+      var _businessId = 1;
+      var _consecutiveFailures = 0;
+      final _client = http.Client();
 
-    final _urls = <String>[];
-    final _client = http.Client();
+      try {
+        do {
+          final _req =
+              http.Request('HEAD', Uri.parse('$url/member/$_businessId'))
+                ..followRedirects = false;
+          final _res = await _client.send(_req);
 
-    try {
-      do {
-        final _req = http.Request('HEAD', Uri.parse('$url/member/$_businessId'))
-          ..followRedirects = false;
-        final _res = await _client.send(_req);
+          if (_res.statusCode == 301) {
+            final _endpoint = _res.headers['location'];
+            final _verificationReq = http.Request('HEAD', Uri.parse(_endpoint))
+              ..followRedirects = false;
+            final _verificationRes = await _client.send(_verificationReq);
 
-        if (_res.statusCode == 301) {
-          final _endpoint = _res.headers['location'];
-          final _verificationReq = http.Request('HEAD', Uri.parse(_endpoint))
-            ..followRedirects = false;
-          final _verificationRes = await _client.send(_verificationReq);
+            if (_verificationRes.statusCode == 200) {
+              _urls.add(_endpoint);
 
-          if (_verificationRes.statusCode == 200) {
-            _urls.add(_endpoint);
-
-            // Reset the consecutive failure count if successful and there were
-            // failures prior to this successful fetch
-            if (_consecutiveFailures != 0) {
-              _consecutiveFailures = 0;
+              // Reset the consecutive failure count if successful and there were
+              // failures prior to this successful fetch
+              if (_consecutiveFailures != 0) {
+                _consecutiveFailures = 0;
+              }
+            } else {
+              _consecutiveFailures++;
             }
           } else {
             _consecutiveFailures++;
           }
-        } else {
-          _consecutiveFailures++;
-        }
-        _businessId++;
-      } while (_consecutiveFailures < MAX_FAILURES);
-    } finally {
-      _client.close();
+          _businessId++;
+        } while (_consecutiveFailures < MAX_FAILURES);
+      } finally {
+        _client.close();
+      }
+      return _urls;
+    } else {
+      return initialUrlList;
     }
-
-    return _urls;
   }
 
   Future<BusinessDTO> _getBusinessDetails(String businessUrl) async {
