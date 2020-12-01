@@ -19,6 +19,8 @@ class DatabaseManager {
       'SELECT * FROM events ORDER BY datetime(startDate);';
   static const SQL_SELECT_BUSINESSES =
       'SELECT * FROM businesses ORDER BY name ASC;';
+  static const SQL_COUNT_EVENTS = 'SELECT COUNT(*) FROM events';
+  static const SQL_COUNT_BUSINESSES = 'SELECT COUNT(*) FROM businesses';
   static const SQL_SELECT_ONE_EVENT =
       'SELECT * FROM events WHERE permalink = ?;';
   static const SQL_SELECT_ONE_BUSINESS =
@@ -50,7 +52,7 @@ class DatabaseManager {
   static Future initialize(String schema) async {
     final db = await openDatabase(
       DATABASE_FILENAME,
-      version: 3,
+      version: 4,
       onCreate: (Database db, int version) {
         _createTables(db, schema);
       },
@@ -157,6 +159,10 @@ class DatabaseManager {
     return _events;
   }
 
+  Future<int> countEvents() async {
+    return Sqflite.firstIntValue(await db.rawQuery(SQL_COUNT_EVENTS));
+  }
+
   void setFavoriteBusiness({String permalink, bool isFavorite}) {
     final favorite = isFavorite ? 1 : 0;
     final date = isFavorite ? DateTime.now().toUtc().toString() : null;
@@ -203,5 +209,9 @@ class DatabaseManager {
         )
         .toList();
     return _businesses;
+  }
+
+  Future<int> countBusinesses() async {
+    return Sqflite.firstIntValue(await db.rawQuery(SQL_COUNT_BUSINESSES));
   }
 }
