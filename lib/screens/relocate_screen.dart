@@ -44,6 +44,20 @@ class RelocateScreen extends StatelessWidget {
     'Find local banks, accounting and services.',
   ];
 
+  final memResourcesUri = 'https://bandon.com/member-resources-2/';
+  final rentalTipsUri =
+      'http://bandon.com/tips-for-finding-rental-homes-in-bandon-and-coos-bay-or/';
+  final workSourceOregonUri = 'http://worksourceoregon.org/';
+  final jobListingsUri = 'https://theworldlink.com/ads/job/?l=25';
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,6 +124,10 @@ class RelocateScreen extends StatelessWidget {
               top: 30,
               bottom: 0,
             ),
+            StyledButton(
+              text: 'Go to Member Resources',
+              onPressed: () => _launchURL(memResourcesUri),
+            ),
             const StyledSectionBanner(
               leftText: 'Find',
               rightText: 'a Rental',
@@ -118,6 +136,10 @@ class RelocateScreen extends StatelessWidget {
               textBody: findRental,
               top: 30,
               bottom: 0,
+            ),
+            StyledButton(
+              text: 'Tips for Finding a Rental',
+              onPressed: () => _launchURL(rentalTipsUri),
             ),
             const StyledSectionBanner(
               leftText: 'Find',
@@ -128,6 +150,14 @@ class RelocateScreen extends StatelessWidget {
               top: 30,
               bottom: 0,
             ),
+            StyledButton(
+              text: 'WorkSource Oregon',
+              onPressed: () => _launchURL(workSourceOregonUri),
+            ),
+            StyledButton(
+              text: 'Local Job Listings',
+              onPressed: () => _launchURL(jobListingsUri),
+            ),
             const StyledSectionBanner(
               leftText: 'Transfer',
               rightText: 'Financial Services',
@@ -136,6 +166,13 @@ class RelocateScreen extends StatelessWidget {
             const PaddedTextBody(
               textBody: finServ,
               top: 30,
+            ),
+            StyledButton(
+              text: 'View Financial Services Options',
+              onPressed: () => Navigator.of(context).pushNamed(
+                FindBusinessScreen.routeName,
+                arguments: 'Financial Services',
+              ),
             ),
           ],
         ),
