@@ -1,16 +1,7 @@
-# bandon
+To facilitate future development for our real industry project, we provided a multitude of methods for accessing and testing the app, detailed below: through the App Store, Google Play, manual Android installation using the APK included alongside the source code, launching “hot reload” development builds that update in real-time on connected devices or simulators as source code is modified, and compiling production builds.
 
-A new Flutter project.
+The Bandon, Oregon Guide is a mobile app available on the App Store for iOS and iPadOS version 9.0 or later devices at [https://apps.apple.com/us/app/bandon-oregon-guide/id1537656581](https://apps.apple.com/us/app/bandon-oregon-guide/id1537656581), as well as on Google Play for Android devices at [https://play.google.com/store/apps/details?id=com.bandon.BandonOregon](https://play.google.com/store/apps/details?id=com.bandon.BandonOregon). Additionally, included with the source code is a compiled, “fat” APK file with binaries that can be installed on any Android device in developer mode running version 5.0 (Lollipop) or later. Enabling Android developer mode is typically accomplished by navigating to **Settings** > **About phone** and tapping on the **Build number** approximately 8 times. Transferring the APK file to the device and opening it after enabling developer mode will install the app.
 
-## Getting Started
+If desired, the app can be compiled from source using Flutter rather than using the pre-compiled Bandon.apk file. Detailed instructions on installing Flutter to compile a development build on specific operating systems can be found here: [https://flutter.dev/docs/get-started/install](https://flutter.dev/docs/get-started/install). Note that compiling a build for Android requires Android Studio and an available USB-connected Android device or emulator in developer mode, while iOS/iPadOS compilation requires a Mac with Xcode 12.0 or later, Cocoapods, an Apple ID, as well as a USB-connected device or simulator running iOS (preferred) or iPadOS. Once a development environment is configured according to the instructions in the link above, an IDE (Android Studio, IDEA or Visual Studio Code) with the Flutter plugin installed, or a terminal can be used to launch a development build of the app with “hot reload” enabled (see [https://flutter.dev/docs/get-started/test-drive](https://flutter.dev/docs/get-started/test-drive))
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Alternatively, the Flutter command line tool can compile binaries for manual installation or release by navigating to the project directory in a terminal window, updating the `android/key.properties` file’s **storeFile** property to reflect the current location of the key.jks keystore file (e.g., `storeFile=/Users/username/<project-directory>/key.jks`), then running `flutter build apk`, then installing the APK file located at `build/app/outputs/flutter-apk/app-release.apk`. For iOS development compilation, first open the `ios/Runner.xcworkspace` workspace in Xcode, select the **Runner** target, click **Signing & Capabilities**, and update the Team to one available with your Apple ID, and provide a unique **Bundle Identifier**. Finally, navigate to the project directory in a terminal window, execute `flutter build ios`, then open the Xcode workspace again and select the desired connected device or simulator under **Product** > **Destination** in the macOS menu bar, then click **Product** > **Run**.

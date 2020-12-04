@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 import 'dining.dart';
+import 'find_business.dart';
+// Comment out the above line and uncomment the import statement below to
+// navigate to the Things to Do Screen from the Plan Your Stay image, rather
+// than navigating to the Find a Business screen. Then, see lines 170-174 below.
+// import 'things_to_do.dart';
 import 'lodging.dart';
 import '../models/secret_loader.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/padded_text_body.dart';
-
-// Week 4 tests
-// import '../widgets/test_distance_display.dart';
-// import '../widgets/test_rss_feed.dart';
-// import '../widgets/test_web_scraping.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/';
@@ -34,9 +35,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var currentTemp = 72;
-  var currentCondition = 'Sunny';
-  var currentConditionIcon = BoxedIcon(WeatherIcons.day_sunny);
+  final currentConditionWidget = <Widget>[];
+  final forecastWidgets = <Widget>[];
 
   @override
   void initState() {
@@ -46,36 +46,78 @@ class _HomePageState extends State<HomePage> {
 
   void _loadWeather() async {
     const CITY_NAME = 'Bandon';
-    IconData conditionIcon;
+    final threeDayForecast = <Weather>[];
+    var dateTime = DateTime.now();
 
     final secret = await SecretLoader(secretPath: 'openweather.json').load();
     final weatherFactory =
         WeatherFactory(secret.key, language: Language.ENGLISH);
     final currentWeather =
         await weatherFactory.currentWeatherByCityName(CITY_NAME);
+    final forecast = await weatherFactory.fiveDayForecastByCityName(CITY_NAME);
 
-    if (currentWeather.weatherConditionCode >= 200 &&
-        currentWeather.weatherConditionCode < 300) {
-      conditionIcon = WeatherIcons.thunderstorm;
-    } else if (currentWeather.weatherConditionCode >= 300 &&
-        currentWeather.weatherConditionCode < 400) {
-      conditionIcon = WeatherIcons.sprinkle;
-    } else if (currentWeather.weatherConditionCode >= 500 &&
-        currentWeather.weatherConditionCode < 600) {
-      conditionIcon = WeatherIcons.rain;
-    } else if (currentWeather.weatherConditionCode >= 500 &&
-        currentWeather.weatherConditionCode < 600) {
-      conditionIcon = WeatherIcons.snow;
-    } else if (currentWeather.weatherConditionCode == 800) {
-      conditionIcon = WeatherIcons.day_sunny;
-    } else if (currentWeather.weatherConditionCode > 800) {
-      conditionIcon = WeatherIcons.cloud;
+    currentConditionWidget.clear();
+    currentConditionWidget.addAll(
+      [
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                BoxedIcon(
+                    getConditionIcon(currentWeather.weatherConditionCode)),
+                Text('${currentWeather.weatherDescription}'),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                Text(
+                  '${currentWeather.temperature.fahrenheit.round()}°',
+                  style: const TextStyle(fontSize: 36.0),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+
+    for (var _ = 0; _ < 3; _++) {
+      final midDayForecast = forecast.firstWhere(
+          (forecast) =>
+              (forecast.date.day == dateTime.day && forecast.date.hour >= 11),
+          orElse: () => null);
+
+      if (midDayForecast?.temperature?.fahrenheit?.isFinite ?? false) {
+        threeDayForecast.add(midDayForecast);
+      }
+
+      dateTime = dateTime.add(Duration(days: 1));
     }
-    setState(() {
-      currentTemp = currentWeather.temperature.fahrenheit.round();
-      currentCondition = currentWeather.weatherDescription;
-      currentConditionIcon = BoxedIcon(conditionIcon);
-    });
+
+    dateTime = DateTime.now();
+    forecastWidgets.clear();
+    for (final day in threeDayForecast) {
+      forecastWidgets.add(
+        Expanded(
+          child: Center(
+            child: Column(
+              children: [
+                BoxedIcon(getConditionIcon(day.weatherConditionCode)),
+                Text('${day.temperature.fahrenheit.round()}°'),
+                Text(DateFormat('EEEE').format(dateTime)),
+              ],
+            ),
+          ),
+        ),
+      );
+      dateTime = dateTime.add(Duration(days: 1));
+    }
+
+    setState(() {});
   }
 
   @override
@@ -84,46 +126,33 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      endDrawer: const SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 3, 0, 3),
+            padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 3.0),
             child: Image.asset(
                 'assets/images/bandon-logo-${Theme.of(context).brightness == Brightness.dark ? 'light' : 'dark'}.png'),
           ),
           Image.asset('assets/images/beach-sunset.jpg'),
-          SizedBox(height: 20),
-          Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        currentConditionIcon,
-                        Text(currentCondition),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          '${currentTemp.toString()}°',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ]),
-          StyledSectionBanner(
+          const SizedBox(height: 20.0),
+          Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: currentConditionWidget,
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: forecastWidgets,
+              ),
+            ],
+          ),
+          const StyledSectionBanner(
             leftText: 'About',
             rightText: 'Bandon Oregon',
           ),
@@ -131,14 +160,22 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.symmetric(vertical: 40.0),
             child: Image.asset('assets/images/separator.png'),
           ),
-          PaddedTextBody(textBody: HomePage.bodyAbout),
+          const PaddedTextBody(textBody: HomePage.bodyAbout),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
-            child: Image.asset(
-                'assets/images/bandon-home-plan-your-visit-alt.jpg'),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
+            child: InkWell(
+              child: Image.asset(
+                  'assets/images/bandon-home-plan-your-visit-alt.jpg'),
+              onTap: () =>
+                  Navigator.of(context).pushNamed(FindBusinessScreen.routeName),
+              // Comment out the above line and uncomment the line below to
+              // navigate to the Things to Do Screen from the Plan Your Stay
+              // image, rather than navigating to the Find a Business screen
+              // Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
             child: InkWell(
               child: Image.asset(
                   'assets/images/bandon-home-choose-your-table-green.jpg'),
@@ -147,7 +184,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50),
+            padding: const EdgeInsets.symmetric(vertical: 50.0),
             child: InkWell(
               child:
                   Image.asset('assets/images/bandon-home-book-your-stay.jpg'),
@@ -157,7 +194,29 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
       ),
-      endDrawer: SettingsDrawer(),
     );
+  }
+
+  IconData getConditionIcon(int conditionCode) {
+    IconData conditionIcon;
+
+    if (conditionCode >= 200 && conditionCode < 300) {
+      conditionIcon = WeatherIcons.thunderstorm;
+    } else if (conditionCode >= 300 && conditionCode < 400) {
+      conditionIcon = WeatherIcons.sprinkle;
+    } else if (conditionCode >= 500 && conditionCode < 600) {
+      conditionIcon = WeatherIcons.rain;
+    } else if (conditionCode >= 600 && conditionCode < 700) {
+      conditionIcon = WeatherIcons.snow;
+    } else if (conditionCode >= 700 && conditionCode < 800) {
+      conditionIcon = WeatherIcons.fog;
+    } else if (conditionCode == 800) {
+      conditionIcon = WeatherIcons.day_sunny;
+    } else if (conditionCode > 800) {
+      conditionIcon = WeatherIcons.cloud;
+    } else {
+      conditionIcon = WeatherIcons.day_sunny;
+    }
+    return conditionIcon;
   }
 }

@@ -1,16 +1,13 @@
-import 'package:bandon/widgets/padded_text_body.dart';
-import 'package:bandon/widgets/styled_expansion_tile.dart';
-import 'package:bandon/widgets/styled_section_banner.dart';
-import 'package:bandon/widgets/styled_top_banner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
+import '../widgets/padded_text_body.dart';
+import '../widgets/settings_drawer.dart';
+import '../widgets/styled_expansion_tile.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/styled_section_banner.dart';
-import '../widgets/styled-dropdown-menu.dart';
+import '../widgets/styled_dropdown_menu.dart';
 
 class GetStartedScreen extends StatelessWidget {
   static const routeName = 'gettingStartedScreen';
@@ -102,7 +99,7 @@ class GetStartedScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Bandon Start Here'),
       ),
-      endDrawer: SettingsDrawer(),
+      endDrawer: const SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(
@@ -115,7 +112,7 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/bandon-forest-generic.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyIntro,
             ),
             StyledSectionBanner(
@@ -126,7 +123,7 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/plane-view.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyFlight,
             ),
             Container(
@@ -140,14 +137,14 @@ class GetStartedScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => _launchURL(transpLinks[index]),
                       child: Card(
-                        color: Color(0xFFF58B3E),
+                        color: const Color(0xFFF58B3E),
                         child: Container(
                           child: Center(
                             child: Text(
                               transpOptions[index],
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Color(0xFF05668d), fontSize: 24),
+                              style: const TextStyle(
+                                  color: Color(0xFF05668d), fontSize: 24.0),
                             ),
                           ),
                         ),
@@ -161,7 +158,7 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 60, bottom: 20),
               child: Image.asset('assets/images/separator-suitcase.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Take a Scenic',
               rightText: 'Drive',
             ),
@@ -169,7 +166,7 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/drive-view.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyDrive,
             ),
             StyledDropdownMenu(
@@ -180,31 +177,31 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 60, bottom: 20),
               child: Image.asset('assets/images/separator-suitcase.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Planning a trip',
               rightText: 'to Bandon?',
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 50),
+            const Padding(
+              padding: EdgeInsets.only(top: 50),
               child: StyledExpansionTile(
                 title: 'Go Casual',
                 hiddenContent: goCasual,
               ),
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Pack Layers',
               hiddenContent: packLayers,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Dogs are Welcome',
               hiddenContent: dogsWelcome,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Book Early',
               hiddenContent: bookEarly,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 50),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 50.0),
               child: StyledExpansionTile(
                 title: 'Extended Travel in Oregon',
                 hiddenContent: extendedTravel,

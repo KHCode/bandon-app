@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -5,11 +7,11 @@ class StyledDropdownMenu extends StatefulWidget {
   final List<String> optionsDisplays;
   final List<String> optionsValues;
 
-  StyledDropdownMenu({Key key, this.optionsDisplays, this.optionsValues})
+  const StyledDropdownMenu({Key key, this.optionsDisplays, this.optionsValues})
       : super(key: key);
 
   List<DropdownMenuItem<String>> menuBuilder() {
-    List<DropdownMenuItem<String>> optionsList = [];
+    final optionsList = <DropdownMenuItem<String>>[];
     for (var i = 0; i < optionsDisplays.length; i++) {
       optionsList.add(
         DropdownMenuItem(
@@ -30,12 +32,20 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
   Uri launchUri;
 
   void launchMap(selectedValue) async {
-    launchUri = Uri.https('google.com', '/maps/dir/', {
-      'api': '1',
-      'origin': '$selectedValue',
-      'destination': 'Bandon, OR',
-      'travelnode': 'driving'
-    });
+    Uri launchUri;
+
+    if (Platform.isAndroid) {
+      launchUri = Uri.https('google.com', '/maps/dir/', {
+        'api': '1',
+        'origin': '$selectedValue',
+        'destination': 'Bandon, OR',
+        'travelnode': 'driving'
+      });
+    } else {
+      launchUri = Uri.parse(
+          'http://maps.apple.com/?saddr=$selectedValue&daddr=Bandon, OR');
+    }
+
     if (await canLaunch(launchUri.toString())) {
       await launch(launchUri.toString());
     }
@@ -46,12 +56,12 @@ class _StyledDropdownMenuState extends State<StyledDropdownMenu> {
     return Column(
       children: [
         Text(
-          '*Making a selection will launch Google Maps, if available',
-          style: TextStyle(fontSize: 12, color: Colors.red),
+          '*Making a selection will launch ${Platform.isAndroid ? 'Google' : 'Apple'} Maps, if available',
+          style: const TextStyle(fontSize: 12.0, color: Colors.red),
         ),
         Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.symmetric(horizontal: 100, vertical: 0),
+          margin: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 0.0),
           child: DropdownButtonHideUnderline(
             child: DropdownButton(
                 value: selectedValue,

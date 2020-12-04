@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
 class StyledButton extends StatelessWidget {
   final String text;
+  final void Function() onPressed;
 
-  StyledButton({Key key, this.text});
+  const StyledButton({Key key, this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(100, 10, 100, 10),
+      padding: const EdgeInsets.fromLTRB(100.0, 10.0, 100.0, 10.0),
       child: RaisedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         color: Color(0xFFF58B3E),
-        // textColor: Color(0xFF05668D),
         child: Text(text),
       ),
     );

@@ -4,25 +4,14 @@ class StyledExpansionTile extends StatelessWidget {
   final String title;
   final List<String> hiddenContent;
 
-  StyledExpansionTile({Key key, this.hiddenContent, this.title})
+  const StyledExpansionTile({Key key, this.hiddenContent, this.title})
       : super(key: key);
-
-  List<Widget> bodyBuilder(hiddenContent) {
-    List<Widget> paragraphs = [];
-    for (var i = 0; i < hiddenContent.length; i++) {
-      paragraphs.add(Padding(
-        padding: const EdgeInsets.only(bottom: 15),
-        child: Text(hiddenContent[i]),
-      ));
-    }
-    return paragraphs;
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      decoration: BoxDecoration(
+      margin: const EdgeInsets.symmetric(horizontal: 50.0),
+      decoration: const BoxDecoration(
         color: Color(0xFFF58B3E),
         border: Border(
           bottom: BorderSide(
@@ -32,11 +21,16 @@ class StyledExpansionTile extends StatelessWidget {
       ),
       child: ExpansionTile(
         title: Text(title),
-        childrenPadding: EdgeInsets.all(15),
+        childrenPadding: const EdgeInsets.all(15.0),
         backgroundColor: Theme.of(context).brightness == Brightness.light
             ? Colors.white
             : Colors.black,
-        children: bodyBuilder(hiddenContent),
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15.0),
+            child: Text(hiddenContent.join('\n\n')),
+          ),
+        ],
       ),
     );
   }

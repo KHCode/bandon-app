@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 
 class PaddedTextBody extends StatelessWidget {
   final List<String> textBody;
@@ -8,7 +7,7 @@ class PaddedTextBody extends StatelessWidget {
   final double right;
   final double bottom;
 
-  PaddedTextBody(
+  const PaddedTextBody(
       {Key key,
       this.textBody,
       this.left = 50,
@@ -17,21 +16,17 @@ class PaddedTextBody extends StatelessWidget {
       this.bottom = 30})
       : super(key: key);
 
-  List<Widget> bodyBuilder(textBody) {
-    List<Widget> paddedParagraphs = [];
-    for (var i = 0; i < textBody.length; i++) {
-      paddedParagraphs.add(Padding(
-        padding: EdgeInsets.fromLTRB(left, top, right, bottom),
-        child: Text(textBody[i]),
-      ));
-    }
-    return paddedParagraphs;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: bodyBuilder(textBody),
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+          child: Text(
+            textBody.join('\n\n'),
+          ),
+        ),
+      ],
       crossAxisAlignment: CrossAxisAlignment.start,
     );
   }

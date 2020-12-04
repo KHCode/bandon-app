@@ -1,21 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/styled_section_banner.dart';
-import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/styled_expansion_tile.dart';
+import '../widgets/styled_section_banner.dart';
+import '../widgets/styled_top_banner.dart';
 
-class ThingsToDoScreen extends StatefulWidget {
+class ThingsToDoScreen extends StatelessWidget {
   static const routeName = 'thingsToDoScreen';
-
-  @override
-  _ThingsToDoScreenState createState() => _ThingsToDoScreenState();
-}
-
-class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
   static const body1 = [
     'How you pace yourself in Bandon is entirely up to you. We pride ourselves on a small-town attitude that’s relaxed and unhurried.',
     'Toss a crab pot in the water, and then kick back on the dock. Or, stroll through Old Town– then head back to the water to see what’s bitin’.',
@@ -44,6 +37,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
   ];
 
   static const linksStyleGolf = [
+    'The links golf tradition is alive and well in Bandon. Firm turf, ocean breezes and rolling dunes invite golfers to challenge their expectations. On the Southern Oregon Coast, fairways and bunkers are shaped by nature, surrounded by acres of shoreline vegetation.',
     'And, they’re designed by course architects who value restraint. No imported sand. No condos in the background. Just the terrain and the game. It’s a synergy of nature and nurture, and golfers are eager for more.'
   ];
 
@@ -54,14 +48,14 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
 
   static const golfEvents = [
     'Young golfers tee off early in Bandon. Students in youth golf programs play award winning greens with pro instructors at Bandon Crossings Golf Course and Bandon Dunes Golf Resort.',
-    'Programs are designed for novice and experienced players. Watch the event calendar, or contact Bandon Dunes or Bandon Crossings for event dates and details.'
+    'Programs are designed for novice and experienced players. Watch the event calendar, or contact Bandon Dunes or Bandon Crossings for event dates and details.',
   ];
 
   static const goWild = [
     'Easy access to wild places makes Bandon unique in the 21st century.',
     'Public beaches, parks, wildlife reserves, bikeways and trails offer countless destinations for outdoor enthusiasts.',
     'Though some may opt for truly deep woods exploration, many parks and trails are only a short drive from town. Even a quick jaunt along a quiet stretch of beach, or forest trail, can give the impression that you’re light years from your typical routine.',
-    'Grab your water bottle, camera or binoculars, and enjoy the region’s year-round natural wonder.'
+    'Grab your water bottle, camera or binoculars, and enjoy the region’s year-round natural wonder.',
   ];
 
   static const cyclistLayover = [
@@ -175,23 +169,23 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
       appBar: AppBar(
         title: Text('Bandon Things To Do'),
       ),
-      endDrawer: SettingsDrawer(),
+      endDrawer: const SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(
           children: <Widget>[
-            StyledTopBanner(topText: 'Things To Do'),
+            const StyledTopBanner(topText: 'Things To Do'),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset(
                   'assets/images/things-to-do/bandon-things-to-do.jpg'),
             ),
-            PaddedTextBody(textBody: body1),
+            const PaddedTextBody(textBody: body1),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/separator.png'),
             ),
-            StyledTopBanner(
+            const StyledTopBanner(
               topText: 'Golf on the',
               bottomText: 'Southern Oregon Coast',
               fontSize: 32,
@@ -201,15 +195,15 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-golfing.jpg'),
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Links Style Golf',
               hiddenContent: linksStyleGolf,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Award-Winning Public Courses',
               hiddenContent: publicCourses,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Events',
               hiddenContent: golfEvents,
             ),
@@ -217,7 +211,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-golf.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Cycle and Hike',
               rightText: 'in Bandon',
             ),
@@ -226,19 +220,19 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-hiking.jpg'),
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Go Wild on the Southern Oregon Coast',
               hiddenContent: goWild,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Cyclist Layover',
               hiddenContent: cyclistLayover,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Cycling Destinations',
               hiddenContent: cyclingDestinations,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Events & Guided Tours',
               hiddenContent: cyclingEvents,
             ),
@@ -246,7 +240,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-bicycle.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Beach-Going',
               rightText: 'in Bandon',
             ),
@@ -255,18 +249,18 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-beaches.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyBeach,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Stay Safe and Respect the Environment',
               hiddenContent: beachStaySafe,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Tide Table',
               hiddenContent: tideTable,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Events',
               hiddenContent: beachEvents,
             ),
@@ -274,7 +268,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-beaches.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Fishing',
               rightText: 'Bandon',
             ),
@@ -283,22 +277,22 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-fishing.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyFishing,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Year-Round Angling',
               hiddenContent: yearRound,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Bandon Hatchery',
               hiddenContent: hatchery,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Tide Table',
               hiddenContent: tideTable,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Events',
               hiddenContent: fishEvents,
             ),
@@ -306,7 +300,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-beaches.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Birding',
               rightText: 'in Bandon',
             ),
@@ -315,18 +309,18 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-birding.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyBirding,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Birdwatching & Nature Discovery',
               hiddenContent: natureDiscovery,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Nature Interpretation & Events',
               hiddenContent: natureInterpretation,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Fun for Families & Youngsters',
               hiddenContent: funForKids,
             ),
@@ -334,7 +328,7 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               padding: const EdgeInsets.symmetric(vertical: 40.0),
               child: Image.asset('assets/images/separator-bird.png'),
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Historic',
               rightText: 'Old Town',
             ),
@@ -343,22 +337,22 @@ class _ThingsToDoScreenState extends State<ThingsToDoScreen> {
               child:
                   Image.asset('assets/images/things-to-do/bandon-oldtown.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyOldTown,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Shopping',
               hiddenContent: shopping,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Dining',
               hiddenContent: dining,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Art, Culture and Outdoor Recreation',
               hiddenContent: artCulture,
             ),
-            StyledExpansionTile(
+            const StyledExpansionTile(
               title: 'Events',
               hiddenContent: oldTownEvents,
             ),

@@ -9,6 +9,10 @@ class BusinessDTO {
   String hours;
   String highlights;
 
+  BusinessDTO();
+
+  BusinessDTO.nullBusiness() : name = null;
+
   bool get isNull => [
         name,
         aboutUs,

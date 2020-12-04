@@ -4,7 +4,7 @@ ListTile navDrawerListTile(String displayName, routeScreen, context) {
   return ListTile(
     title: Text(
       displayName,
-      style: TextStyle(color: Colors.white, fontSize: 20),
+      style: const TextStyle(color: Colors.white, fontSize: 20.0),
     ),
     onTap: () => Navigator.of(context).pushNamed(routeScreen.routeName),
   );

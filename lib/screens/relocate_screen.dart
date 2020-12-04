@@ -1,12 +1,10 @@
-import 'package:bandon/widgets/padded_text_body.dart';
-import 'package:bandon/widgets/styled_section_banner.dart';
-import 'package:bandon/widgets/styled_top_banner.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
+import '../widgets/styled_section_banner.dart';
+import '../widgets/styled_top_banner.dart';
 
 class RelocateScreen extends StatelessWidget {
   static const routeName = 'relocateScreen';
@@ -53,7 +51,7 @@ class RelocateScreen extends StatelessWidget {
         decoration: gradientBackground(context),
         child: ListView(
           children: <Widget>[
-            StyledTopBanner(
+            const StyledTopBanner(
               topText: 'Relocate',
               bottomText: 'to Bandon',
             ),
@@ -61,64 +59,64 @@ class RelocateScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 40.0),
               child: Image.asset('assets/images/bandon-sunset-generic.jpg'),
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: bodyRelocate,
               top: 15,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Request a',
               rightText: 'Relocation Packet',
               fontSize: 28,
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: relocatePacket,
               top: 30,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Contact a',
               rightText: 'Local Realtor',
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: localRealtor,
               top: 30,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Move Your Business,',
               rightText: 'or Start a New One',
               fontSize: 22,
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: moveBusiness,
               top: 30,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Find',
               rightText: 'a Rental',
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: findRental,
               top: 30,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Find',
               rightText: 'a Job',
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: findJob,
               top: 30,
               bottom: 0,
             ),
-            StyledSectionBanner(
+            const StyledSectionBanner(
               leftText: 'Transfer',
               rightText: 'Financial Services',
               fontSize: 28,
             ),
-            PaddedTextBody(
+            const PaddedTextBody(
               textBody: finServ,
               top: 30,
             ),

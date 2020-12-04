@@ -50,21 +50,22 @@ class EventCollector {
     if (await _webScraper.loadWebPage(_endpoint)) {
       _newEvent.title = _getEventTitle(_webScraper);
       if (_newEvent?.title?.isEmpty ?? true) {
-        return _newEvent;
+        return EventDTO.nullEvent();
       }
       _newEvent.permalink = eventUrl;
       final _dateDetails = _getEventDate(_webScraper);
       _newEvent.startDate = _dateDetails['startDate'];
       _newEvent.endDate = _dateDetails['endDate'];
-      _newEvent.dateDetails = _dateDetails['dateDetails'].trim();
-      _newEvent.description = _getEventDescription(_webScraper).trim();
-      _newEvent.location = _getEventLocation(_webScraper).trim();
-      _newEvent.admission = _getEventAdmission(_webScraper).trim();
-      _newEvent.website = _getEventWebsite(_webScraper).trim();
-      _newEvent.contact = _getEventContact(_webScraper).trim();
-      _newEvent.email = _getEventEmail(_webScraper).trim();
+      _newEvent.dateDetails = _dateDetails['dateDetails'];
+      _newEvent.description = _getEventDescription(_webScraper);
+      _newEvent.location = _getEventLocation(_webScraper);
+      _newEvent.admission = _getEventAdmission(_webScraper);
+      _newEvent.website = _getEventWebsite(_webScraper);
+      _newEvent.contact = _getEventContact(_webScraper);
+      _newEvent.email = _getEventEmail(_webScraper);
     } else {
       print('Failed to load the event');
+      return EventDTO.nullEvent();
     }
 
     return _newEvent;
@@ -74,7 +75,9 @@ class EventCollector {
     String _title;
 
     final _elements = webScraper.getElement('h1.gz-pagetitle', []);
-    _elements.isNotEmpty ? _title = _elements.first['title'] : _title = '';
+    _elements.isNotEmpty
+        ? _title = _elements.first['title'].trim()
+        : _title = '';
 
     return _title;
   }
@@ -85,7 +88,7 @@ class EventCollector {
     final _elements =
         webScraper.getElement('div.gz-event-description > div > p', []);
     _elements.isNotEmpty
-        ? _description = _elements.first['title']
+        ? _description = _elements.first['title'].trim()
         : _description = '';
 
     return _description;
@@ -115,7 +118,7 @@ Map<String, dynamic> _getEventDate(WebScraper webScraper) {
   final _dateDetailsElements =
       webScraper.getElement('div.gz-event-date > div.gz-details-hours > p', []);
   _dateDetailsElements.isNotEmpty
-      ? _dateDetails = _dateDetailsElements.first['title']
+      ? _dateDetails = _dateDetailsElements.first['title'].trim()
       : _dateDetails = '';
 
   _date['startDate'] = _startDate ?? DateTime.parse('00010101');
@@ -130,7 +133,9 @@ String _getEventLocation(WebScraper webScraper) {
 
   final _elements =
       webScraper.getElement('div.gz-event-location > p > span', []);
-  _elements.isNotEmpty ? _location = _elements.first['title'] : _location = '';
+  _elements.isNotEmpty
+      ? _location = _elements.first['title'].trim()
+      : _location = '';
 
   return _location;
 }
@@ -140,7 +145,7 @@ String _getEventAdmission(WebScraper webScraper) {
 
   final _elements = webScraper.getElement('span.gz-event-fees', []);
   _elements.isNotEmpty
-      ? _admission = _elements.first['title']
+      ? _admission = _elements.first['title'].trim()
       : _admission = '';
 
   return _admission;
@@ -152,7 +157,7 @@ String _getEventWebsite(WebScraper webScraper) {
   final _elements =
       webScraper.getElement('div.gz-event-website > p > span > a', ['href']);
   _elements.isNotEmpty
-      ? _website = _elements.first['attributes']['href']
+      ? _website = _elements.first['attributes']['href'].trim()
       : _website = '';
 
   return _website;
@@ -163,7 +168,9 @@ String _getEventContact(WebScraper webScraper) {
 
   final _elements = webScraper
       .getElement('div.gz-event-contactInfo > p > span:first-child', []);
-  _elements.isNotEmpty ? _contact = _elements.first['title'] : _contact = '';
+  _elements.isNotEmpty
+      ? _contact = _elements.first['title'].trim()
+      : _contact = '';
 
   return _contact;
 }
@@ -174,7 +181,7 @@ String _getEventEmail(WebScraper webScraper) {
   final _elements = webScraper
       .getElement('div.gz-event-contactInfo > p > span > a', ['href']);
   _elements.isNotEmpty
-      ? _email = _elements.first['attributes']['href']
+      ? _email = _elements.first['attributes']['href'].trim()
       : _email = '';
 
   if (!_email.contains('@')) {

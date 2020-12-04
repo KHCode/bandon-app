@@ -1,20 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/find_business.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/styled_top_banner.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
 import '../widgets/settings_drawer.dart';
 
-class DiningScreen extends StatefulWidget {
+class DiningScreen extends StatelessWidget {
   static const routeName = 'diningScreen';
-  DiningScreen({Key key}) : super(key: key);
 
-  @override
-  _DiningScreenState createState() => _DiningScreenState();
-}
+  const DiningScreen({Key key}) : super(key: key);
 
-class _DiningScreenState extends State<DiningScreen> {
   static const body1 = [
     'We invite you to sample the foods and flavors of Bandon and the coast. Bandon chefs have year-round access to local and regionally sourced seafood, as well as meats, produce and cheese.',
     'Taste Oregon wine, and regional craft beer and spirits.',
@@ -29,10 +26,6 @@ class _DiningScreenState extends State<DiningScreen> {
     'Indulge your taste buds with sweets unique to our corner of the coast. Coastal Mist Chocolate Boutique has won countless awards– one bite, and you’ll see why their classic chocolates and desserts have fans raving. Find award-winning artisan cheese at Face Rock Creamery. The creamery retail shop also features a variety of Oregon-made food and wine.',
     'Sample local brews on tap Bandon Brewing. For more local specialty foods, visit the Big Wheel General Store and try their handmade fudge served right from the baking pan. Cranberry Sweets is an Oregon Coast sweet shop that celebrates locally grown cranberries, and a lot more. Misty Meadows, south of town, is your destination for Oregon-grown berries, preserves and sauces.'
   ];
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,48 +44,71 @@ class _DiningScreenState extends State<DiningScreen> {
                 child:
                     Image.asset('assets/images/dining/bandon-fish-market.jpg'),
               ),
-              PaddedTextBody(textBody: body1),
+              const PaddedTextBody(textBody: body1),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 50, 0, 50),
+                padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 50.0),
                 child: Image.asset('assets/images/separator-cranberry.png'),
               ),
-              StyledSectionBanner(
+              const StyledSectionBanner(
                 leftText: 'Three',
                 rightText: 'Squares',
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 30.0),
                 child: Image.asset(
                   'assets/images/dining/shrimp.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
-              PaddedTextBody(textBody: body2),
-              StyledSectionBanner(leftText: 'Coastal', rightText: 'Treats'),
+              const PaddedTextBody(textBody: body2),
+              const StyledSectionBanner(
+                  leftText: 'Coastal', rightText: 'Treats'),
               Padding(
-                padding: const EdgeInsets.only(bottom: 30),
+                padding: const EdgeInsets.only(bottom: 30.0),
                 child: Image.asset(
                   'assets/images/dining/dessert.jpg',
                   fit: BoxFit.fill,
                 ),
               ),
-              PaddedTextBody(textBody: body3),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child:
-                    Image.asset('assets/images/dining/dining-restaurants.jpg'),
+              const PaddedTextBody(textBody: body3),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Restaurants'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
+                  child: Image.asset(
+                      'assets/images/dining/dining-restaurants.jpg'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/dining-specialty.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Specialty Food Sellers'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
+                  child:
+                      Image.asset('assets/images/dining/dining-specialty.jpg'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/dining-wine-beer.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'Wine, Beer & Sprits'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
+                  child:
+                      Image.asset('assets/images/dining/dining-wine-beer.jpg'),
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50),
-                child: Image.asset('assets/images/dining/all-dining.jpg'),
+              InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    FindBusinessScreen.routeName,
+                    arguments: 'All Dining'),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 50.0),
+                  child: Image.asset('assets/images/dining/all-dining.jpg'),
+                ),
               ),
             ],
           )),

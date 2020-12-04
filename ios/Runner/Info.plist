@@ -31,9 +31,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Allowing Bandon to access your location while using the app lets you see your distance from local events and businesses.</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
+	<array/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

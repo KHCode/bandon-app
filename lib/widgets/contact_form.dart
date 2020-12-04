@@ -96,7 +96,7 @@ class _ContactFormState extends State<ContactForm> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -109,7 +109,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -122,7 +122,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -135,7 +135,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -149,7 +149,7 @@ class _ContactFormState extends State<ContactForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -318,7 +318,7 @@ class _ContactFormState extends State<ContactForm> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 validator: (value) {
                   if (value.isEmpty) {
@@ -355,8 +355,8 @@ class _ContactFormState extends State<ContactForm> {
               onPressed: () async {
                 if (_formKey.currentState.validate()) {
                   _choice == ContactChoice.email
-                      ? _choiceString = "email"
-                      : _choiceString = "phone";
+                      ? _choiceString = 'email'
+                      : _choiceString = 'phone';
                   infoCollector = ContactInfo(
                       firstName: _firstNameController.text,
                       lastName: _lastNameController.text,
@@ -393,7 +393,7 @@ class _ContactFormState extends State<ContactForm> {
 
                   statusCode = await sendData(infoCollector);
                   Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text("Thank you for your interest in Bandon!")));
+                      content: Text('Thank you for your interest in Bandon!')));
                   Future.delayed(const Duration(milliseconds: 2000), () {
                     Navigator.of(context).pushNamed(HomePage.routeName);
                   });
