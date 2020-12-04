@@ -40,15 +40,6 @@ class Directory {
             .contains(RegExp(r'(Bars and Pubs)|(Wine & Liquor Stores)',
                 caseSensitive: false)));
         break;
-      case 'Real Estate':
-        filteredList = businesses.where((element) => element.categories
-            .contains(RegExp(r'(Real Estate)', caseSensitive: false)));
-        break;
-      case 'Financial Services':
-        filteredList = businesses.where((element) => element.categories
-            .contains(RegExp(r'(Accounting, Banking & Finance)',
-                caseSensitive: false)));
-        break;
       default:
         filteredList = businesses
             .where((element) => element.categories.contains(category));
