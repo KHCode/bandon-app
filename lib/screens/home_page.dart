@@ -4,11 +4,11 @@ import 'package:weather/weather.dart';
 import 'package:weather_icons/weather_icons.dart';
 
 import 'dining.dart';
-import 'find_business.dart';
-// Comment out the above line and uncomment the import statement below to
+// import 'find_business.dart';
+// Comment out the below line and uncomment the import statement above to
 // navigate to the Things to Do Screen from the Plan Your Stay image, rather
 // than navigating to the Find a Business screen. Then, see lines 170-174 below.
-// import 'things_to_do.dart';
+import 'things_to_do.dart';
 import 'lodging.dart';
 import '../models/secret_loader.dart';
 import '../widgets/app_gradient_background.dart';
@@ -167,11 +167,11 @@ class _HomePageState extends State<HomePage> {
               child: Image.asset(
                   'assets/images/bandon-home-plan-your-visit-alt.jpg'),
               onTap: () =>
-                  Navigator.of(context).pushNamed(FindBusinessScreen.routeName),
+                  Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
               // Comment out the above line and uncomment the line below to
-              // navigate to the Things to Do Screen from the Plan Your Stay
-              // image, rather than navigating to the Find a Business screen
-              // Navigator.of(context).pushNamed(ThingsToDoScreen.routeName),
+              // navigate to the Find a Business screen from the Plan Your Stay
+              // image, rather than navigating to the Things to Do screen
+              // Navigator.of(context).pushNamed(FindBusinessScreen.routeName),
             ),
           ),
           Padding(
