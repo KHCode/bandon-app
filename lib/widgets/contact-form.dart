@@ -7,9 +7,9 @@ import '../models/contact_info.dart';
 import '../screens/home_page.dart';
 
 Future<String> sendData(ContactInfo infoBody) async {
-  String jsonInfoBody = jsonEncode(infoBody);
-  final http.Response response = await http.post('http://10.0.2.2:8080',
-      headers: {"content-type": "application/json"}, body: jsonInfoBody);
+  final jsonInfoBody = jsonEncode(infoBody);
+  final response = await http.post('http://10.0.2.2:8080',
+      headers: {'content-type': 'application/json'}, body: jsonInfoBody);
 
   return response.statusCode.toString();
 }
@@ -42,7 +42,7 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _zipController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
-  static String _choiceString = "email";
+  static String _choiceString = 'email';
   static String statusCode;
   ContactChoice _choice = ContactChoice.email;
 

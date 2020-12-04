@@ -12,41 +12,41 @@ class RelocateScreen extends StatelessWidget {
   static const routeName = 'relocateScreen';
 
   static const bodyRelocate = [
-    "If you’re looking to make the Oregon Coast your home, Bandon welcomes you!",
-    "We invite you to join the countless Bandon residents who say they came to Bandon for vacation and fell in love. Those who choose to move here appreciate Bandon’s beauty, clean air, moderate climate and friendly people.",
-    "Whether you’re ready to move now, or considering future relocation, here are tips to help you get started.",
+    'If you’re looking to make the Oregon Coast your home, Bandon welcomes you!',
+    'We invite you to join the countless Bandon residents who say they came to Bandon for vacation and fell in love. Those who choose to move here appreciate Bandon’s beauty, clean air, moderate climate and friendly people.',
+    'Whether you’re ready to move now, or considering future relocation, here are tips to help you get started.',
   ];
 
   static const relocatePacket = [
-    "Stop by the Bandon Chamber Visitors Center, or submit the electronic information request form on our Contact page.",
+    'Stop by the Bandon Chamber Visitors Center, or submit the electronic information request form on our Contact page.',
   ];
 
   static const localRealtor = [
-    "We know you can search RMLS listings on your own, but our member realtors are experts when it comes to helping new residents choose the right property, in the best location and price point for you.",
+    'We know you can search RMLS listings on your own, but our member realtors are experts when it comes to helping new residents choose the right property, in the best location and price point for you.',
   ];
 
   static const moveBusiness = [
-    "Visit the Member Resources page of our Members section for a list of state and local contacts to help with business relocation or start-up.",
+    'Visit the Member Resources page of our Members section for a list of state and local contacts to help with business relocation or start-up.',
   ];
 
   static const findRental = [
-    "If you’ve just moved to Bandon and need a place to stay, read Tips for Finding a Rental.",
+    'If you’ve just moved to Bandon and need a place to stay, read Tips for Finding a Rental.',
   ];
 
   static const findJob = [
-    "Search job listings at WorkSource Oregon.",
-    "Check job posts published in the World News, Bandon Western World and Coffee Break, in circulation and online at The World.",
+    'Search job listings at WorkSource Oregon.',
+    'Check job posts published in the World News, Bandon Western World and Coffee Break, in circulation and online at The World.',
   ];
 
   static const finServ = [
-    "Find local banks, accounting and services.",
+    'Find local banks, accounting and services.',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Relocate"),
+        title: Text('Bandon Relocate'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
@@ -54,8 +54,8 @@ class RelocateScreen extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             StyledTopBanner(
-              topText: "Relocate",
-              bottomText: "to Bandon",
+              topText: 'Relocate',
+              bottomText: 'to Bandon',
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 40.0),
@@ -67,8 +67,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Request a",
-              rightText: "Relocation Packet",
+              leftText: 'Request a',
+              rightText: 'Relocation Packet',
               fontSize: 28,
             ),
             PaddedTextBody(
@@ -77,8 +77,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Contact a",
-              rightText: "Local Realtor",
+              leftText: 'Contact a',
+              rightText: 'Local Realtor',
             ),
             PaddedTextBody(
               textBody: localRealtor,
@@ -86,8 +86,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Move Your Business,",
-              rightText: "or Start a New One",
+              leftText: 'Move Your Business,',
+              rightText: 'or Start a New One',
               fontSize: 22,
             ),
             PaddedTextBody(
@@ -96,8 +96,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Find",
-              rightText: "a Rental",
+              leftText: 'Find',
+              rightText: 'a Rental',
             ),
             PaddedTextBody(
               textBody: findRental,
@@ -105,8 +105,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Find",
-              rightText: "a Job",
+              leftText: 'Find',
+              rightText: 'a Job',
             ),
             PaddedTextBody(
               textBody: findJob,
@@ -114,8 +114,8 @@ class RelocateScreen extends StatelessWidget {
               bottom: 0,
             ),
             StyledSectionBanner(
-              leftText: "Transfer",
-              rightText: "Financial Services",
+              leftText: 'Transfer',
+              rightText: 'Financial Services',
               fontSize: 28,
             ),
             PaddedTextBody(

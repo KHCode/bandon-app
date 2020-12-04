@@ -38,14 +38,14 @@ class _DiningScreenState extends State<DiningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Dining"),
+        title: Text('Bandon Dining'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
           decoration: gradientBackground(context),
           child: ListView(
             children: <Widget>[
-              StyledTopBanner(topText: "Choose Your Table"),
+              StyledTopBanner(topText: 'Choose Your Table'),
               Padding(
                 padding: const EdgeInsets.only(bottom: 40.0),
                 child:

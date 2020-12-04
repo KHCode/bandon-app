@@ -1,5 +1,3 @@
-import 'package:bandon/widgets/padded_text_body.dart';
-import 'package:bandon/widgets/styled_section_banner.dart';
 import 'package:bandon/widgets/styled_top_banner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
-import '../widgets/contact-form.dart';
+// import '../widgets/contact-form.dart';
 
 class ContactScreen extends StatelessWidget {
   static const routeName = 'contactScreen';
@@ -18,7 +16,7 @@ class ContactScreen extends StatelessWidget {
     }
   }
 
-  Uri streetAddressLaunchUri = Uri.https('google.com', '/maps/search/', {
+  final Uri streetAddressLaunchUri = Uri.https('google.com', '/maps/search/', {
     'api': '1',
     'query': '300 2nd St SE, Bandon, OR',
   });
@@ -29,14 +27,14 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bandon Contact"),
+        title: Text('Bandon Contact'),
       ),
       endDrawer: SettingsDrawer(),
       body: Container(
         decoration: gradientBackground(context),
         child: ListView(children: <Widget>[
           StyledTopBanner(
-            topText: "Contact Us",
+            topText: 'Contact Us',
           ),
           Padding(
             padding: EdgeInsets.only(bottom: 40),
