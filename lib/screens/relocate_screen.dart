@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import 'package:bandon/screens/contact.dart';
+import 'package:bandon/screens/find_business.dart';
 import '../widgets/settings_drawer.dart';
 import '../widgets/app_gradient_background.dart';
 import '../widgets/padded_text_body.dart';
+import '../widgets/styled_button.dart';
 import '../widgets/styled_section_banner.dart';
 import '../widgets/styled_top_banner.dart';
 
@@ -74,6 +78,12 @@ class RelocateScreen extends StatelessWidget {
               top: 30,
               bottom: 0,
             ),
+            StyledButton(
+              text: 'Contact Us',
+              onPressed: () => Navigator.of(context).pushNamed(
+                ContactScreen.routeName,
+              ),
+            ),
             const StyledSectionBanner(
               leftText: 'Contact a',
               rightText: 'Local Realtor',
@@ -82,6 +92,13 @@ class RelocateScreen extends StatelessWidget {
               textBody: localRealtor,
               top: 30,
               bottom: 0,
+            ),
+            StyledButton(
+              text: 'View Realtor Options',
+              onPressed: () => Navigator.of(context).pushNamed(
+                FindBusinessScreen.routeName,
+                arguments: 'Real Estate',
+              ),
             ),
             const StyledSectionBanner(
               leftText: 'Move Your Business,',

@@ -11,6 +11,7 @@ class Directory {
     'All Dining',
     'All Lodging',
     'Wine, Beer & Sprits',
+    'Real Estate',
   ];
 
   List<Business> getByCategory(String category) =>
@@ -39,6 +40,10 @@ class Directory {
         filteredList = businesses.where((element) => element.categories
             .contains(RegExp(r'(Bars and Pubs)|(Wine & Liquor Stores)',
                 caseSensitive: false)));
+        break;
+      case 'Real Estate':
+        filteredList = businesses.where((element) => element.categories
+            .contains(RegExp(r'(Real Estate)', caseSensitive: false)));
         break;
       default:
         filteredList = businesses
