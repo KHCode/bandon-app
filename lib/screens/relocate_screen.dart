@@ -171,8 +171,12 @@ class RelocateScreen extends StatelessWidget {
               text: 'View Financial Services Options',
               onPressed: () => Navigator.of(context).pushNamed(
                 FindBusinessScreen.routeName,
-                arguments: 'Financial Services',
+                arguments: 'Accounting, Banking & Finance',
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40.0),
+              child: Image.asset('assets/images/separator.png'),
             ),
           ],
         ),
