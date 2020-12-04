@@ -46,11 +46,11 @@ class RelocateScreen extends StatelessWidget {
 
   final memResourcesUri = 'https://bandon.com/member-resources-2/';
   final rentalTipsUri =
-      'http://bandon.com/tips-for-finding-rental-homes-in-bandon-and-coos-bay-or/';
+      'https://bandon.com/tips-for-finding-rental-homes-in-bandon-and-coos-bay-or/';
   final workSourceOregonUri = 'http://worksourceoregon.org/';
   final jobListingsUri = 'https://theworldlink.com/ads/job/?l=25';
 
-  _launchURL(url) async {
+  void _launchURL(url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
